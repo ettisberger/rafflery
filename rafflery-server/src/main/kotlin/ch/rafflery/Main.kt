@@ -13,12 +13,8 @@ fun main() {
     .start()
 }
 
-@Component(
-  modules = [
-    RepositoryModule::class
-  ]
-)
 @Singleton
+@Component(modules = [RepositoryModule::class])
 interface RaffleryApp {
   fun app(): App
 }

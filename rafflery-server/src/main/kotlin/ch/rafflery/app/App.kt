@@ -51,7 +51,7 @@ class App @Inject constructor(
         commandHandler.handle(command)
 
         val raffle: Raffle? = raffleRepository.get("stubbed_id")
-        raffle.let { println("Raffle was added to the database") }
+        raffle?.let { println("Raffle was added to the database") }
         server.start(wait = true)
     }
 }
