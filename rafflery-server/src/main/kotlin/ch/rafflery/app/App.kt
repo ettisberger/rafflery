@@ -1,10 +1,7 @@
 package ch.rafflery.app
 
-import ch.rafflery.domain.commands.CreateRaffleCommand
-import ch.rafflery.domain.commands.CreateRaffleCommandHandler
-import ch.rafflery.domain.ports.RaffleRepository
-import ch.rafflery.domain.raffle.Raffle
-import ch.rafflery.plugins.StubbedRaffleRepository
+import ch.rafflery.controllers.raffleRoutes
+import ch.rafflery.infrastructure.CommandBus
 import io.ktor.application.call
 import io.ktor.http.ContentType
 import io.ktor.http.content.files
@@ -20,14 +17,12 @@ import javax.inject.Inject
 
 const val STATIC_ROUTE = "./rafflery-ui/build/"
 
-class App @Inject constructor(
-    private val commandHandler: CreateRaffleCommandHandler,
-    private val raffleRepository: RaffleRepository
-) {
+class App @Inject constructor(private val commandBus: CommandBus) {
 
     fun start() {
         val server = embeddedServer(Netty, port = 8080) {
             routing {
+                raffleRoutes(commandBus)
                 get("/") {
                     call.respondFile(File("$STATIC_ROUTE/index.html"))
                 }
@@ -40,18 +35,6 @@ class App @Inject constructor(
             }
         }
 
-        val command = CreateRaffleCommand(
-            "hello",
-            "world",
-            2,
-            10,
-            "hi"
-        )
-
-        commandHandler.handle(command)
-
-        val raffle: Raffle? = raffleRepository.get("stubbed_id")
-        raffle?.let { println("Raffle was added to the database") }
         server.start(wait = true)
     }
 }
