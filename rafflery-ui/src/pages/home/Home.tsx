@@ -1,6 +1,6 @@
 import React from 'react';
 import './Home.css';
-import RaffleList from '../components/raffles/RaffleList';
+import RaffleList from '../../components/raffles/RaffleList';
 
 const Home: React.FC = () => {
 

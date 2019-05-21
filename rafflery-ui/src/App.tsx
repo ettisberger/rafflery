@@ -3,9 +3,9 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import './App.css';
 import Header from './layout/header/Header';
-import Home from './home/Home';
+import Home from './pages/home/Home';
 import Footer from './layout/footer/Footer';
-import Login from './login/Login';
+import Login from './pages/login/Login';
 
 const App: React.FC = () => {
   return (
