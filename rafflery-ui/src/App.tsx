@@ -1,16 +1,22 @@
 import React from 'react';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+
 import './App.css';
+import Header from './layout/header/Header';
+import Home from './home/Home';
+import Footer from './layout/footer/Footer';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <div className="header">
-        <h1>Rafflery</h1>
-      </div>
-      <div className="content">
-        <p>Hoi Andreas</p>
-      </div>
-    </div>
+      <Router>
+        <div className="App">
+          <Header/>
+          <main className="main">
+              <Route name="home" exact={true} path="/" component={Home} />
+              <Footer/>
+          </main>
+        </div>
+      </Router>
   );
 };
 
