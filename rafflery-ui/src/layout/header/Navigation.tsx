@@ -7,7 +7,7 @@ const Navigation: React.FC = () => {
         <nav className="navigation">
             <ul>
                 <li><Link to="">Home</Link></li>
-                <li>Login</li>
+                <li><Link to="login">Login</Link></li>
                 <li>Raffles</li>
             </ul>
         </nav>

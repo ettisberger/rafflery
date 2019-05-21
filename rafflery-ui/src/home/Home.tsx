@@ -35,6 +35,16 @@ const Home: React.FC = () => {
             closesAt: '2019-05-22 12:40:32',
             id: 3,
         },
+        {
+            name: 'Koalabär',
+            totalPrize: 50000,
+            slotPrize: 1000,
+            slotSize: 50,
+            purchasedTickets: 1,
+            createdBy: 'ninula4',
+            closesAt: '2019-05-23 12:40:32',
+            id: 4,
+        },
     ];
 
     return (
