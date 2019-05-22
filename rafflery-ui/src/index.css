@@ -1,7 +1,7 @@
 * {
-  box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
-}
+   box-sizing: border-box;
+   font-family: 'Roboto', sans-serif;
+ }
 
 body {
   margin: 0;
@@ -24,4 +24,9 @@ a {
 
 a:hover {
    text-decoration: none;
+}
+
+:root   {
+  --primaryColor: #1E57C6;
+  --whiteColor: #FEFEFE;
 }
