@@ -1,6 +1,7 @@
 import React from 'react';
 import './Home.css';
 import RaffleList from '../../components/raffles/RaffleList';
+import SearchBar from '../../components/Searchbar';
 
 const Home: React.FC = () => {
 
@@ -49,6 +50,7 @@ const Home: React.FC = () => {
 
     return (
         <div className="home">
+            <SearchBar/>
             <RaffleList raffles={raffles}/>
         </div>
     );

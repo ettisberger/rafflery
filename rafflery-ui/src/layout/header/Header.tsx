@@ -6,14 +6,14 @@ const Header: React.FC = () => {
     return (
         <div className="header">
             <Navigation/>
-            <div className="content">
-                <div className="title">
+            <div className="header__content">
+                <div className="header__title">
                     <h1>RAFFLERY</h1>
-                    <div id="first">
+                    <div id="header__subtitle__first">
                         <p>slots</p>
                         <p>prizes</p>
                     </div>
-                    <div id="second">
+                    <div id="header__subtitle__second">
                         <span>
                             <p>chances</p>
                         </span>
