@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/rafflery-ui # directory where steps will run
+#    working_directory: ~/r-ui # directory where steps will run
     docker: # run the steps with Docker
       - image: circleci/node:12.1.0 # our steps run in this container
     steps:
@@ -14,14 +14,14 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: install-npm-wee
-          command: npm install
+          command: cd rafflery-ui && npm install
       - save_cache: # special step to save the dependency cache
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
-            - ./node_modules
+            - ./rafflery-ui/node_modules
       - run: # run tests
           name: test
-          command: npm test
+          command: cd rafflery-ui && npm test
       - store_artifacts: # special step to save test results as as artifact
           # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: test-results.xml
