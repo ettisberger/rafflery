@@ -1,10 +1,11 @@
 plugins {
+    id 'com.github.johnrengelman.shadow' version '5.0.0'
     id 'application'
     id 'net.ltgt.apt' version '0.10'
     id 'kotlin-kapt'
 }
 
-mainClassName = 'ch.rafflery.AppKt'
+mainClassName = 'ch.rafflery.MainKt'
 
 dependencies {
     implementation 'io.ktor:ktor-server-netty:1.2.0'
@@ -14,4 +15,11 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.22.1'
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
     testImplementation 'org.jetbrains.kotlin:kotlin-test-junit'
+}
+
+// used for creating shadow jars to run the docker container
+shadowJar {
+    baseName = 'rafflery'
+    classifier = null
+    version = null
 }
