@@ -6,6 +6,7 @@ jobs:
       - image: circleci/node:12.1.0 # our steps run in this container
     steps:
       - checkout
+      - run: cd rafflery-ui
       - run:
           name: update-npm
           command: 'sudo npm install -g npm@latest'
