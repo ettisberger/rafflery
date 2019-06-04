@@ -7,5 +7,5 @@
 3. `cd rafflery-ui && npm install && npm start`
 
 ## Docker
-`docker build -t rafflery .`
-`docker run -it -p 8080:8080 --rm rafflery`
+1. `docker build -t rafflery .`
+2. `docker run -it -p 8080:8080 --rm rafflery`
