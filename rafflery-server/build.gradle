@@ -17,7 +17,7 @@ dependencies {
     testImplementation 'org.jetbrains.kotlin:kotlin-test-junit'
 }
 
-// used for creating shadow jars to run the docker container
+// used for creating shadow jars to run the docker container (FAT JAR)
 shadowJar {
     baseName = 'rafflery'
     classifier = null

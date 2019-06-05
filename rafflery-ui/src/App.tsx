@@ -1,6 +1,6 @@
 import React from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
-
+import {Router, Route} from 'react-router-dom';
+import history from './history/History';
 import './App.css';
 import Header from './layout/header/Header';
 import Home from './pages/home/Home';
@@ -9,7 +9,7 @@ import Login from './pages/login/Login';
 
 const App: React.FC = () => {
   return (
-      <Router>
+      <Router history={history}>
         <div className="App">
           <Header/>
           <main className="main">
