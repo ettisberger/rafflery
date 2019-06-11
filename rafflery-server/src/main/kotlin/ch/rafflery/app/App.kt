@@ -9,6 +9,10 @@ import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.interfaces.RSAKeyProvider
 import io.ktor.application.call
 import io.ktor.application.install
+<<<<<<< HEAD
+=======
+import io.ktor.features.CallLogging
+>>>>>>> Add rest call logging
 import io.ktor.http.ContentType
 import io.ktor.http.content.files
 import io.ktor.http.content.static
@@ -46,7 +50,6 @@ class App @Inject constructor(private val commandBus: CommandBus) {
                 .build()
 
         val server = embeddedServer(Netty, port = 8080) {
-
             install(DefaultHeaders)
             install(CallLogging) // log every rest call
             install(Authentication) {
