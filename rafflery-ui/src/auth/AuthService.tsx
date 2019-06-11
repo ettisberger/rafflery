@@ -13,7 +13,7 @@ export default class AuthService {
         responseType: 'token id_token',
         redirectUri: process.env.REACT_APP_AUTH_REDIRECT_URL,
         audience: `https://${process.env.REACT_APP_AUTH_DOMAIN_ADDRESS}/userinfo`,
-        scope: 'openid',
+        scope: 'openid email profile',
     });
 
     public get authenticated(): boolean {
@@ -26,6 +26,7 @@ export default class AuthService {
         localStorage.removeItem('access_token');
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
+        localStorage.removeItem('email');
         history.push('/login');
     }
 
@@ -47,11 +48,30 @@ export default class AuthService {
     }
 
     public setSession(authResult: Auth0DecodedHash): void {
-        const {accessToken, expiresIn, idToken} = authResult;
+        console.log(authResult);
+        const {accessToken, expiresIn, idToken, idTokenPayload} = authResult;
         const expiresAt = JSON.stringify(expiresIn! * 1000 + new Date().getTime());
         localStorage.setItem('access_token', accessToken!);
         localStorage.setItem('id_token', idToken!);
         localStorage.setItem('expires_at', expiresAt);
+        localStorage.setItem('email', idTokenPayload.email);
         history.push('/login');
+    }
+
+    public getProfile = (callBack: (err?: any, result?: any) => void) => {
+        const accessToken = this.getAccessToken();
+        // let self = this;
+        this.auth0.client.userInfo(accessToken, (err, profile) => {
+            console.log(profile);
+            callBack(err, profile);
+        });
+    };
+
+    public getAccessToken() {
+        const accessToken = localStorage.getItem('access_token');
+        if (!accessToken) {
+            throw new Error('No access token found');
+        }
+        return accessToken;
     }
 }
