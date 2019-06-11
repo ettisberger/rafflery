@@ -3,6 +3,8 @@ package ch.rafflery.app
 import ch.rafflery.controllers.raffleRoutes
 import ch.rafflery.infrastructure.CommandBus
 import io.ktor.application.call
+import io.ktor.application.install
+import io.ktor.features.CallLogging
 import io.ktor.http.ContentType
 import io.ktor.http.content.files
 import io.ktor.http.content.static
@@ -21,6 +23,9 @@ class App @Inject constructor(private val commandBus: CommandBus) {
 
     fun start() {
         val server = embeddedServer(Netty, port = 8080) {
+
+            install(CallLogging) // log every call
+
             routing {
                 raffleRoutes(commandBus)
                 get("/") {
