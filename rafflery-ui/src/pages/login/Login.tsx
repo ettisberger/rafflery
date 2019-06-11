@@ -1,35 +1,57 @@
-import React, {Component} from 'react';
+import React, {Component, Dispatch} from 'react';
 import './Login.css';
 import AuthService from '../../auth/AuthService';
-import {RouteComponentProps, withRouter} from 'react-router';
+import {connect} from 'react-redux';
+import {loggedIn} from '../../actions/actions';
+import {ApplicationState} from '../../reducers/root.reducer';
 
-interface LoginState {
+interface AuthProps {
+    email: string;
     authService: AuthService;
-}
+    loggedIn: any;
+};
 
-class Login extends Component<{} & RouteComponentProps<{}>, LoginState> {
+const mapStateToProps = (state: ApplicationState) => {
+    return {
+        authService: state.authState.auth,
+        email: state.authState.email,
+    };
+};
 
+const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
+    loggedIn: (email: string) => dispatch(loggedIn(email)),
+});
+
+class Login extends Component<AuthProps> {
     constructor(props: any) {
         super(props);
 
-        this.state = { authService: new AuthService() };
+        console.log(props);
+
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
     }
 
     public async componentDidMount() {
-        await this.state.authService.handleAuthentication();
+        // this should be on the route later with a callback component
+        await this.props.authService.handleAuthentication();
+
+        this.props.loggedIn(localStorage.getItem('email'));
+
     }
 
     private login() {
-        this.state.authService.login();
+        this.props.authService.login();
     }
 
     private logout() {
-        this.state.authService.logout();
+        this.props.authService.logout();
     }
 
     render() {
+
+        const authenticated = this.props.authService.authenticated.toString();
+
         return (
             <div className="login">
                 <h2>Login</h2>
@@ -37,10 +59,10 @@ class Login extends Component<{} & RouteComponentProps<{}>, LoginState> {
                 <button onClick={this.login}>Login</button>
                 <button onClick={this.logout}>Logout</button>
                 <br/>
-                <span>{this.state.authService.authenticated.toString()}</span>
+                <span>{authenticated}</span>
             </div>
         );
     }
 }
 
-export default withRouter(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
