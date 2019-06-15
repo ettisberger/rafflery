@@ -4,17 +4,20 @@ import history from '../history/History';
 /**
  * Authentication service
  */
-export default class AuthService {
+class AuthService {
 
-    // auth0 web auth instance
-    private auth0: WebAuth = new WebAuth({
-        clientID: process.env.REACT_APP_AUTH_CLIENT_ID as string, // why do I need as string
-        domain: process.env.REACT_APP_AUTH_DOMAIN_ADDRESS as string,
-        responseType: 'token id_token',
-        redirectUri: process.env.REACT_APP_AUTH_REDIRECT_URL,
-        audience: `https://${process.env.REACT_APP_AUTH_DOMAIN_ADDRESS}/userinfo`,
-        scope: 'openid email profile',
-    });
+    private auth0: WebAuth;
+
+    constructor() {
+        this.auth0 = new WebAuth({
+            clientID: process.env.REACT_APP_AUTH_CLIENT_ID as string, // why do I need as string
+            domain: process.env.REACT_APP_AUTH_DOMAIN_ADDRESS as string,
+            responseType: 'token id_token',
+            redirectUri: process.env.REACT_APP_AUTH_REDIRECT_URL,
+            audience: `https://${process.env.REACT_APP_AUTH_DOMAIN_ADDRESS}/userinfo`,
+            scope: 'openid email profile',
+        });
+    }
 
     public get authenticated(): boolean {
         const expiresAt = JSON.parse(localStorage.getItem('expires_at')!);
@@ -40,32 +43,27 @@ export default class AuthService {
                 this.setSession(authResult);
             } else if (err) {
                 // TODO error display
-                // tslint:disable-next-line:no-console
-                console.error(err);
                 alert(`Error: ${err.error}. Check the console for further details.`);
             }
         });
     }
 
     public setSession(authResult: Auth0DecodedHash): void {
-        console.log(authResult);
         const {accessToken, expiresIn, idToken, idTokenPayload} = authResult;
         const expiresAt = JSON.stringify(expiresIn! * 1000 + new Date().getTime());
         localStorage.setItem('access_token', accessToken!);
         localStorage.setItem('id_token', idToken!);
         localStorage.setItem('expires_at', expiresAt);
         localStorage.setItem('email', idTokenPayload.email);
-        history.push('/login');
     }
 
     public getProfile = (callBack: (err?: any, result?: any) => void) => {
         const accessToken = this.getAccessToken();
         // let self = this;
         this.auth0.client.userInfo(accessToken, (err, profile) => {
-            console.log(profile);
             callBack(err, profile);
         });
-    };
+    }
 
     public getAccessToken() {
         const accessToken = localStorage.getItem('access_token');
@@ -75,3 +73,7 @@ export default class AuthService {
         return accessToken;
     }
 }
+
+const auth0Service = new AuthService();
+
+export default auth0Service;
