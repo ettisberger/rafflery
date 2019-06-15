@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {loggedIn} from '../../actions/actions';
 import {ApplicationState} from '../../reducers/root.reducer';
 import auth0Service from '../../auth/AuthService';
+import LoginForm from './LoginForm';
 
 interface AuthProps {
     email: string;
@@ -27,13 +28,6 @@ class Login extends Component<AuthProps> {
         this.logout = this.logout.bind(this);
     }
 
-    // public async componentDidMount() {
-    //     // this should be on the route later with a callback component
-    //     await this.props.authService.handleAuthentication();
-    //lf
-    //     this.props.loggedIn(localStorage.getItem('email'));
-    // }
-
     public render() {
 
         const isAuthenticated = auth0Service.authenticated.toString();
@@ -42,8 +36,17 @@ class Login extends Component<AuthProps> {
             <div className="login">
                 <h2>Login</h2>
                 <br/>
-                <button onClick={this.login}>Login</button>
-                <button onClick={this.logout}>Logout</button>
+                <LoginForm
+                    handleLogin={(values: any) => {
+                        // handle login
+                    }}
+                    handleLoginAuth0={(values: any) => {
+                        this.login();
+                    }}
+                    handleLogout={() => auth0Service.logout()}
+                />
+                {/*<button onClick={this.login}>Login Auth0 Popup</button>*/}
+                {/*<button onClick={this.logout}>Logout</button>*/}
                 <br/>
                 <span>{isAuthenticated}</span>
             </div>
