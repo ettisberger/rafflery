@@ -2,9 +2,11 @@ package ch.rafflery.app
 
 import ch.rafflery.controllers.raffleRoutes
 import ch.rafflery.infrastructure.CommandBus
+import com.auth0.jwk.Jwk
 import com.auth0.jwt.JWT
 import com.auth0.jwt.JWTVerifier
 import com.auth0.jwt.algorithms.Algorithm
+import com.auth0.jwt.interfaces.RSAKeyProvider
 import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.http.ContentType
@@ -23,25 +25,32 @@ import io.ktor.features.CallLogging
 import io.ktor.features.DefaultHeaders
 import java.io.File
 import javax.inject.Inject
+import com.auth0.jwk.UrlJwkProvider
+import com.auth0.jwk.JwkProvider
+import com.auth0.jwk.JwkProviderBuilder
+import java.security.interfaces.RSAPrivateKey
+import java.security.interfaces.RSAPublicKey
+import java.util.concurrent.TimeUnit
+
 
 const val STATIC_ROUTE = "./rafflery-ui/build/"
 
 class App @Inject constructor(private val commandBus: CommandBus) {
 
     fun start() {
-        val issuer = "https://jwt-provider-domain/"
-        val audience = "jwt-audience"
-        val realm = "ktor rafflery"
-
+        val issuer = "https://dev-gm0vrgh2.eu.auth0.com/" // domain
+        val audience = "71OoWiZhuBBYSLczfzhDXsO0DE37GS46" // client id
+        val jwkProvider = JwkProviderBuilder(issuer) // uses jwt keyset
+                .cached(10, 24, TimeUnit.HOURS)
+                .rateLimited(10, 1, TimeUnit.MINUTES)
+                .build()
         val server = embeddedServer(Netty, port = 8080) {
 
             install(DefaultHeaders)
             install(CallLogging) // log every call
             install(Authentication) {
-                val jwtVerifier = makeJwtVerifier(issuer, audience)
                 jwt {
-                    verifier(jwtVerifier)
-                    this.realm = realm
+                    verifier(jwkProvider, issuer)
                     validate { credential ->
                         if (credential.payload.audience.contains(audience))
                             JWTPrincipal(credential.payload)
@@ -74,12 +83,5 @@ class App @Inject constructor(private val commandBus: CommandBus) {
 
         server.start(wait = true)
     }
-
-    private val algorithm = Algorithm.HMAC256("secret")
-    private fun makeJwtVerifier(issuer: String, audience: String): JWTVerifier = JWT
-            .require(algorithm)
-            .withAudience(audience)
-            .withIssuer(issuer)
-            .build()
 }
 
