@@ -11,6 +11,7 @@ dependencies {
     implementation 'io.ktor:ktor-server-netty:1.2.0'
     implementation 'io.ktor:ktor-auth:1.2.1'
     implementation 'io.ktor:ktor-auth-jwt:1.2.1'
+    implementation 'com.auth0:jwks-rsa:0.8.2'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
     implementation 'ch.qos.logback:logback-classic:1.2.3'
     implementation 'com.google.dagger:dagger:2.22.1'
