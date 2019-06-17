@@ -2,17 +2,15 @@ package ch.rafflery.app
 
 import ch.rafflery.controllers.raffleRoutes
 import ch.rafflery.infrastructure.CommandBus
-import com.auth0.jwk.Jwk
-import com.auth0.jwt.JWT
-import com.auth0.jwt.JWTVerifier
-import com.auth0.jwt.algorithms.Algorithm
-import com.auth0.jwt.interfaces.RSAKeyProvider
+import com.auth0.jwk.JwkProviderBuilder
 import io.ktor.application.call
 import io.ktor.application.install
-<<<<<<< HEAD
-=======
+import io.ktor.auth.Authentication
+import io.ktor.auth.authenticate
+import io.ktor.auth.jwt.JWTPrincipal
+import io.ktor.auth.jwt.jwt
 import io.ktor.features.CallLogging
->>>>>>> Add rest call logging
+import io.ktor.features.DefaultHeaders
 import io.ktor.http.ContentType
 import io.ktor.http.content.files
 import io.ktor.http.content.static
@@ -22,19 +20,9 @@ import io.ktor.routing.get
 import io.ktor.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
-import io.ktor.auth.*
-import io.ktor.auth.jwt.JWTPrincipal
-import io.ktor.auth.jwt.jwt
-import io.ktor.features.CallLogging
-import io.ktor.features.DefaultHeaders
 import java.io.File
-import javax.inject.Inject
-import com.auth0.jwk.UrlJwkProvider
-import com.auth0.jwk.JwkProvider
-import com.auth0.jwk.JwkProviderBuilder
-import java.security.interfaces.RSAPrivateKey
-import java.security.interfaces.RSAPublicKey
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 
 const val STATIC_ROUTE = "./rafflery-ui/build/" // TODO application.conf
