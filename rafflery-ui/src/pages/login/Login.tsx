@@ -10,6 +10,10 @@ interface AuthProps {
     email: string;
 }
 
+interface AuthState {
+    userProfile: any;
+}
+
 const mapStateToProps = (state: ApplicationState) => {
     return {
         email: state.authState.email,
@@ -20,12 +24,23 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
     loggedIn: (email: string) => dispatch(loggedIn(email)),
 });
 
-class Login extends Component<AuthProps> {
+class Login extends Component<AuthProps, AuthState> {
     constructor(props: any) {
         super(props);
 
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
+
+        this.state = { userProfile : {}};
+
+
+        if (auth0Service.authenticated) {
+            auth0Service.getProfile((err: any, user: any) => {
+                if (user) {
+                    this.setState({userProfile: user});
+                }
+            });
+        }
     }
 
     public render() {
@@ -45,10 +60,10 @@ class Login extends Component<AuthProps> {
                     }}
                     handleLogout={() => auth0Service.logout()}
                 />
-                {/*<button onClick={this.login}>Login Auth0 Popup</button>*/}
-                {/*<button onClick={this.logout}>Logout</button>*/}
                 <br/>
-                <span>{isAuthenticated}</span>
+                <span>Authenticated: {isAuthenticated}</span>
+                <br/>
+                <span>Email: {this.state.userProfile.email}</span>
             </div>
         );
     }

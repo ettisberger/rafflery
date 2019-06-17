@@ -6,7 +6,7 @@ import Header from './layout/header/Header';
 import Home from './pages/home/Home';
 import Footer from './layout/footer/Footer';
 import Login from './pages/login/Login';
-import Callback from './layout/Callback';
+import Callback from './pages/login/Callback';
 
 const App: React.FC = () => {
 
