@@ -57,6 +57,11 @@ class App @Inject constructor(private val commandBus: CommandBus) {
                 get("/") {
                     call.respondFile(File("$STATIC_ROUTE/index.html"))
                 }
+
+                get("/*") {
+                    call.respondFile(File("$STATIC_ROUTE/index.html"))
+                }
+
                 get("/api/hello") {
                     call.respondText("Hello World!", ContentType.Text.Plain)
                 }
