@@ -3,10 +3,13 @@ package ch.rafflery.app
 import ch.rafflery.controllers.raffleRoutes
 import ch.rafflery.infrastructure.CommandBus
 import com.auth0.jwk.JwkProviderBuilder
+import com.auth0.jwt.interfaces.Claim
 import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.auth.Authentication
+import io.ktor.auth.UserIdPrincipal
 import io.ktor.auth.authenticate
+import io.ktor.auth.authentication
 import io.ktor.auth.jwt.JWTPrincipal
 import io.ktor.auth.jwt.jwt
 import io.ktor.features.CallLogging
@@ -30,8 +33,8 @@ const val STATIC_ROUTE = "./rafflery-ui/build/" // TODO application.conf
 class App @Inject constructor(private val commandBus: CommandBus) {
 
     fun start() {
-        val issuer = "https://dev-gm0vrgh2.eu.auth0.com/" // // TODO application.conf DOMAIN
-        val audience = "71OoWiZhuBBYSLczfzhDXsO0DE37GS46" // // TODO application.conf CLIENT ID
+        val issuer = "https://rafflery.eu.auth0.com/" // TODO application.conf DOMAIN
+        val audience = "wvDUhCjqPf0cDiAzPx62tLifTd4lI84z" // // TODO application.conf CLIENT ID
         val jwkProvider = JwkProviderBuilder(issuer) // uses jwt keyset
                 .cached(10, 24, TimeUnit.HOURS)
                 .rateLimited(10, 1, TimeUnit.MINUTES)
@@ -69,6 +72,14 @@ class App @Inject constructor(private val commandBus: CommandBus) {
                 authenticate {
                     get("/api/secured") {
                         call.respondText("This is highly secured by jwt tokens.")
+                        val principal: JWTPrincipal? = call.authentication.principal()
+
+                        if(principal != null) {
+                            val name: Claim = principal.payload.getClaim("name")
+
+                            System.out.println("Logged in with username $name.asString()")
+                        }
+
                     }
                 }
 
