@@ -10,11 +10,11 @@ class AuthService {
 
     constructor() {
         this.auth0 = new WebAuth({
-            clientID: process.env.REACT_APP_AUTH_CLIENT_ID as string, // why do I need as string
-            domain: process.env.REACT_APP_AUTH_DOMAIN_ADDRESS as string,
+            clientID: process.env.REACT_APP_AUTH_CLIENT_ID || '',
+            domain: process.env.REACT_APP_AUTH_DOMAIN_ADDRESS || '',
             responseType: 'token id_token',
             redirectUri: process.env.REACT_APP_AUTH_REDIRECT_URL,
-            audience: `https://${process.env.REACT_APP_AUTH_DOMAIN_ADDRESS}/userinfo`,
+            //audience: `https://${process.env.REACT_APP_AUTH_DOMAIN_ADDRESS}/userinfo`,
             scope: 'openid email profile',
         });
     }
@@ -33,19 +33,37 @@ class AuthService {
         history.push('/login');
     }
 
-    public login(): void {
+    public loginWithAuth0(): void {
         this.auth0.authorize();
+    }
+
+    /**
+     * This only works when the browser doesnt block 3rd party cookies
+     * https://auth0.com/docs/cross-origin-authentication#limitations-of-cross-origin-authentication
+     */
+    public login(username: string, password: string) {
+        return new Promise((resolve, reject) => this.auth0.login({
+            realm: 'Username-Password-Authentication',
+            username,
+            password,
+            }, (err: any, authResult) => {
+                this.handleAuthResult(authResult, err);
+            }));
     }
 
     public handleAuthentication(): void {
         this.auth0.parseHash((err, authResult) => {
-            if (authResult && authResult.accessToken && authResult.idToken) {
-                this.setSession(authResult);
-            } else if (err) {
-                // TODO error display
-                alert(`Error: ${err.error}. Check the console for further details.`);
-            }
+            this.handleAuthResult(authResult, err);
         });
+    }
+
+    private handleAuthResult(authResult: any, err: any) {
+        if (authResult && authResult.accessToken && authResult.idToken) {
+            this.setSession(authResult);
+        } else if (err) {
+            // TODO error display
+            alert(`Error: ${err.error}. Check the console for further details.`);
+        }
     }
 
     public setSession(authResult: Auth0DecodedHash): void {

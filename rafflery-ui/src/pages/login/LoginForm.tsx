@@ -21,7 +21,7 @@ class LoginForm extends Component<LoginFormProps, LoginFormState> {
     constructor(props: LoginFormProps) {
         super(props);
 
-        this.state = {username: '', password: ''};
+        this.state = {username: 'admin@rafflery.ch', password: 'Test123456'};
     }
 
     public render() {
@@ -36,7 +36,7 @@ class LoginForm extends Component<LoginFormProps, LoginFormState> {
                         onChange={e => this.setState({
                             username: e.target.value,
                         })}
-                        placeholder="user"
+                        placeholder="username"
                     />
                     <input
                         className="login-form__login-password"

@@ -30,6 +30,7 @@ class Login extends Component<AuthProps, AuthState> {
 
         this.login = this.login.bind(this);
         this.logout = this.logout.bind(this);
+        this.loginWithAuth0 = this.loginWithAuth0.bind(this);
 
         this.state = { userProfile : {}};
 
@@ -53,11 +54,9 @@ class Login extends Component<AuthProps, AuthState> {
                 <br/>
                 <LoginForm
                     handleLogin={(values: any) => {
-                        // handle login
+                        this.login(values.username, values.password);
                     }}
-                    handleLoginAuth0={(values: any) => {
-                        this.login();
-                    }}
+                    handleLoginAuth0={() => { this.loginWithAuth0(); }}
                     handleLogout={() => auth0Service.logout()}
                 />
                 <br/>
@@ -68,8 +67,12 @@ class Login extends Component<AuthProps, AuthState> {
         );
     }
 
-    private login() {
-        auth0Service.login();
+    private loginWithAuth0() {
+        auth0Service.loginWithAuth0();
+    }
+
+    private login(username: string, password: any) {
+        auth0Service.login(username, password);
     }
 
     private logout() {
