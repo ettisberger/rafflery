@@ -51,19 +51,25 @@ class AuthService {
             }));
     }
 
+    public signup(email: string, password: string) {
+        return new Promise((resolve, reject) =>
+            this.auth0.signup({
+                connection: 'Username-Password-Authentication',
+                email,
+                password,
+            }, (err: any) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            }));
+    },
+
     public handleAuthentication(): void {
         this.auth0.parseHash((err, authResult) => {
             this.handleAuthResult(authResult, err);
         });
-    }
-
-    private handleAuthResult(authResult: any, err: any) {
-        if (authResult && authResult.accessToken && authResult.idToken) {
-            this.setSession(authResult);
-        } else if (err) {
-            // TODO error display
-            alert(`Error: ${err.error}. Check the console for further details.`);
-        }
     }
 
     public setSession(authResult: Auth0DecodedHash): void {
@@ -89,6 +95,15 @@ class AuthService {
             throw new Error('No access token found');
         }
         return accessToken;
+    }
+
+    private handleAuthResult(authResult: any, err: any) {
+        if (authResult && authResult.accessToken && authResult.idToken) {
+            this.setSession(authResult);
+        } else if (err) {
+            // TODO error display
+            alert(`Error: ${err.error}. Check the console for further details.`);
+        }
     }
 }
 
