@@ -34,7 +34,6 @@ class Login extends Component<AuthProps, AuthState> {
 
         this.state = { userProfile : {}};
 
-
         if (auth0Service.authenticated) {
             auth0Service.getProfile((err: any, user: any) => {
                 if (user) {
