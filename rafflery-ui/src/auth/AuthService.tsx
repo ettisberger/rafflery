@@ -14,7 +14,7 @@ class AuthService {
             domain: process.env.REACT_APP_AUTH_DOMAIN_ADDRESS || '',
             responseType: 'token id_token',
             redirectUri: process.env.REACT_APP_AUTH_REDIRECT_URL,
-            //audience: `https://${process.env.REACT_APP_AUTH_DOMAIN_ADDRESS}/userinfo`,
+            audience: `https://${process.env.REACT_APP_AUTH_DOMAIN_ADDRESS}/userinfo`,
             scope: 'openid email profile',
         });
     }
