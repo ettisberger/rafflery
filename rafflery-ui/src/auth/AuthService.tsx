@@ -64,7 +64,7 @@ class AuthService {
                     resolve();
                 }
             }));
-    },
+    }
 
     public handleAuthentication(): void {
         this.auth0.parseHash((err, authResult) => {
