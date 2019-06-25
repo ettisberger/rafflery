@@ -1,5 +1,6 @@
 package ch.rafflery.app
 
+import ch.rafflery.controllers.mainRoutes
 import ch.rafflery.controllers.raffleRoutes
 import ch.rafflery.infrastructure.CommandBus
 import com.auth0.jwk.JwkProviderBuilder
@@ -55,36 +56,8 @@ class App @Inject constructor(private val commandBus: CommandBus) {
             }
 
             routing {
+                mainRoutes()
                 raffleRoutes(commandBus)
-                get("/") {
-                    call.respondFile(File("$STATIC_ROUTE/index.html"))
-                }
-
-                get("/*") {
-                    call.respondFile(File("$STATIC_ROUTE/index.html"))
-                }
-
-                get("/api/hello") {
-                    call.respondText("Hello World!", ContentType.Text.Plain)
-                }
-
-                authenticate {
-                    get("/api/secured") {
-                        call.respondText("This is highly secured by jwt tokens.")
-                        val principal: JWTPrincipal? = call.authentication.principal()
-
-                        if (principal != null) {
-                            val name: Claim = principal.payload.getClaim("name")
-
-                            System.out.println("Logged in with username $name.asString()")
-                        }
-
-                    }
-                }
-
-                static {
-                    files(STATIC_ROUTE)
-                }
             }
         }
 
