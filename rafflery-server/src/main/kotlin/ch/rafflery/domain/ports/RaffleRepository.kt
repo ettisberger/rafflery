@@ -6,4 +6,6 @@ interface RaffleRepository {
     fun save(raffle: Raffle)
 
     fun get(id: String): Raffle?
+
+    fun getAll(): List<Raffle>
 }

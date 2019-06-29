@@ -24,5 +24,4 @@ object CommandHandlerModule {
     setOf(
       CreateRaffleCommandHandler(raffleRepository)
     )
-
 }

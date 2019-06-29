@@ -7,8 +7,7 @@ class CommandBus(
   private val commandHandlers: Set<CommandHandler<*>>
 ) {
 
-  // why is this being ignored ?
-  @SuppressWarnings("UNCHECKED_CAST")
+  @Suppress("UNCHECKED_CAST")
   fun <T : Command> submit(command: T) =
     (handlerFor(command) as CommandHandler<T>).handle(command)
 
