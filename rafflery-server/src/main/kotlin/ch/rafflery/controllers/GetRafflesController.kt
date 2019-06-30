@@ -8,6 +8,7 @@ class GetRafflesController(
   private val raffleRepository: RaffleRepository
 ): Controller() {
 
+  override val method = "GET"
   override val path = "/api/raffles"
 
   override suspend fun invoke(call: ApplicationCall) =

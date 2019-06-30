@@ -6,6 +6,8 @@ import io.ktor.response.respondFile
 import java.io.File
 
 class IndexController : Controller() {
+
+  override val method = "GET"
   override val path = "/"
 
   override suspend fun invoke(call: ApplicationCall) {
