@@ -27,6 +27,27 @@ class App @Inject constructor(
 }
 
 fun Application.init(controllers: Set<Controller>) {
+  val issuer = "https://rafflery.eu.auth0.com/" // TODO application.conf DOMAIN
+  val audience = "wvDUhCjqPf0cDiAzPx62tLifTd4lI84z" // // TODO application.conf CLIENT ID
+  val jwkProvider = JwkProviderBuilder(issuer) // uses jwt keyset
+    .cached(10, 24, TimeUnit.HOURS)
+    .rateLimited(10, 1, TimeUnit.MINUTES)
+    .build()
+
+  install(DefaultHeaders)
+  install(CallLogging) // log every rest call
+  install(Authentication) {
+    jwt {
+      verifier(jwkProvider, issuer)
+      validate { credential ->
+        if (credential.payload.audience.contains(audience))
+          JWTPrincipal(credential.payload)
+        else
+          null
+      }
+    }
+  }
+
   install(ContentNegotiation) {
     gson {}
   }
