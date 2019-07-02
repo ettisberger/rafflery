@@ -27,14 +27,14 @@ jobs:
           prefix: tests
       - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test-results.xml
-    build_docker:
-      docker:
-      - image: circleci/buildpack-deps:stretch
-      steps:
-        - checkout
-        - run:
-            name: build docker image
-            command: docker build -t rafflery .
+  build_docker:
+    docker:
+    - image: circleci/buildpack-deps:stretch
+    steps:
+      - checkout
+      - run:
+          name: build docker image
+          command: docker build -t rafflery .
 #  deploy:
 #    environment:
 #      IMAGE_NAME: rafflery/building-on-ci
