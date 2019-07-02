@@ -39,6 +39,7 @@ abstract class ControllerTest {
   protected fun TestApplicationEngine.post(path: String, request: Any, then: () -> Unit) {
     handleRequest(HttpMethod.Post, path) {
       addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
+
       setBody(mapper.writeValueAsString(request))
     }.apply {
       then()
