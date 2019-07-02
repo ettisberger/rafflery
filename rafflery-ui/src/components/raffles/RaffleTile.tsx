@@ -5,10 +5,9 @@ interface RaffleTileProps {
     raffle: {
         // I guess we need to make an interface for raffle items too...
         name: string,
-        totalPrize: number,
-        slotPrize: number,
+        item: { name: string, value: number},
         slotSize: number,
-        purchasedTickets: number,
+        purchasedTickets: [ { owner: string }],
         createdBy: string,
         closesAt: Date,
         id: number,
@@ -23,9 +22,8 @@ const RaffleTile: React.FC<RaffleTileProps> = ({ raffle, color }) => {
                 <div className="title">
                     {raffle.name}
                 </div>
-                <div>SLOTS {raffle.purchasedTickets} / {raffle.slotSize}</div>
-                <div>TOTAL {raffle.totalPrize}</div>
-                <div>SLOT PRIZE {raffle.slotPrize}</div>
+                <div>SLOTS {raffle.slotSize}</div>
+                <div>SLOT PRIZE {raffle.item.value}</div>
                 <div>closes at {raffle.closesAt}</div>
             </div>
         </div>
