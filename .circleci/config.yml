@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  build_frontend:
     docker: # run the steps with Docker
       - image: circleci/node:12.1.0 # our steps run in this container
     steps:
@@ -27,22 +27,36 @@ jobs:
           prefix: tests
       - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test-results.xml
-  deploy:
-    steps:
-      - checkout
-      - run:
-          name: Deploy Master to Heroku
-          command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+    build_docker:
+      docker:
+      - image: circleci/buildpack-deps:stretch
+      steps:
+        - checkout
+        - run:
+            name: build docker image
+            command: docker build -t rafflery .
+#  deploy:
+#    environment:
+#      IMAGE_NAME: rafflery/building-on-ci
+#    docker:
+#      - image: circleci/buildpack-deps:stretch
+#    steps:
+#      - checkout
+#      - setup_remote_docker
+#      - run:
+#          name: Deploy Master to Heroku
+#          command: |
+#            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 
 workflows:
   version: 2
   build-deploy:
     jobs:
-      - build
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
+      - build_frontend
+      - build_docker
+#      - deploy:
+#          requires:
+#            - build
+#          filters:
+#            branches:
+#              only: master
