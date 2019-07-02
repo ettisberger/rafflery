@@ -68,8 +68,6 @@ workflows:
     jobs:
       - build_frontend
       - build_project
-          requires:
-            - build_frontend
 #      - build_docker
 #          requires:
 #            - build_frontend
