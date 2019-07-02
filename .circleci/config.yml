@@ -27,6 +27,14 @@ jobs:
           prefix: tests
       - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test-results.xml
+  build_project:
+    docker:
+      - image: gradle/5.5.0-jdk8
+    steps:
+      - checkout
+      - run:
+          name: build with gradle
+          command: ./gradlew clean build
   build_docker:
     docker:
       - image: circleci/buildpack-deps:stretch
@@ -59,7 +67,12 @@ workflows:
   build-deploy:
     jobs:
       - build_frontend
-      - build_docker
+      - build_project
+          requires:
+            - build_frontend
+#      - build_docker
+#          requires:
+#            - build_frontend
 #      - deploy:
 #          requires:
 #            - build
