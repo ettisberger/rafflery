@@ -34,6 +34,9 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
+          name: build with gradle
+          command: ./gradlew clean build
+      - run:
           name: build docker image
           command: |
             TAG=0.1.$CIRCLE_BUILD_NUM
