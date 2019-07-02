@@ -24,7 +24,7 @@ const RaffleTile: React.FC<RaffleTileProps> = ({ raffle, color }) => {
                 </div>
                 <div>SLOTS {raffle.slotSize}</div>
                 <div>SLOT PRIZE {raffle.item.value}</div>
-                <div>closes at {raffle.closesAt}</div>
+                <div>created by {raffle.createdBy}</div>
             </div>
         </div>
     );
