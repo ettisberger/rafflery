@@ -6,7 +6,7 @@ import io.ktor.response.respond
 
 class GetRafflesController(
   private val raffleRepository: RaffleRepository
-): SecureController() {
+): Controller() {
 
   override val method = "GET"
   override val path = "/api/raffles"
