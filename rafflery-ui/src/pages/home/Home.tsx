@@ -2,8 +2,21 @@ import React from 'react';
 import './Home.css';
 import RaffleList from '../../components/raffles/RaffleList';
 import SearchBar from '../../components/Searchbar';
+import axios from 'axios';
 
 const Home: React.FC = () => {
+
+    const getRaffles = async () => {
+        const jwt = localStorage.getItem('id_token');
+        console.log('using jwt', jwt);
+        const raffles = await axios.get('/api/raffles', {
+            headers: {
+                Authorization: "Bearer " + jwt
+            }
+        });
+
+        console.log(raffles);
+    };
 
     const raffles = [
         {
@@ -51,6 +64,7 @@ const Home: React.FC = () => {
     return (
         <div className="home">
             <SearchBar/>
+            <button onClick={getRaffles}>Geile button zum en request abschicke</button>
             <RaffleList raffles={raffles}/>
         </div>
     );

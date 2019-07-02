@@ -14,15 +14,15 @@ abstract class Controller {
 
   protected abstract suspend fun invoke(call: ApplicationCall)
 
-  fun asRoute(parent: Route): Route =
+  open fun asRoute(parent: Route): Route =
     parent.route(path) {
-      when (method) {
-        "GET" -> get {
-          invoke(call)
+        when (method) {
+          "GET" -> get {
+            invoke(call)
+          }
+          "POST" -> post {
+            invoke(call)
+          }
         }
-        "POST" -> post {
-          invoke(call)
-        }
-      }
     }
 }
