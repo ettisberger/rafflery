@@ -3,6 +3,7 @@ package ch.rafflery.domain.commands
 import ch.rafflery.domain.ports.RaffleRepository
 import ch.rafflery.domain.prize.PrizeItem
 import ch.rafflery.domain.raffle.Raffle
+import java.time.LocalDateTime
 
 data class CreateRaffleCommand(
   val name: String,
