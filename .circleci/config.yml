@@ -35,20 +35,17 @@ jobs:
       - run:
           name: build with gradle
           command: ./gradlew clean build
-#  build_docker:
-#    docker:
-#      - image: circleci/buildpack-deps:stretch
-#    steps:
-#      - checkout
-#      - setup_remote_docker
-#      - run:
-#          name: build with gradle
-#          command: ./gradlew clean build
-#      - run:
-#          name: build docker image
-#          command: |
-#            TAG=0.1.$CIRCLE_BUILD_NUM
-#            docker build -t rafflery:$TAG .
+  deploy:
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: build docker image
+          command: |
+            TAG=0.1.$CIRCLE_BUILD_NUM
+            docker build -t rafflery:$TAG .
 #  deploy:
 #    environment:
 #      IMAGE_NAME: rafflery/building-on-ci
@@ -70,13 +67,6 @@ workflows:
       - build_test_backend:
           requires:
             - build_test_frontend
-            
-#      - build_docker
-#          requires:
-#            - build_frontend
-#      - deploy:
-#          requires:
-#            - build
-#          filters:
-#            branches:
-#              only: master
+      - deploy:
+          requires:
+            - build_test_backend
