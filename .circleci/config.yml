@@ -2,7 +2,7 @@ version: 2
 jobs:
   build_test_frontend:
     docker: # run the steps with Docker
-      - image: circleci/node:12.1.0 # our steps run in this container
+      - image: circleci/node:12.1.0
     steps:
       - checkout
       - run:
@@ -27,6 +27,13 @@ jobs:
           prefix: tests
       - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test-results.xml
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
+          # taken to be the root directory of the workspace.
+          root: ./rafflery-ui
+          # Must be relative path from root
+          paths:
+            - build
   build_test_backend:
     docker:
       - image: gradle:jdk8
