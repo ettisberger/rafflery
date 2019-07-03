@@ -62,30 +62,20 @@ jobs:
       - checkout
       - attach_workspace:
           at:  ~/project
-      - run:
-          name: print workspace
-          command: cd ~/project && printf '%s\n' *
-      - run:
-          name: print workspace
-          command: cd ~/project/build/libs && printf '%s\n' *
-      - run:
-          name: print directory
-          command: printf '%s\n' *
 #      - setup_remote_docker
+      - run:
+          name: login to heroku
+          command: |
+            docker login --email=$HEROKU_LOGIN --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.com
       - run:
           name: build docker image
           command: |
             TAG=0.1.$CIRCLE_BUILD_NUM
-            docker build --build-arg frontendBuild=./build --build-arg backendBuild=./build/libs/rafflery.jar -t rafflery:$TAG .
-
-# deployment:
-#  staging:
-#    branch: master
-#    commands:
-#      - docker login --email=$HEROKU_LOGIN --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.com
-#      - docker build --rm=false -t registry.heroku.com/APP_NAME/web .
-#      - docker push registry.heroku.com/APP_NAME/web:latest
-
+            docker build --build-arg frontendBuild=./build --build-arg backendBuild=./build/libs/rafflery.jar -t registry.heroku.com/rafflery/web .
+      - run:
+          name: push docker to heroku
+          command: |
+            docker push registry.heroku.com/rafflery/web:latest
 workflows:
   version: 2
   build-test-and-deploy:
