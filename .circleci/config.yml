@@ -75,7 +75,8 @@ jobs:
       - run:
           name: Deploy heroku docker container
           command: |
-            docker push registry.heroku.com/rafflery/web:latest
+            heroku container:push web -a rafflery
+            # docker push registry.heroku.com/rafflery/web:latest
       - run:
           name: Release heroku docker container
           command: |
