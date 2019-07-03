@@ -12,6 +12,8 @@ RUN chown -R $APPLICATION_USER /app
 # Marks this container to use the specified $APPLICATION_USER
 USER $APPLICATION_USER
 
+RUN printf '%s\n' *
+
 # We copy the FAT Jar we built into the /app folder and sets that folder as the working directory.
 COPY ./rafflery-ui/build /app/rafflery-ui/build
 COPY ./rafflery-server/build/libs/rafflery.jar /app/rafflery.jar
