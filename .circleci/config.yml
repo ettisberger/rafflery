@@ -61,7 +61,7 @@ jobs:
           at:  ~/test
       - run:
           name: print workspace
-          command: cd ~/test && printf '%s\n' *
+          command: cd ~/test/build && printf '%s\n' *
       - run:
           name: print directory
           command: printf '%s\n' *
