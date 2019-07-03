@@ -18,7 +18,7 @@ RUN chown -R $APPLICATION_USER /app
 USER $APPLICATION_USER
 
 # RUN printf '%s\n' *
-# RUN cd ~/app/build && printf '%s\n' *
+RUN cd ~ && printf '%s\n' *
 # RUN cd /app && printf '%s\n' *
 
 # We copy the FAT Jar we built into the /app folder and sets that folder as the working directory.
