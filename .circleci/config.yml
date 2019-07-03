@@ -53,40 +53,38 @@ jobs:
           paths:
             - build/libs/rafflery.jar
   deploy:
-    docker:
-      - image: circleci/buildpack-deps:stretch
+#    docker:
+#      - image: circleci/buildpack-deps:stretch
+    machine: 
+      services:
+        - docker
     steps:
       - checkout
       - attach_workspace:
-          at:  ~/app
+          at:  ~/project
       - run:
           name: print workspace
-          command: cd ~/app && printf '%s\n' *
+          command: cd ~/project && printf '%s\n' *
       - run:
           name: print workspace
-          command: cd ~/app/build/libs && printf '%s\n' *
+          command: cd ~/project/build/libs && printf '%s\n' *
       - run:
           name: print directory
           command: printf '%s\n' *
-      - setup_remote_docker
+#      - setup_remote_docker
       - run:
           name: build docker image
           command: |
             TAG=0.1.$CIRCLE_BUILD_NUM
-            docker build --build-arg frontendBuild=~/app/build --build-arg backendBuild=~/app/build/libs/rafflery.jar -t rafflery:$TAG .
+            docker build --build-arg frontendBuild=./project/build --build-arg backendBuild=~./project/build/libs/rafflery.jar -t rafflery:$TAG .
 
-#  deploy:
-#    environment:
-#      IMAGE_NAME: rafflery/building-on-ci
-#    docker:
-#      - image: circleci/buildpack-deps:stretch
-#    steps:
-#      - checkout
-#      - setup_remote_docker
-#      - run:
-#          name: Deploy Master to Heroku
-#          command: |
-#            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+# deployment:
+#  staging:
+#    branch: master
+#    commands:
+#      - docker login --email=$HEROKU_LOGIN --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.com
+#      - docker build --rm=false -t registry.heroku.com/APP_NAME/web .
+#      - docker push registry.heroku.com/APP_NAME/web:latest
 
 workflows:
   version: 2
