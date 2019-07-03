@@ -76,7 +76,7 @@ jobs:
           name: build docker image
           command: |
             TAG=0.1.$CIRCLE_BUILD_NUM
-            docker build --build-arg frontendBuild=./project/build --build-arg backendBuild=~./project/build/libs/rafflery.jar -t rafflery:$TAG .
+            docker build --build-arg frontendBuild=./build --build-arg backendBuild=~./build/libs/rafflery.jar -t rafflery:$TAG .
 
 # deployment:
 #  staging:
