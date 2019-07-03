@@ -76,6 +76,10 @@ jobs:
           name: push docker to heroku
           command: |
             docker push registry.heroku.com/rafflery/web:latest
+      - run:
+          name: release on heroku
+          command: |
+            heroku container:release web
 workflows:
   version: 2
   build-test-and-deploy:
