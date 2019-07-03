@@ -50,11 +50,8 @@ jobs:
       - image: circleci/buildpack-deps:stretch
     steps:
       - checkout
-      - run:
-          name: create rafflery build dir
-          command: mkdir rafflery
       - attach_workspace:
-          at: /rafflery/
+          at: /app/
       - setup_remote_docker
       - run:
           name: build docker image
