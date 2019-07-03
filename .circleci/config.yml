@@ -45,6 +45,13 @@ jobs:
       - run:
           name: build with gradle
           command: ./gradlew clean build
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
+          # taken to be the root directory of the workspace.
+          root: ./rafflery-server
+          # Must be relative path from root
+          paths:
+            - build
   deploy:
     docker:
       - image: circleci/buildpack-deps:stretch
@@ -52,6 +59,9 @@ jobs:
       - checkout
       - attach_workspace:
           at:  ~/test
+      - run:
+          name: print workspace
+          command: cd ~/test && printf '%s\n' *
       - run:
           name: print directory
           command: printf '%s\n' *
