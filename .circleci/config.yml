@@ -64,10 +64,9 @@ jobs:
           at:  ~/project
 #      - setup_remote_docker
       - run:
-          name: install heroku cli
+          name: Install heroku cli
           command: |
             wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
-            heroku --version #whatever command you want
       - run:
           name: Login to heroku
           command: |
@@ -81,7 +80,7 @@ jobs:
           name: Deploy heroku docker container
           command: |
             heroku container:push web -a rafflery --build-arg frontendBuild=./build --build-arg backendBuild=./build/libs/rafflery.jar
-            # docker push registry.heroku.com/rafflery/web:latest
+# docker push registry.heroku.com/rafflery/web:latest
       - run:
           name: Release heroku docker container
           command: |
