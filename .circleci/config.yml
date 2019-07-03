@@ -53,11 +53,11 @@ jobs:
           paths:
             - build/libs/rafflery.jar
   deploy:
-#    docker:
-#      - image: circleci/buildpack-deps:stretch
-    machine: 
-      services:
-        - docker
+    docker:
+      - image: circleci/buildpack-deps:stretch
+#    machine: 
+#      services:
+#        - docker
     steps:
       - checkout
       - attach_workspace:
@@ -67,15 +67,15 @@ jobs:
           name: Login to heroku
           command: |
             docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.com
-      - run:
-          name: Build docker image
-          command: |
-            TAG=0.1.$CIRCLE_BUILD_NUM
-            docker build --build-arg frontendBuild=./build --build-arg backendBuild=./build/libs/rafflery.jar -t registry.heroku.com/rafflery/web .
+#      - run:
+#          name: Build docker image
+#          command: |
+#            TAG=0.1.$CIRCLE_BUILD_NUM
+#            docker build --build-arg frontendBuild=./build --build-arg backendBuild=./build/libs/rafflery.jar -t registry.heroku.com/rafflery/web .
       - run:
           name: Deploy heroku docker container
           command: |
-            heroku container:push web -a rafflery
+            heroku container:push web -a rafflery --build-arg frontendBuild=./build --build-arg backendBuild=./build/libs/rafflery.jar
             # docker push registry.heroku.com/rafflery/web:latest
       - run:
           name: Release heroku docker container
