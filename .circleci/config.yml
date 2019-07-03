@@ -62,22 +62,22 @@ jobs:
       - checkout
       - attach_workspace:
           at:  ~/project
-      - setup_remote_docker
+#      - setup_remote_docker
       - run:
-          name: login to heroku
+          name: Login to heroku
           command: |
             docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.com
       - run:
-          name: build docker image
+          name: Build docker image
           command: |
             TAG=0.1.$CIRCLE_BUILD_NUM
             docker build --build-arg frontendBuild=./build --build-arg backendBuild=./build/libs/rafflery.jar -t registry.heroku.com/rafflery/web .
       - run:
-          name: push docker to heroku
+          name: Deploy heroku docker container
           command: |
             docker push registry.heroku.com/rafflery/web:latest
       - run:
-          name: release on heroku
+          name: Release heroku docker container
           command: |
             heroku container:release web -a rafflery
 workflows:
