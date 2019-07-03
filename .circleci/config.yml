@@ -51,7 +51,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: /app/
+          at:  ~/test
       - setup_remote_docker
       - run:
           name: build docker image
