@@ -24,4 +24,4 @@ COPY ${backendBuild} /app/rafflery.jar
 WORKDIR /app
 
 # We launch java to execute the jar, with good defauls intended for containers.
-CMD ["java", "-server", "-port 1234", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-XX:InitialRAMFraction=2", "-XX:MinRAMFraction=2", "-XX:MaxRAMFraction=2", "-XX:+UseG1GC", "-XX:MaxGCPauseMillis=100", "-XX:+UseStringDeduplication", "-jar", "rafflery.jar"]
+CMD ["java", "-server", "-port=1234", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-XX:InitialRAMFraction=2", "-XX:MinRAMFraction=2", "-XX:MaxRAMFraction=2", "-XX:+UseG1GC", "-XX:MaxGCPauseMillis=100", "-XX:+UseStringDeduplication", "-jar", "rafflery.jar"]
