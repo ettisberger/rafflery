@@ -65,9 +65,9 @@ jobs:
 #      - setup_remote_docker
       - run:
           name: install heroku cli
-          commands:
-            - wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
-            - heroku --version #whatever command you want
+          command: |
+            wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+            heroku --version #whatever command you want
       - run:
           name: Login to heroku
           command: |
