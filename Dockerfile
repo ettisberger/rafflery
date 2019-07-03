@@ -14,9 +14,10 @@ USER $APPLICATION_USER
 
 RUN printf '%s\n' *
 
+COPY ~/app/build /app
+
 RUN cd /app && printf '%s\n' *
 
-RUN cd /home/ktor && printf '%s\n' *
 
 # We copy the FAT Jar we built into the /app folder and sets that folder as the working directory.
 COPY ./rafflery-ui/build /app/rafflery-ui/build
