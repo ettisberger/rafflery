@@ -4,8 +4,6 @@ FROM openjdk:8-jre-alpine
 ARG frontendBuild=./rafflery-ui/build
 ARG backendBuild=./rafflery-server/build/libs/rafflery.jar
 
-COPY ${folderVariable} /opt/my-folder
-
 # We define the user we will use in this instance to prevent using root that even in a container, can be a security risk.
 ENV APPLICATION_USER ktor
 
@@ -18,8 +16,6 @@ RUN chown -R $APPLICATION_USER /app
 USER $APPLICATION_USER
 
 # RUN printf '%s\n' *
-RUN mkdir ~/andy
-RUN cd ~ && printf '%s\n' *
 # RUN cd /app && printf '%s\n' *
 
 # We copy the FAT Jar we built into the /app folder and sets that folder as the working directory.
