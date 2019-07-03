@@ -50,7 +50,7 @@ jobs:
       - image: circleci/buildpack-deps:stretch
     steps:
       - checkout
-      -run:
+      - run:
           name: create rafflery build dir
           command: mkdir rafflery
       - attach_workspace:
