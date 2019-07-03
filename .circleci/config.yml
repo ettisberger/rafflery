@@ -63,6 +63,9 @@ jobs:
           name: print workspace
           command: cd ~/app && printf '%s\n' *
       - run:
+          name: print workspace
+          command: cd ~/app/build && printf '%s\n' *
+      - run:
           name: print directory
           command: printf '%s\n' *
       - setup_remote_docker
