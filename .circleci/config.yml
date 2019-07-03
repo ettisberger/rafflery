@@ -62,7 +62,7 @@ jobs:
       - checkout
       - attach_workspace:
           at:  ~/project
-#      - setup_remote_docker
+      - setup_remote_docker
       - run:
           name: login to heroku
           command: |
