@@ -52,6 +52,9 @@ jobs:
       - checkout
       - attach_workspace:
           at:  ~/test
+      - run:
+          name: print directory
+          command: printf '%s\n' *
       - setup_remote_docker
       - run:
           name: build docker image
