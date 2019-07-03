@@ -13,8 +13,8 @@ RUN chown -R $APPLICATION_USER /app
 USER $APPLICATION_USER
 
 # We copy the FAT Jar we built into the /app folder and sets that folder as the working directory.
-COPY ./rafflery-server/build/libs/rafflery.jar /app/rafflery.jar
 COPY ./rafflery-ui/build /app/rafflery-ui/build
+COPY ./rafflery-server/build/libs/rafflery.jar /app/rafflery.jar
 WORKDIR /app
 
 # We launch java to execute the jar, with good defauls intended for containers.
