@@ -51,7 +51,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: /rafflery-ui/build
+          at: /rafflery-ui
       - setup_remote_docker
       - run:
           name: build docker image
