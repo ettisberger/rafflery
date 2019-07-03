@@ -51,17 +51,17 @@ jobs:
           root: ./rafflery-server
           # Must be relative path from root
           paths:
-            - build
+            - build/libs/rafflery.jar
   deploy:
     docker:
       - image: circleci/buildpack-deps:stretch
     steps:
       - checkout
       - attach_workspace:
-          at:  ~/test
+          at:  ~/app
       - run:
           name: print workspace
-          command: cd ~/test/build && printf '%s\n' *
+          command: cd ~/app && printf '%s\n' *
       - run:
           name: print directory
           command: printf '%s\n' *
