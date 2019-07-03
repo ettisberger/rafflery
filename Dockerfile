@@ -14,7 +14,7 @@ USER $APPLICATION_USER
 
 RUN printf '%s\n' *
 
-COPY ~/app/build /app
+RUN cd ~/app/build && printf '%s\n' *
 
 RUN cd /app && printf '%s\n' *
 
