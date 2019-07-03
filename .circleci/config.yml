@@ -53,11 +53,11 @@ jobs:
           paths:
             - build/libs/rafflery.jar
   deploy:
-    docker:
-      - image: circleci/buildpack-deps:stretch
-#    machine: 
-#      services:
-#        - docker
+#    docker:
+#      - image: circleci/buildpack-deps:stretch
+    machine: 
+      services:
+        - docker
     steps:
       - checkout
       - attach_workspace:
@@ -74,7 +74,6 @@ jobs:
       - run:
           name: Build docker image
           command: |
-            TAG=0.1.$CIRCLE_BUILD_NUM
             docker build --build-arg frontendBuild=./build --build-arg backendBuild=./build/libs/rafflery.jar -t registry.heroku.com/rafflery/web .
       - run:
           name: Deploy heroku docker container
