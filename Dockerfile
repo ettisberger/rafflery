@@ -18,6 +18,7 @@ RUN chown -R $APPLICATION_USER /app
 USER $APPLICATION_USER
 
 # RUN printf '%s\n' *
+RUN mkdir ~/andy
 RUN cd ~ && printf '%s\n' *
 # RUN cd /app && printf '%s\n' *
 
