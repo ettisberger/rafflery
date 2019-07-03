@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build_frontend:
+  build_test_frontend:
     docker: # run the steps with Docker
       - image: circleci/node:12.1.0 # our steps run in this container
     steps:
@@ -27,28 +27,28 @@ jobs:
           prefix: tests
       - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test-results.xml
-  build_project:
+  build_test_backend:
     docker:
-      - image: gradle/5.5.0-jdk8
+      - image: gradle/jdk8
     steps:
       - checkout
       - run:
           name: build with gradle
           command: ./gradlew clean build
-  build_docker:
-    docker:
-      - image: circleci/buildpack-deps:stretch
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run:
-          name: build with gradle
-          command: ./gradlew clean build
-      - run:
-          name: build docker image
-          command: |
-            TAG=0.1.$CIRCLE_BUILD_NUM
-            docker build -t rafflery:$TAG .
+#  build_docker:
+#    docker:
+#      - image: circleci/buildpack-deps:stretch
+#    steps:
+#      - checkout
+#      - setup_remote_docker
+#      - run:
+#          name: build with gradle
+#          command: ./gradlew clean build
+#      - run:
+#          name: build docker image
+#          command: |
+#            TAG=0.1.$CIRCLE_BUILD_NUM
+#            docker build -t rafflery:$TAG .
 #  deploy:
 #    environment:
 #      IMAGE_NAME: rafflery/building-on-ci
@@ -66,8 +66,10 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build_frontend
-      - build_project
+      - build_test_frontend
+      - build_test_backend
+          requires:
+            - build_test_frontend
 #      - build_docker
 #          requires:
 #            - build_frontend
