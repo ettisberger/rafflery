@@ -6,6 +6,14 @@ plugins {
 }
 
 mainClassName = 'ch.rafflery.MainKt'
+// TODO we need to use EngineMain to make the application.conf work?
+//mainClassName = 'io.ktor.server.netty.EngineMain'
+
+sourceSets {
+    main.kotlin.srcDirs = [ 'src/main/kotlin' ]
+    main.resources.srcDirs = [ 'src/main/resources' ]
+    test.kotlin.srcDirs = [ 'src/test/kotlin' ]
+}
 
 dependencies {
     implementation 'io.ktor:ktor-server-netty:1.2.0'
