@@ -1,6 +1,7 @@
 package ch.rafflery.app
 
 import ch.rafflery.controllers.Controller
+import ch.rafflery.infrastructure.Config
 import ch.rafflery.infrastructure.Jwt
 import io.ktor.application.Application
 import io.ktor.application.install
@@ -23,9 +24,7 @@ class App @Inject constructor(
   private val controllers: Set<@JvmSuppressWildcards Controller>
 ) {
   fun start() {
-    val port: Int = (System.getenv("PORT")?.toInt() ?: 8080)
-
-    val server = embeddedServer(Netty, port) {
+    val server = embeddedServer(Netty, Config.appConfig.port) {
       init(controllers)
     }
 
