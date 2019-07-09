@@ -6,7 +6,7 @@ import com.natpryce.konfig.ConfigurationProperties.Companion.systemProperties
 object Config {
 
   // app config
-  private val app_port = "app.port" to intType
+  private val app_port = "port" to intType
 
   // jwt config
   private val jwt_clientId = "jwt.clientId" to stringType
