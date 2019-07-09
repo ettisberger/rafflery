@@ -1,7 +1,7 @@
 package ch.rafflery.app
 
 import ch.rafflery.controllers.Controller
-import ch.rafflery.infrastructure.JwtConfig
+import ch.rafflery.infrastructure.Jwt
 import io.ktor.application.Application
 import io.ktor.application.install
 import io.ktor.auth.Authentication
@@ -36,9 +36,9 @@ fun Application.init(controllers: Set<Controller>) {
   install(CallLogging)
   install(Authentication) {
     jwt {
-      verifier(JwtConfig.verifier)
+      verifier(Jwt.verifier)
       validate {
-        JwtConfig.validate(it)
+        Jwt.validate(it)
       }
     }
   }

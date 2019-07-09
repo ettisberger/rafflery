@@ -26,7 +26,7 @@ class CreateRaffleControllerTest : ControllerTest() {
         slotSize = 10,
         createdBy = "andy"
       )
-      assertEquals(0, FakeCommandBus.commands.size)
+      assertEquals(1, FakeCommandBus.commands.size)
       assertEquals(expectedCommand, FakeCommandBus.commands[0])
     }
   }

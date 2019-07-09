@@ -7,7 +7,7 @@ import io.ktor.request.receive
 
 class CreateRaffleController(
   private val commandBus: CommandBus
-): SecureController() {
+): Controller() {
 
   override val method = "POST"
   override val path = "/api/raffles"

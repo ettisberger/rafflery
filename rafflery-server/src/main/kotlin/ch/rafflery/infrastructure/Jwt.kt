@@ -9,23 +9,23 @@ import io.ktor.auth.jwt.JWTCredential
 import io.ktor.auth.jwt.JWTPrincipal
 import java.util.*
 
-object JwtConfig {
+object Jwt {
 
-  const val clientId = "wvDUhCjqPf0cDiAzPx62tLifTd4lI84z"
-  const val secret = "5fsdJnKl7OlcVCFP8lcEnJmCyF7EMTmdiya8OKbu1ujvbu_UHy0E2z3Kq1TP9QN1"
-  const val issuer = "https://rafflery.eu.auth0.com/"
-  const val validityInMs = 36_000_00 * 10 // 10 hours
-  private val algorithm = Algorithm.HMAC512(secret)
+  private const val validityInMs = 36_000_00 * 10 // 10 hours
+
+  private val config = Config.jwtConfig
+
+  private val algorithm = Algorithm.HMAC512(config.secret)
 
   val verifier: JWTVerifier = JWT
     .require(algorithm)
-    .withIssuer(issuer)
+    .withIssuer(config.issuer)
     .build()
 
   fun makeToken(user: User): String = JWT.create()
     .withSubject("Authentication")
-    .withAudience(clientId)
-    .withIssuer(issuer)
+    .withAudience(config.clientId)
+    .withIssuer(config.issuer)
     .withClaim("id", user.name)
     .withExpiresAt(getExpiration())
     .sign(algorithm)
@@ -33,6 +33,6 @@ object JwtConfig {
   private fun getExpiration() = Date(System.currentTimeMillis() + validityInMs)
 
   fun validate(credential: JWTCredential): Principal? =
-    credential.payload.audience.contains(clientId)
+    credential.payload.audience.contains(config.clientId)
       .let { JWTPrincipal(credential.payload) }
 }
