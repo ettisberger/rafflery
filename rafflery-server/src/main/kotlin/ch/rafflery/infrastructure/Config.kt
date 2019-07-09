@@ -19,6 +19,8 @@ object Config {
       println("ENVIRONMENT JWT CLIENT ID: ${it.getOrNull(Key("JWT_CLIENTID", stringType))}")
       println("ENVIRONMENT JWT ISSUER: ${it.getOrNull(Key("JWT_ISSUER", stringType))}")
     }
+    // why does this give an error on heroku because he cant find the properties file even
+    // tho he finds every ENV var he needs?
     //ConfigurationProperties.fromResource("local.properties")
 
   val jwtConfig
@@ -35,7 +37,7 @@ object Config {
 }
 
 data class AppConfig(
-    val port: Int?
+    val port: Int
 )
 
 data class JwtConfig(
