@@ -15,8 +15,8 @@ object Config {
 
   private val env = EnvironmentVariables().also {
     println("ENVIRONMENT PORT: ${it.getOrNull(Key("port", intType))}")
-    println("ENVIRONMENT JWT CLIENT ID: ${it.getOrNull(Key("JWT_CLIENTID", intType))}")
-    println("ENVIRONMENT JWT ISSUER: ${it.getOrNull(Key("JWT_ISSUER", intType))}")
+    println("ENVIRONMENT JWT CLIENT ID: ${it.getOrNull(Key("JWT_CLIENTID", stringType))}")
+    println("ENVIRONMENT JWT ISSUER: ${it.getOrNull(Key("JWT_ISSUER", stringType))}")
   }
 
   private val config = systemProperties() overriding
