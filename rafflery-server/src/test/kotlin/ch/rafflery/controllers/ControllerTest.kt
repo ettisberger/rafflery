@@ -2,13 +2,17 @@ package ch.rafflery.controllers
 
 import ch.rafflery.app.init
 import ch.rafflery.domain.commands.Command
+import ch.rafflery.domain.user.User
 import ch.rafflery.infrastructure.CommandBus
+import ch.rafflery.infrastructure.JwtConfig
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
+import io.ktor.http.HttpStatusCode
 import io.ktor.server.testing.*
+import kotlin.test.assertEquals
 
 abstract class ControllerTest {
 
@@ -36,13 +40,29 @@ abstract class ControllerTest {
     return mapper.readValue(this.content!!)
   }
 
+  protected inline infix fun <reified T> TestApplicationCall.shouldHaveBody(body: T) {
+    assertEquals(body, response.getBody())
+  }
+
+  protected infix fun TestApplicationCall.shouldHaveStatus(code: HttpStatusCode) =
+    assertEquals(code, response.status())
+
+  protected fun TestApplicationEngine.getSecure(path: String): TestApplicationCall {
+    return handleRequest {
+      uri = path
+      method = HttpMethod.Get
+      addHeader("Authorization", "Bearer ${getToken()}")
+    }
+  }
+
   protected fun TestApplicationEngine.post(path: String, request: Any, then: () -> Unit) {
     handleRequest(HttpMethod.Post, path) {
       addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
-
       setBody(mapper.writeValueAsString(request))
     }.apply {
       then()
     }
   }
+
+  private fun getToken() = JwtConfig.makeToken(User("testUser"))
 }

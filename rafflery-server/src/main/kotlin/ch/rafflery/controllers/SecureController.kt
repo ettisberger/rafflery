@@ -1,8 +1,8 @@
 package ch.rafflery.controllers
 
+import ch.rafflery.domain.user.User
 import io.ktor.application.ApplicationCall
 import io.ktor.application.call
-import io.ktor.auth.Principal
 import io.ktor.auth.authenticate
 import io.ktor.auth.authentication
 import io.ktor.auth.jwt.JWTPrincipal
@@ -35,12 +35,10 @@ abstract class SecureController: Controller() {
   }
 }
 
-data class User(val name: String) : Principal
-
 val ApplicationCall.user: User
   get(): User {
     val principal: JWTPrincipal? = authentication.principal()
-    val name = principal?.payload?.getClaim("name")?.asString()
+    val name = principal?.payload?.getClaim("id")?.asString()
     if (name != null) {
       return User(name)
     }
