@@ -13,7 +13,11 @@ object Config {
   private val jwt_secret = "jwt.secret" to stringType
   private val jwt_issuer = "jwt.issuer" to stringType
 
-  private val env = EnvironmentVariables().also { println("ENVIRONMENT PORT: ${it.getOrNull(Key("port", intType))}") }
+  private val env = EnvironmentVariables().also {
+    println("ENVIRONMENT PORT: ${it.getOrNull(Key("port", intType))}")
+    println("ENVIRONMENT JWT CLIENT ID: ${it.getOrNull(Key("JWT_CLIENTID", intType))}")
+    println("ENVIRONMENT JWT ISSUER: ${it.getOrNull(Key("JWT_ISSUER", intType))}")
+  }
 
   private val config = systemProperties() overriding
     EnvironmentVariables() overriding
