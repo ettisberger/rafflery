@@ -23,7 +23,7 @@ class App @Inject constructor(
   private val controllers: Set<@JvmSuppressWildcards Controller>
 ) {
   fun start() {
-    val port: Int = (System.getenv("PORT") ?: 8080) as Int
+    val port: Int = (System.getenv("PORT")?.toInt() ?: 8080)
 
     val server = embeddedServer(Netty, port) {
       init(controllers)
