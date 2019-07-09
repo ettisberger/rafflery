@@ -31,7 +31,7 @@ object Config {
 }
 
 data class AppConfig(
-    val port: Int
+    val port: Int?
 )
 
 data class JwtConfig(
