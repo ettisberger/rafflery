@@ -1,10 +1,10 @@
 package ch.rafflery.controllers
 
+import ch.rafflery.assertions.shouldBe
 import ch.rafflery.domain.commands.CreateRaffleCommand
 import io.ktor.http.HttpStatusCode.Companion.OK
 import io.ktor.http.HttpStatusCode.Companion.Unauthorized
 import org.junit.Test
-import kotlin.test.assertEquals
 
 class CreateRaffleControllerTest : ControllerTest() {
 
@@ -31,8 +31,8 @@ class CreateRaffleControllerTest : ControllerTest() {
     )
 
     response shouldHaveStatus OK
-    assertEquals(1, FakeCommandBus.commands.size)
-    assertEquals(expectedCommand, FakeCommandBus.commands[0])
+    FakeCommandBus.commands.size shouldBe 1
+    FakeCommandBus.commands[0] shouldBe expectedCommand
   }
 
   @Test
