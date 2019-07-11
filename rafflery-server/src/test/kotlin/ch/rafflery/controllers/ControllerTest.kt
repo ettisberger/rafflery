@@ -4,7 +4,6 @@ import ch.rafflery.app.init
 import ch.rafflery.domain.commands.Command
 import ch.rafflery.domain.user.User
 import ch.rafflery.infrastructure.CommandBus
-import ch.rafflery.infrastructure.Jwt
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import io.ktor.http.ContentType
@@ -32,7 +31,7 @@ abstract class ControllerTest {
     callback: TestApplicationEngine.() -> Unit
   ) {
     withTestApplication({
-      init(setOf(controller))
+      init(setOf(controller), JwtHmac256)
     }) { callback() }
   }
 

@@ -9,7 +9,6 @@ object Config {
 
     // jwt config
     private val jwt_clientId = "jwt.clientId" to stringType
-    private val jwt_secret = "jwt.secret" to stringType
     private val jwt_issuer = "jwt.issuer" to stringType
 
     // raffler config
@@ -34,7 +33,6 @@ object Config {
     val jwtConfig
         get() = JwtConfig(
             config[jwt_clientId],
-            config[jwt_secret],
             config[jwt_issuer]
         ).also { println("Using JWT config: $it") }
 
@@ -61,7 +59,6 @@ data class RafflerConfig(
 
 data class JwtConfig(
     val clientId: String,
-    val secret: String,
     val issuer: String
 )
 

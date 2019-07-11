@@ -38,7 +38,7 @@ abstract class SecureController: Controller() {
 val ApplicationCall.user: User
   get(): User {
     val principal: JWTPrincipal? = authentication.principal()
-    val name = principal?.payload?.getClaim("id")?.asString()
+    val name = principal?.payload?.getClaim("name")?.asString()
     if (name != null) {
       return User(name)
     }
