@@ -54,14 +54,28 @@ abstract class ControllerTest {
     }
   }
 
-  protected fun TestApplicationEngine.post(path: String, request: Any, then: () -> Unit) {
-    handleRequest(HttpMethod.Post, path) {
-      addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
-      setBody(mapper.writeValueAsString(request))
-    }.apply {
-      then()
+  protected fun TestApplicationEngine.get(path: String): TestApplicationCall {
+    return handleRequest {
+      uri = path
+      method = HttpMethod.Get
     }
   }
+
+  protected fun TestApplicationEngine.post(path: String, request: Any): TestApplicationCall {
+    return handleRequest(HttpMethod.Post, path) {
+      addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
+      setBody(mapper.writeValueAsString(request))
+    }
+  }
+
+  protected fun TestApplicationEngine.postSecure(path: String, request: Any): TestApplicationCall {
+    return handleRequest(HttpMethod.Post, path) {
+      addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
+      setBody(mapper.writeValueAsString(request))
+      addHeader("Authorization", "Bearer ${getToken()}")
+    }
+  }
+
 
   private fun getToken() = Jwt.makeToken(User("testUser"))
 }

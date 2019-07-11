@@ -3,11 +3,12 @@ package ch.rafflery.controllers
 import ch.rafflery.domain.commands.CreateRaffleCommand
 import ch.rafflery.infrastructure.CommandBus
 import io.ktor.application.ApplicationCall
+import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 
 class CreateRaffleController(
   private val commandBus: CommandBus
-): Controller() {
+): SecureController() {
 
   override val method = "POST"
   override val path = "/api/raffles"
@@ -23,6 +24,8 @@ class CreateRaffleController(
     )
 
     commandBus.submit(command)
+
+    call.response.status(HttpStatusCode.OK)
   }
 }
 
