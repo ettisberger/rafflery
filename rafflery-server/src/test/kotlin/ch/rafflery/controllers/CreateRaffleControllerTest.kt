@@ -7,7 +7,6 @@ import io.ktor.http.HttpStatusCode.Companion.Unauthorized
 import org.junit.Ignore
 import org.junit.Test
 
-@Ignore
 class CreateRaffleControllerTest : ControllerTest() {
 
   private val controller = CreateRaffleController(FakeCommandBus)

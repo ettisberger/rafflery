@@ -6,7 +6,10 @@ import ch.rafflery.infrastructure.JwtValidator
 import com.auth0.jwt.JWT
 import com.auth0.jwt.JWTVerifier
 import com.auth0.jwt.algorithms.Algorithm
+import io.ktor.auth.Principal
 import io.ktor.auth.jwt.JWTAuthenticationProvider
+import io.ktor.auth.jwt.JWTCredential
+import io.ktor.auth.jwt.JWTPrincipal
 
 object Jwt {
 
@@ -26,6 +29,9 @@ object Jwt {
     .withClaim("name", user.name)
     .sign(algorithm)
 
+  fun validate(credential: JWTCredential): Principal? =
+    credential.payload.audience.contains(clientId)
+      .let { JWTPrincipal(credential.payload) }
 }
 
 object JwtHmac256 : JwtConfigurator {
@@ -33,7 +39,7 @@ object JwtHmac256 : JwtConfigurator {
     with(configuration) {
       verifier(Jwt.verifier)
       validate {
-        JwtValidator.validate(it)
+        Jwt.validate(it)
       }
     }
   }
