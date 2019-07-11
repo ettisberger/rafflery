@@ -4,8 +4,10 @@ import ch.rafflery.assertions.shouldBe
 import ch.rafflery.domain.commands.CreateRaffleCommand
 import io.ktor.http.HttpStatusCode.Companion.OK
 import io.ktor.http.HttpStatusCode.Companion.Unauthorized
+import org.junit.Ignore
 import org.junit.Test
 
+@Ignore
 class CreateRaffleControllerTest : ControllerTest() {
 
   private val controller = CreateRaffleController(FakeCommandBus)
