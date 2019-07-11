@@ -7,11 +7,9 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.JWTVerifier
 import com.auth0.jwt.algorithms.Algorithm
 import io.ktor.auth.jwt.JWTAuthenticationProvider
-import java.util.*
 
 object Jwt {
 
-  private const val validityInMs = 36_000_00 * 10 // 10 hours
   private val algorithm = Algorithm.HMAC512("secret")
   private val clientId = "clientId"
   private val issuer = "issuer"
@@ -26,10 +24,8 @@ object Jwt {
     .withAudience(clientId)
     .withIssuer(issuer)
     .withClaim("name", user.name)
-    .withExpiresAt(getExpiration())
     .sign(algorithm)
 
-  private fun getExpiration() = Date(System.currentTimeMillis() + validityInMs)
 }
 
 object JwtHmac256 : JwtConfigurator {
