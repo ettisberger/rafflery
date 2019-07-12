@@ -6,6 +6,7 @@ build
 
 .idea
 rafflery-server/out/
+rafflery-ui/out/
 
 local.properties
 
