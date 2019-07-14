@@ -77,5 +77,5 @@ abstract class ControllerTest {
   }
 
 
-  private fun getToken() = Jwt.makeToken(User("testUser"))
+  private fun getToken() = MockJwt.makeToken(User("testUser"))
 }

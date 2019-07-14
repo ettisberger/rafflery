@@ -2,7 +2,6 @@ package ch.rafflery.controllers
 
 import ch.rafflery.domain.user.User
 import ch.rafflery.infrastructure.JwtConfigurator
-import ch.rafflery.infrastructure.JwtValidator
 import com.auth0.jwt.JWT
 import com.auth0.jwt.JWTVerifier
 import com.auth0.jwt.algorithms.Algorithm
@@ -11,11 +10,11 @@ import io.ktor.auth.jwt.JWTAuthenticationProvider
 import io.ktor.auth.jwt.JWTCredential
 import io.ktor.auth.jwt.JWTPrincipal
 
-object Jwt {
+object MockJwt {
 
   private val algorithm = Algorithm.HMAC512("secret")
-  private val clientId = "clientId"
-  private val issuer = "issuer"
+  const val clientId = "clientId"
+  private const val issuer = "issuer"
 
   val verifier: JWTVerifier = JWT
     .require(algorithm)
@@ -28,19 +27,20 @@ object Jwt {
     .withIssuer(issuer)
     .withClaim("name", user.name)
     .sign(algorithm)
-
-  fun validate(credential: JWTCredential): Principal? =
-    credential.payload.audience.contains(clientId)
-      .let { JWTPrincipal(credential.payload) }
 }
 
 object JwtHmac256 : JwtConfigurator {
+
   override fun configure(configuration: JWTAuthenticationProvider.Configuration) {
     with(configuration) {
-      verifier(Jwt.verifier)
+      verifier(MockJwt.verifier)
       validate {
-        Jwt.validate(it)
+        validate(it)
       }
     }
   }
+
+  private fun validate(credential: JWTCredential): Principal? =
+    credential.payload.audience.contains(MockJwt.clientId)
+      .let { JWTPrincipal(credential.payload) }
 }

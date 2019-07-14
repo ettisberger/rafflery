@@ -11,14 +11,6 @@ interface JwtConfigurator {
   fun configure(configuration: JWTAuthenticationProvider.Configuration)
 }
 
-object JwtValidator {
-
-  // this should probably do something smarter...
-  fun validate(credential: JWTCredential): Principal? =
-    credential.payload.audience.contains(Config.jwtConfig.clientId)
-      .let { JWTPrincipal(credential.payload) }
-}
-
 class JwtRs256 : JwtConfigurator {
 
   private val config = Config.jwtConfig
@@ -33,8 +25,11 @@ class JwtRs256 : JwtConfigurator {
     with(configuration) {
       verifier(jwkProvider, config.issuer)
       validate {
-        JwtValidator.validate(it)
+        validate(it)
       }
     }
 
+  private fun validate(credential: JWTCredential): Principal? =
+    credential.payload.audience.contains(Config.jwtConfig.clientId)
+      .let { JWTPrincipal(credential.payload) }
 }
