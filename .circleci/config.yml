@@ -89,13 +89,17 @@ jobs:
             pwd
             ls
       - run:
+          name: Show docker version
+          command: |
+            sudo docker version
+      - run:
           name: Load docker image
           command: |
-            docker load -i ./rafflery.tar
+            sudo docker load -i ./rafflery.tar
       - run:
           name: Run docker image
           command: |
-            docker run -it -p 8080:8080 --rm rafflery
+            sudo docker run -it -p 8080:8080 --rm rafflery
       - run:
           name: Run cypress
           command: |
