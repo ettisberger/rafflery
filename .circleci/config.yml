@@ -44,7 +44,7 @@ jobs:
           name: build
           command: cd rafflery-ui && npm run build
       - persist_to_workspace:
-          root: /root
+          root: /root/project
           paths:
             - rafflery-ui/build
   build_test_backend:
