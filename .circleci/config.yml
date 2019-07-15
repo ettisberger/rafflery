@@ -45,10 +45,10 @@ jobs:
       - run:
           name: build
           command: cd rafflery-ui && npm run build
-      - persist_to_workspace:
-          root: /home/circleci
-          paths:
-            - .
+      #- persist_to_workspace:
+      #    root: /home/circleci
+      #    paths:
+      #      - .
   build_test_backend:
     docker:
       - image: gradle:jdk8
@@ -57,16 +57,18 @@ jobs:
       - run:
           name: build with gradle
           command: ./gradlew clean build
-      - persist_to_workspace:
-          root: /root
-          paths:
-            - .
+      #- persist_to_workspace:
+      #    root: /root
+      #    paths:
+      #      - .
   build_docker:
     machine: 
       services:
         - docker
     steps:
       - *fast-checkout
+      - run: pwd
+      - run: ls
       - run:
           name: Build docker image
           command: |
