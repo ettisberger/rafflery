@@ -52,13 +52,18 @@ jobs:
       - image: gradle:jdk8
     steps:
       - *fast-checkout
+      - run: cd .. && pwd && ls
+      - run: pwd
+      - run: ls
+      - run: cd rafflery-ui && ls
+      - run: cd rafflery-server && ls
       - run:
           name: build with gradle
           command: ./gradlew clean build
       - persist_to_workspace:
           root: /home/circleci/project
           paths:
-            - build/libs/rafflery.jar
+            - rafflery-server/build/libs/rafflery.jar
   build_docker:
     machine: 
       services:
