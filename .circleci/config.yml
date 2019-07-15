@@ -1,6 +1,6 @@
 fast-checkout: &fast-checkout
   attach_workspace:
-    at: /root
+    at: ~/project
     
 version: 2
 jobs:
