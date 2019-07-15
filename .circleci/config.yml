@@ -65,6 +65,7 @@ jobs:
         - docker
     steps:
       - *fast-checkout
+      - run: cd .. && pwd && ls
       - run: pwd
       - run: ls
       - run: cd rafflery-ui && ls
