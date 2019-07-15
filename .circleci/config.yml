@@ -140,7 +140,7 @@ jobs:
       - run:
           name: Run cypress
           command: |
-            cd rafflery-ui && docker ps && npm run cypress:run
+            cd rafflery-ui && npm run cypress:run --config baseUrl=http://0.0.0.0:8080/
   deploy:
     machine: 
       services:
