@@ -122,8 +122,13 @@ jobs:
       - run: 
           name: Run rafflery backend
           command: |
-            docker run -it -p 8080:8080 -e JWT_CLIENTID -e JWT_ISSUER -e PORT registry.heroku.com/rafflery/web:latest 
+            docker run -it -p 8080:8080 -e JWT_CLIENTID -e JWT_ISSUER -e PORT registry.heroku.com/rafflery/web:latest
+            docker exec registry.heroku.com/rafflery/web:latest curl --retry 10 --retry-connrefused http://localhost:8080
           background: true
+      - run: 
+          name: Check running container
+          command: |
+            docker ps
       # why does it install cypress again here? shouldnt this be cached because of the
       # frontend build where we saved the cache?
       - restore_cache: # special step to restore the dependency cache
