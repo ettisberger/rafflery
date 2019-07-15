@@ -10,6 +10,7 @@ jobs:
     steps:
       - checkout
       - run: rm -rf .git
+      - run: ls
       - persist_to_workspace:
           root: /root
           paths:
@@ -19,6 +20,7 @@ jobs:
       - image: circleci/node:12.1.0
     steps:
       - *fast-checkout
+      - run: ls
       - run:
           name: update-npm
           command: 'sudo npm install -g npm@latest'
