@@ -2,7 +2,7 @@ fast-checkout: &fast-checkout
   attach_workspace:
     at: ~/
     
-version: 2
+version: 2.1
 jobs:
   checkout_rafflery:
     docker:
@@ -73,33 +73,38 @@ jobs:
           name: Save docker image tag
           command: |
             docker save -o ./rafflery.tar registry.heroku.com/rafflery/web
-      - run:
-          name: Print working dir
-          command: |
-            pwd
-            ls
       - persist_to_workspace:
           root: /home/circleci
           paths:
             - .
   build_test_end2end:
-    docker:
-      - image: circleci/buildpack-deps:stretch
+    #docker:
+    #  - image: cypress/browsers:chrome67
+    orbs:
+      cypress: cypress-io/cypress@1.5.1
     steps:
       - *fast-checkout
-      - run: pwd
       - run:
-          name: TO DO
+          name: Print working dir
           command: |
+            pwd
             ls
+      - run:
+          name: Load docker image
+          command: |
+            docker load -i ./rafflery.tar
+      - run:
+          name: Run docker image
+            docker run -it -p 8080:8080 --rm rafflery
+      - run:
+          name: Run cypress
+            cd rafflery-ui && npm run cypress:run
   deploy:
     machine: 
       services:
         - docker
     steps:
-      - checkout
-      - attach_workspace:
-          at:  ~/project
+      - *fast-checkout
       - run:
           name: Install heroku cli
           command: |
@@ -121,7 +126,7 @@ jobs:
           command: |
             heroku container:release web -a rafflery
 workflows:
-  version: 2
+  version: 2.1
   build-test-and-deploy:
     jobs:
       - checkout_rafflery
