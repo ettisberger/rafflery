@@ -79,7 +79,7 @@ jobs:
             - .
   build_test_end2end:
     docker:
-      - image: circleci/buildpack-deps
+      - image: gradle:jdk8
       - image: cypress/browsers:chrome67
     steps:
       - *fast-checkout
@@ -89,17 +89,9 @@ jobs:
             pwd
             ls
       - run:
-          name: Show docker version
+          name: Run rafflery backend
           command: |
-            sudo docker version
-      - run:
-          name: Load docker image
-          command: |
-            sudo docker load -i ./rafflery.tar
-      - run:
-          name: Run docker image
-          command: |
-            sudo docker run -it -p 8080:8080 --rm rafflery
+          java -server -jar ./rafflery-server/build/libs/rafflery.jar     
       - run:
           name: Run cypress
           command: |
