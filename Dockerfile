@@ -16,7 +16,8 @@ RUN chown -R $APPLICATION_USER /app
 USER $APPLICATION_USER
 
 RUN printf '%s\n' *
-RUN cd /home/ktor && printf '%s\n' *
+RUN find . -name "build"
+#RUN cd /home/ktor && printf '%s\n' *
 
 # We copy the FAT Jar we built into the /app folder and sets that folder as the working directory.
 COPY ${frontendBuild} /app/rafflery-ui/build
