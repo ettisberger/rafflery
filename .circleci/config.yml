@@ -100,7 +100,7 @@ jobs:
             pwd
             ls
       - run:
-       it would be better to have a docker image with cypress and docker
+      # it would be better to have a docker image with cypress and docker
           name: Install Docker client (replace later with docker container with cypress and docker)
           command: |
             set -x
@@ -121,7 +121,7 @@ jobs:
       - run: 
           name: Run rafflery backend
           command: |
-            docker run -it -p 8080:8080 --rm registry.heroku.com/rafflery/web:latest
+            docker run -it -p 8080:8080 --rm registry.heroku.com/rafflery/web:latest -e JWT_CLIENTID="${JWT_CLIENTID}" -e JWT_ISSUER="${JWT_ISSUER}" -e PORT="${PORT}"
       # why does it install cypress again here? shouldnt this be cached because of the
       # frontend build where we saved the cache?
       - restore_cache: # special step to restore the dependency cache
