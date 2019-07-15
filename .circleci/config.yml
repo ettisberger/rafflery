@@ -75,8 +75,8 @@ jobs:
       - *fast-checkout
       - run: pwd
       - run: ls
-      - run: cd /home/circleci/build-frontend && ls
-      - run: cd /home/circleci/build-backend && ls
+      - run: cp -R /home/circleci/build-frontend .
+      - run: cp -R /home/circleci/build-backend .
       - run: cd .. && pwd && ls
       - run: cd /home/circleci && ls
       - run:
