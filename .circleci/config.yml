@@ -86,7 +86,9 @@ jobs:
           command: |
             docker save -o ./rafflery.tar registry.heroku.com/rafflery/web
       - persist_to_workspace:
-          root: /home/circleci/project/rafflery.tar
+          root: /home/circleci
+          paths:
+            - project/rafflery.tar
   build_test_end2end:
     docker:
       - image: cypress/browsers:chrome67
