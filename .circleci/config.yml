@@ -75,8 +75,8 @@ jobs:
       - *fast-checkout
       - run: pwd
       - run: ls
-      - run: cd rafflery-ui && ls
-      - run: cd rafflery-server && ls
+      - run: cd ~/build-frontend && ls
+      - run: cd ~/build-backend && ls
       - run: cd .. && ls
       - run:
           name: Build docker image
