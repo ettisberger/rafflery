@@ -44,9 +44,9 @@ jobs:
           name: build
           command: cd rafflery-ui && npm run build
       - persist_to_workspace:
-          root: /home/circleci/project
+          root: /home/circleci/project/rafflery-ui
           paths:
-            - rafflery-ui/build
+            - build
   build_test_backend:
     docker:
       - image: gradle:jdk8
@@ -61,7 +61,7 @@ jobs:
           name: build with gradle
           command: ./gradlew clean build
       - persist_to_workspace:
-          root: /home/circleci/project
+          root: /root/project
           paths:
             - rafflery-server/build/libs/rafflery.jar
   build_docker:
