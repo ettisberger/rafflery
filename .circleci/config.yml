@@ -69,6 +69,9 @@ jobs:
           paths:
             - rafflery.tar
   build_test_end2end:
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    steps:
       - run:
         name: TO DO
         command: |
