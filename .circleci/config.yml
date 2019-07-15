@@ -4,15 +4,15 @@ fast-checkout: &fast-checkout
 version: 2
 jobs:
   checkout_rafflery:
-  docker:
-    - image: python
-  steps:
-    - checkout
-    - run: rm -rf .git
-    - persist_to_workspace:
-        root: /root
-        paths:
-          - project
+    docker:
+      - image: python
+    steps:
+      - checkout
+      - run: rm -rf .git
+      - persist_to_workspace:
+          root: /root
+          paths:
+            - project
   build_test_frontend:
     docker:
       - image: circleci/node:12.1.0
