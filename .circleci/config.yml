@@ -92,9 +92,6 @@ jobs:
   build_test_end2end:
     docker:
       - image: cypress/browsers:chrome67
-      #- image: gradle:jdk8
-      #  name: test
-      #  command: java -server -jar ./rafflery-server/build/libs/rafflery.jar
     steps:
       - *fast-checkout
       - run:
@@ -102,7 +99,23 @@ jobs:
           command: |
             pwd
             ls
-      - run: docker version
+      - run:
+      # it would be better to have a docker image with cypress and docker
+          name: Install Docker client (replace later with docker container with cypress and docker)
+          command: |
+            set -x
+            VER="17.03.0-ce"
+            curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
+            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+            mv /tmp/docker/* /usr/bin
+      - run: 
+          name: Show docker version
+          command: |
+            docker version
+      - run: 
+          name: Run rafflery backend
+          command: |
+            docker run -it -p 8080:8080 --rm rafflery
       # why does it install cypress again here? shouldnt this be cached because of the
       # frontend build where we saved the cache?
       - restore_cache: # special step to restore the dependency cache
