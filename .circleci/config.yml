@@ -2,7 +2,7 @@ fast-checkout: &fast-checkout
   attach_workspace:
     at: ~/
     
-version: 2.1
+version: 2
 jobs:
   checkout_rafflery:
     docker:
@@ -78,10 +78,8 @@ jobs:
           paths:
             - .
   build_test_end2end:
-    #docker:
-    #  - image: cypress/browsers:chrome67
-    orbs:
-      cypress: cypress-io/cypress@1.5.1
+    docker:
+      - image: cypress/browsers:chrome67
     steps:
       - *fast-checkout
       - run:
@@ -126,7 +124,7 @@ jobs:
           command: |
             heroku container:release web -a rafflery
 workflows:
-  version: 2.1
+  version: 2
   build-test-and-deploy:
     jobs:
       - checkout_rafflery
