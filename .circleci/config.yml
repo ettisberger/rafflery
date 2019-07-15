@@ -47,7 +47,7 @@ jobs:
           command: cd rafflery-ui && npm run build
       - run:
           name: copy build to different dir
-          command: cp rafflery-ui/build ./build-frontend
+          command: cp -R rafflery-ui/build ./build-frontend
       - persist_to_workspace:
           root: /home/circleci/project
           paths:
@@ -62,7 +62,7 @@ jobs:
           command: ./gradlew clean build
       - run:
           name: copy build to different dir
-          command: cp rafflery-server/build ./build-backend
+          command: cp -R rafflery-server/build ./build-backend
       - persist_to_workspace:
           root: /home/circleci/project
           paths:
