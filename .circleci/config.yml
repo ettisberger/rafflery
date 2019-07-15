@@ -110,6 +110,7 @@ jobs:
             mv /tmp/docker/* /usr/bin
       # cant run docker without this
       - setup_remote_docker 
+        - docker_layer_caching: true
       - run: 
           name: Show docker version
           command: |
@@ -121,7 +122,7 @@ jobs:
       - run: 
           name: Run rafflery backend
           command: |
-            docker run -it -p 8080:8080 -e JWT_CLIENTID -e JWT_ISSUER -e PORT --rm registry.heroku.com/rafflery/web:latest 
+            docker run -it -p 8080:8080 -e JWT_CLIENTID -e JWT_ISSUER -e PORT registry.heroku.com/rafflery/web:latest 
           background: true
       # why does it install cypress again here? shouldnt this be cached because of the
       # frontend build where we saved the cache?
