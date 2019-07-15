@@ -73,12 +73,10 @@ jobs:
         - docker
     steps:
       - *fast-checkout
-      - run: pwd
-      - run: ls
+      - run: pwd && ls
+      - run: cd /rafflery-ui && ls
       - run: cp -R /home/circleci/build-frontend .
       - run: cp -R /home/circleci/build-backend .
-      - run: cd .. && pwd && ls
-      - run: cd /home/circleci && ls
       - run:
           name: Build docker image
           command: |
