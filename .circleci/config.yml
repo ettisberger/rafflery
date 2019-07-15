@@ -79,9 +79,9 @@ jobs:
             pwd
             ls
       - persist_to_workspace:
-          root: ~/project
+          root: /home/circleci
           paths:
-            - rafflery.tar
+            - .
   build_test_end2end:
     docker:
       - image: circleci/buildpack-deps:stretch
