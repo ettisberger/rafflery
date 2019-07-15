@@ -10,6 +10,7 @@ jobs:
     steps:
       - checkout
       - run: rm -rf .git
+      - run: pwd
       - run: ls
       - persist_to_workspace:
           root: /root
@@ -20,6 +21,7 @@ jobs:
       - image: circleci/node:12.1.0
     steps:
       - *fast-checkout
+      - run: pwd
       - run: ls
       - run:
           name: update-npm
