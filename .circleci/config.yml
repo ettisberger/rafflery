@@ -75,13 +75,14 @@ jobs:
       - *fast-checkout
       - run: pwd
       - run: ls
-      - run: cd ~/build-frontend && ls
-      - run: cd ~/build-backend && ls
-      - run: cd .. && ls
+      - run: cd /home/circleci/build-frontend && ls
+      - run: cd /home/circleci/build-backend && ls
+      - run: cd .. && pwd && ls
+      - run: cd /home/circleci && ls
       - run:
           name: Build docker image
           command: |
-            docker build --build-arg frontendBuild=./home/circleci/build-frontend --build-arg backendBuild=./home/circleci/build-backend/libs/rafflery.jar -t registry.heroku.com/rafflery/web .
+            docker build --build-arg frontendBuild=./build-frontend --build-arg backendBuild=./build-backend/libs/rafflery.jar -t registry.heroku.com/rafflery/web .
       - run:
           name: Save docker image tag
           command: |
