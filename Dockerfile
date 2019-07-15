@@ -15,13 +15,15 @@ RUN chown -R $APPLICATION_USER /app
 # Marks this container to use the specified $APPLICATION_USER
 USER $APPLICATION_USER
 
-RUN printf '%s\n' *
-RUN cd /app && printf '%s\n' *
+RUN cd /home/circleci && printf '%s\n' *
+RUN cd /root && printf '%s\n' *
 
 # We copy the FAT Jar we built into the /app folder and sets that folder as the working directory.
 COPY ${frontendBuild} /app/rafflery-ui/build
 COPY ${backendBuild} /app/rafflery.jar
 WORKDIR /app
+
+RUN cd /app && printf '%s\n' *
 
 # We launch java to execute the jar, with good defauls intended for containers.
 CMD ["java", "-server", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-XX:InitialRAMFraction=2", "-XX:MinRAMFraction=2", "-XX:MaxRAMFraction=2", "-XX:+UseG1GC", "-XX:MaxGCPauseMillis=100", "-XX:+UseStringDeduplication", "-jar", "rafflery.jar"]
