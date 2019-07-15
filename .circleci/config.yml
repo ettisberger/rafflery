@@ -121,7 +121,7 @@ jobs:
       - run: 
           name: Run rafflery backend
           command: |
-            docker run -it -p 8080:8080 --rm rafflery
+            docker run -it -p 8080:8080 --rm registry.heroku.com/rafflery/web:latest
       # why does it install cypress again here? shouldnt this be cached because of the
       # frontend build where we saved the cache?
       - restore_cache: # special step to restore the dependency cache
