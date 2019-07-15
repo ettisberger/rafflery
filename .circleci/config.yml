@@ -86,7 +86,7 @@ jobs:
           command: |
             docker save -o ./rafflery.tar registry.heroku.com/rafflery/web
       - persist_to_workspace:
-          root: /home/circleci
+          root: /home/circleci/project
           paths:
             - rafflery.tar
   build_test_end2end:
