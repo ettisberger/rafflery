@@ -64,7 +64,7 @@ jobs:
           name: copy build to different dir
           command: cp -R rafflery-server/build ./build-backend
       - persist_to_workspace:
-          root: /home/circleci/project
+          root: /root/project
           paths:
             - build-backend
   build_docker:
