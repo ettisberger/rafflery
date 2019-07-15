@@ -52,9 +52,13 @@ jobs:
       - image: gradle:jdk8
     steps:
       - *fast-checkout
+      - run: pwd
+      - run: ls
       - run:
           name: build with gradle
           command: ./gradlew clean build
+      - run: pwd
+      - run: ls
       - persist_to_workspace:
           root: /root
           paths:
