@@ -109,7 +109,7 @@ jobs:
             tar -xz -C /tmp -f /tmp/docker-$VER.tgz
             mv /tmp/docker/* /usr/bin
       # cant run docker without this
-      - setup_remote_docker 
+      - setup_remote_docker: 
           docker_layer_caching: true
       - run: 
           name: Show docker version
