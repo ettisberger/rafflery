@@ -31,6 +31,8 @@ jobs:
           key: dependency-cache-{{ checksum "rafflery-ui/package.json" }}
           paths:
             - ./rafflery-ui/node_modules
+            - ~/.cache
+            - ~/.npm
       - run:
           name: Test Frontend
           command: cd rafflery-ui && npm run test:ci
@@ -80,9 +82,9 @@ jobs:
   build_test_end2end:
     docker:
       - image: cypress/browsers:chrome67
-      - image: gradle:jdk8
-        name: test
-        command: java -server -jar ./rafflery-server/build/libs/rafflery.jar
+      #- image: gradle:jdk8
+      #  name: test
+      #  command: java -server -jar ./rafflery-server/build/libs/rafflery.jar
     steps:
       - *fast-checkout
       - run:
@@ -135,9 +137,10 @@ workflows:
             - checkout_rafflery
       - build_test_backend:
           requires:
-            - build_test_frontend
+            - checkout_rafflery
       - build_docker:
           requires:
+            - build_test_frontend
             - build_test_backend
       - build_test_end2end:
           requires:
