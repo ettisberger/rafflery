@@ -102,11 +102,9 @@ jobs:
           command: |
             pwd
             ls
-      #- run:
-      #    name: Run rafflery backend
-      #    command: |
-      #      java -server -jar ./rafflery-server/build/libs/rafflery.jar     
-      #    background: true
+      - run: docker version
+      # why does it install cypress again here? shouldnt this be cached because of the
+      # frontend build where we saved the cache?
       - restore_cache: # special step to restore the dependency cache
           key: dependency-cache-{{ checksum "rafflery-ui/package.json" }}
       - run:
