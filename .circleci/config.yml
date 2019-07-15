@@ -107,6 +107,12 @@ jobs:
       #    command: |
       #      java -server -jar ./rafflery-server/build/libs/rafflery.jar     
       #    background: true
+      - restore_cache: # special step to restore the dependency cache
+          key: dependency-cache-{{ checksum "rafflery-ui/package.json" }}
+      - run:
+          name: install-npm
+          command: |
+            cd rafflery-ui && npm install
       - run:
           name: Run cypress
           command: |
