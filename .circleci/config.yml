@@ -1,6 +1,6 @@
 fast-checkout: &fast-checkout
   attach_workspace:
-    at: ~/project
+    at: ~/
     
 version: 2
 jobs:
@@ -10,8 +10,6 @@ jobs:
     steps:
       - checkout
       - run: rm -rf .git
-      - run: pwd
-      - run: ls
       - persist_to_workspace:
           root: /root
           paths:
