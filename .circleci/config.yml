@@ -81,7 +81,7 @@ jobs:
       - run:
           name: Build docker image
           command: |
-            docker build --build-arg frontendBuild=./rafflery-ui/build --build-arg backendBuild=./rafflery-server/build/libs/rafflery.jar -t registry.heroku.com/rafflery/web .
+            docker build --build-arg frontendBuild=~/build-frontend/build --build-arg backendBuild=~/build-backend/build/libs/rafflery.jar -t registry.heroku.com/rafflery/web .
       - run:
           name: Save docker image tag
           command: |
