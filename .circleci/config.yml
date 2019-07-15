@@ -93,9 +93,11 @@ jobs:
             docker load -i ./rafflery.tar
       - run:
           name: Run docker image
+          command: |
             docker run -it -p 8080:8080 --rm rafflery
       - run:
           name: Run cypress
+          command: |
             cd rafflery-ui && npm run cypress:run
   deploy:
     machine: 
