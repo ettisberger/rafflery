@@ -46,7 +46,7 @@ jobs:
           paths:
             - build/libs/rafflery.jar
   build_docker:
-      machine: 
+    machine: 
       services:
         - docker
     steps:
