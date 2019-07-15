@@ -122,11 +122,11 @@ jobs:
             docker container ls
             docker ps
       - run: 
-          # docker exec registry.heroku.com/rafflery/web:latest curl --retry 10 --retry-connrefused http://localhost:8080
           name: Run rafflery backend
           command: |
-            docker run -d	-it -p 8080:8080 -e JWT_CLIENTID -e JWT_ISSUER -e PORT registry.heroku.com/rafflery/web:latest
+            docker run -d	-it -p 8080:8080 -e JWT_CLIENTID -e JWT_ISSUER -e PORT --name rafflery registry.heroku.com/rafflery/web:latest
             docker container ls
+            docker exec rafflery curl --retry 10 --retry-connrefused http://localhost:8080
       - run: 
           name: Check running container
           command: |
