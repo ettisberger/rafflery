@@ -91,7 +91,7 @@ jobs:
       - run:
           name: Run rafflery backend
           command: |
-          java -server -jar ./rafflery-server/build/libs/rafflery.jar     
+            java -server -jar ./rafflery-server/build/libs/rafflery.jar     
       - run:
           name: Run cypress
           command: |
