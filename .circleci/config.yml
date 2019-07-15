@@ -79,6 +79,7 @@ jobs:
             - .
   build_test_end2end:
     docker:
+      - image: circleci/buildpack-deps
       - image: cypress/browsers:chrome67
     steps:
       - *fast-checkout
