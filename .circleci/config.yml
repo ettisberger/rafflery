@@ -77,6 +77,7 @@ jobs:
       - run: ls
       - run: cd rafflery-ui && ls
       - run: cd rafflery-server && ls
+      - run: cd .. && ls
       - run:
           name: Build docker image
           command: |
