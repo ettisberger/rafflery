@@ -74,7 +74,7 @@ jobs:
     steps:
       - *fast-checkout
       - run: pwd && ls
-      - run: cd /rafflery-ui && ls
+      - run: cd ./rafflery-ui && ls
       - run: cp -R /home/circleci/build-frontend .
       - run: cp -R /home/circleci/build-backend .
       - run:
