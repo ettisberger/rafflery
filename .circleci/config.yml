@@ -81,7 +81,8 @@ jobs:
     docker:
       - image: cypress/browsers:chrome67
       - image: gradle:jdk8
-          command: java -server -jar ./rafflery-server/build/libs/rafflery.jar
+        name: test
+        command: java -server -jar ./rafflery-server/build/libs/rafflery.jar
     steps:
       - *fast-checkout
       - run:
