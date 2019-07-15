@@ -1,6 +1,7 @@
 fast-checkout: &fast-checkout
   attach_workspace:
     at: /root
+    
 version: 2
 jobs:
   checkout_rafflery:
@@ -123,7 +124,7 @@ workflows:
     jobs:
       - checkout_rafflery
       - build_test_frontend:
-          -requires:
+          requires:
             - checkout_rafflery
       - build_test_backend:
           requires:
