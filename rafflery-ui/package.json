@@ -34,7 +34,7 @@
     "test:ci": "react-scripts test --ci --coverage --coverageDirectory=out/coverage --reporters=default --reporters=jest-junit",
     "eject": "react-scripts eject",
     "pretty": "prettier --single-quote --trailing-comma es5 --write 'src/**/*.{ts,tsx}'",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
     "cypress:run": "cypress run"
   },
   "jest-junit": {
