@@ -1,10 +1,23 @@
+fast-checkout: &fast-checkout
+  attach_workspace:
+    at: /root
 version: 2
 jobs:
+  checkout_rafflery:
+  docker:
+    - image: python
+  steps:
+    - checkout
+    - run: rm -rf .git
+    - persist_to_workspace:
+        root: /root
+        paths:
+          - project
   build_test_frontend:
     docker:
       - image: circleci/node:12.1.0
     steps:
-      - checkout
+      - *fast-checkout
       - run:
           name: update-npm
           command: 'sudo npm install -g npm@latest'
@@ -37,7 +50,7 @@ jobs:
     docker:
       - image: gradle:jdk8
     steps:
-      - checkout
+      - *fast-checkout
       - run:
           name: build with gradle
           command: ./gradlew clean build
@@ -50,8 +63,7 @@ jobs:
       services:
         - docker
     steps:
-      - attach_workspace:
-          at:  ~/project
+      - *fast-checkout
       - run:
           name: Build docker image
           command: |
@@ -72,6 +84,7 @@ jobs:
     docker:
       - image: circleci/buildpack-deps:stretch
     steps:
+      - *fast-checkout
       - run:
         name: TO DO
         command: |
@@ -108,7 +121,10 @@ workflows:
   version: 2
   build-test-and-deploy:
     jobs:
-      - build_test_frontend
+      - checkout_rafflery
+      - build_test_frontend:
+          -requires:
+            - checkout_rafflery
       - build_test_backend:
           requires:
             - build_test_frontend
