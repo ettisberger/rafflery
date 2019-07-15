@@ -99,7 +99,7 @@ jobs:
           command: |
             pwd
             ls
-      - run:
+      #- run:
       # it would be better to have a docker image with cypress and docker
       #    name: Install Docker client (replace later with docker container with cypress and docker)
       #    command: |
