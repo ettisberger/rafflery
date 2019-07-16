@@ -5,6 +5,7 @@ WORKDIR /app
 COPY ./rafflery-ui/package.json .
 COPY ./rafflery-ui/package-lock.json .
 
-RUN cd ./rafflery-ui && npm install
-#RUN npm cypress verify
-RUN cd ./rafflery-ui && npm run cypress:run
+
+RUN npm install
+RUN npm cypress verify
+RUN npm run cypress:run
