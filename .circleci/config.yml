@@ -45,21 +45,19 @@ jobs:
       - run:
           name: build
           command: cd rafflery-ui && npm run build
+      - run: cd rafflery-ui && ls
       #- run:
       #    name: copy build to different dir
       #    command: cp -R rafflery-ui/build ./build-frontend
       - persist_to_workspace:
           root: /home/circleci/project
           paths:
-            - rafflery-ui/build
+            - rafflery-ui
   build_test_backend:
     docker:
       - image: gradle:jdk8
     steps:
       - *fast-checkout
-      - run: ls
-      - run: cd rafflery-ui && ls
-      - run: cd .. && ls
       - run:
           name: build with gradle
           command: ./gradlew clean build
