@@ -58,6 +58,8 @@ jobs:
     steps:
       - *fast-checkout
       - run: ls
+      - run: cd rafflery-ui && ls
+      - run: cd .. && ls
       - run:
           name: build with gradle
           command: ./gradlew clean build
