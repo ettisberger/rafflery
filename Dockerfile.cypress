@@ -7,5 +7,5 @@ COPY ./rafflery-ui/package-lock.json .
 
 
 RUN npm install
-RUN npm cypress verify
+#RUN npm cypress verify
 RUN npm run cypress:run
