@@ -50,9 +50,7 @@ jobs:
       #    name: copy build to different dir
       #    command: cp -R rafflery-ui/build ./build-frontend
       - persist_to_workspace:
-          root: /home/circleci/project
-          paths:
-            - rafflery-ui
+          root: /home/circleci/project/rafflery-ui
   build_test_backend:
     docker:
       - image: gradle:jdk8
@@ -74,6 +72,7 @@ jobs:
         - docker
     steps:
       - *fast-checkout
+      - run: cd .. && ls
       - run: pwd && ls
       - run: cd ./rafflery-ui && ls
       - run: cp -R /home/circleci/build-frontend .
