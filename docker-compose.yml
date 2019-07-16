@@ -1,0 +1,17 @@
+# we need a docker compose file for running cypress together with the backend
+# because only starting the backend as a docker container cant expose the port
+# for security reasons. cypress needs to run in the same docker context
+# docker-compose.yml
+
+version: 3
+services:
+ backend:
+  build:
+    context: .
+    dockerfile: Dockerfile
+  command: ls
+ cypress:
+   build:
+     context: .
+     dockerfile: Dockerfile.cypress
+   command: ls
