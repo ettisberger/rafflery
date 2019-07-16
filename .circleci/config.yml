@@ -50,8 +50,8 @@ jobs:
       #    name: copy build to different dir
       #    command: cp -R rafflery-ui/build ./build-frontend
       - persist_to_workspace:
-          root: .
-          paths: .
+          root: ~/
+          paths: project/rafflery-ui/build
   build_test_backend:
     docker:
       - image: gradle:jdk8
