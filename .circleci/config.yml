@@ -90,7 +90,7 @@ jobs:
       - run: 
           name: Show docker version
           command: |
-            docker version
+            sudo docker version
       - run:
           name: Load docker image from .tar file
           command: |
