@@ -2,9 +2,9 @@ FROM cypress/base:10
 WORKDIR /app
 
 # dependencies will be installed only if the package files change
-COPY ./rafflery-ui/package.json .
-COPY ./rafflery-ui/package-lock.json .
+COPY ./rafflery-ui .
 
+RUN cd rafflery-ui
 
 RUN npm install
 #RUN npm cypress verify
