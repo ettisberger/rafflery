@@ -45,13 +45,9 @@ jobs:
       - run:
           name: build
           command: cd rafflery-ui && npm run build
-      - run:
-          name: copy build to different dir
-          command: cp -R rafflery-ui/build ./build-frontend
       - persist_to_workspace:
-          root: /home/circleci/project
-          paths:
-            - build-frontend
+          root: ~/
+          paths: project/rafflery-ui/build
   build_test_backend:
     docker:
       - image: gradle:jdk8
@@ -60,38 +56,30 @@ jobs:
       - run:
           name: build with gradle
           command: ./gradlew clean build
-      - run:
-          name: copy build to different dir
-          command: cp -R rafflery-server/build ./build-backend
       - persist_to_workspace:
-          root: /root/project
-          paths:
-            - build-backend
+          root: ~/
+          paths: project/rafflery-server/build
   build_docker:
     machine: 
       services:
         - docker
     steps:
       - *fast-checkout
-      - run: pwd && ls
-      - run: cd ./rafflery-ui && ls
-      - run: cp -R /home/circleci/build-frontend .
-      - run: cp -R /home/circleci/build-backend .
       - run:
           name: Build docker image
           command: |
-            docker build --build-arg frontendBuild=./build-frontend --build-arg backendBuild=./build-backend/libs/rafflery.jar -t registry.heroku.com/rafflery/web .
+            docker build --build-arg frontendBuild=./rafflery-ui/build --build-arg backendBuild=./rafflery-server/build/libs/rafflery.jar -t registry.heroku.com/rafflery/web .
       - run:
           name: Save docker image tag
           command: |
             docker save -o ./rafflery.tar registry.heroku.com/rafflery/web
       - persist_to_workspace:
-          root: /home/circleci/project
+          root: /home/circleci
           paths:
-            - rafflery.tar
+            - project/rafflery.tar
   build_test_end2end:
-    docker:
-      - image: cypress/browsers:chrome67
+    machine:
+      docker_layer_caching: false
     steps:
       - *fast-checkout
       - run:
@@ -99,23 +87,22 @@ jobs:
           command: |
             pwd
             ls
+      - run: docker-compose build
+      - run: docker-compose up --abort-on-container-exit --exit-code-from cypress
       - run:
-      # it would be better to have a docker image with cypress and docker
-          name: Install Docker client (replace later with docker container with cypress and docker)
+          name: Load docker image from .tar file
           command: |
-            set -x
-            VER="17.03.0-ce"
-            curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
-            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-            mv /tmp/docker/* /usr/bin
+            docker load -i rafflery.tar
+            docker container ls
+            docker ps
+      #- run: 
+      #    name: Run rafflery backend
+      #    command: |
+      #      docker run -d	-it -p 8080:8080 -e JWT_CLIENTID -e JWT_ISSUER -e PORT --name rafflery registry.heroku.com/rafflery/web:latest
       - run: 
-          name: Show docker version
+          name: Check running container
           command: |
-            docker version
-      - run: 
-          name: Run rafflery backend
-          command: |
-            docker run -it -p 8080:8080 --rm rafflery
+            docker ps
       # why does it install cypress again here? shouldnt this be cached because of the
       # frontend build where we saved the cache?
       - restore_cache: # special step to restore the dependency cache
@@ -172,6 +159,6 @@ workflows:
       - build_test_end2end:
           requires:
             - build_docker
-      - deploy:
-          requires:
-            - build_test_end2end
+      #- deploy:
+      #    requires:
+      #      - build_docker
