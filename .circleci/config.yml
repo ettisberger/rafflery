@@ -46,9 +46,6 @@ jobs:
           name: build
           command: cd rafflery-ui && npm run build
       - run: cd rafflery-ui && ls
-      #- run:
-      #    name: copy build to different dir
-      #    command: cp -R rafflery-ui/build ./build-frontend
       - persist_to_workspace:
           root: ~/
           paths: project/rafflery-ui/build
@@ -60,13 +57,9 @@ jobs:
       - run:
           name: build with gradle
           command: ./gradlew clean build
-      - run:
-          name: copy build to different dir
-          command: cp -R rafflery-server/build ./build-backend
       - persist_to_workspace:
-          root: /root/project
-          paths:
-            - build-backend
+          root: ~/
+          paths: project/rafflery-server/build
   build_docker:
     machine: 
       services:
@@ -76,12 +69,13 @@ jobs:
       - run: cd .. && ls
       - run: pwd && ls
       - run: cd ./rafflery-ui && ls
-      - run: cp -R /home/circleci/build-frontend .
-      - run: cp -R /home/circleci/build-backend .
+      - run: cd ./rafflery-server && ls
+      #- run: cp -R /home/circleci/rafflery-ui/build .
+      #- run: cp -R /home/circleci/rafflery-server/build .
       - run:
           name: Build docker image
           command: |
-            docker build --build-arg frontendBuild=./build-frontend --build-arg backendBuild=./build-backend/libs/rafflery.jar -t registry.heroku.com/rafflery/web .
+            docker build --build-arg frontendBuild=./rafflery-ui/build --build-arg backendBuild=./rafflery-server/build/libs/rafflery.jar -t registry.heroku.com/rafflery/web .
       - run:
           name: Save docker image tag
           command: |
