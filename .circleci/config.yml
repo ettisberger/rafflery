@@ -79,7 +79,7 @@ jobs:
             - project/rafflery.tar
   build_test_end2end:
     docker:
-      - image: - image: circleci/node:12.1.0
+      - image: circleci/node:12.1.0
     steps:
       - *fast-checkout
       - run:
