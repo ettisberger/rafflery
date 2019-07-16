@@ -82,6 +82,10 @@ jobs:
       docker_layer_caching: false
     steps:
       - *fast-checkout
+      # why does it install cypress again here? shouldnt this be cached because of the
+      # frontend build where we saved the cache?
+      - restore_cache: # special step to restore the dependency cache
+          key: dependency-cache-{{ checksum "rafflery-ui/package.json" }}
       - run:
           name: Print working dir
           command: |
@@ -103,10 +107,6 @@ jobs:
           name: Check running container
           command: |
             docker ps
-      # why does it install cypress again here? shouldnt this be cached because of the
-      # frontend build where we saved the cache?
-      - restore_cache: # special step to restore the dependency cache
-          key: dependency-cache-{{ checksum "rafflery-ui/package.json" }}
       - run:
           name: install-npm
           command: |
