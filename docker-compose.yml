@@ -19,4 +19,4 @@ services:
       - "backend"
    environment:
       - CYPRESS_baseUrl=http://backend
-   command: npm run cypress:run
+   command: cd rafflery-ui && npm run cypress:run
