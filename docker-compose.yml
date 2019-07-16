@@ -3,7 +3,7 @@
 # for security reasons. cypress needs to run in the same docker context
 # docker-compose.yml
 
-version: 3
+version: '3'
 services:
  backend:
   build:
