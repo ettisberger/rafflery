@@ -9,9 +9,9 @@ services:
   build:
     context: .
     dockerfile: Dockerfile
-  command: ls
  cypress:
    build:
      context: .
      dockerfile: Dockerfile.cypress
-   command: ls
+   depends_on:
+      - "backend"
