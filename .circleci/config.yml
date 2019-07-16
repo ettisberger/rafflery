@@ -78,8 +78,8 @@ jobs:
           paths:
             - project/rafflery.tar
   build_test_end2end:
-    docker:
-      - image: circleci/node:12.1.0
+    machine:
+      docker_layer_caching: false
     steps:
       - *fast-checkout
       - run:
@@ -87,20 +87,18 @@ jobs:
           command: |
             pwd
             ls
-      - run: 
-          name: Show docker version
-          command: |
-            sudo docker version
+      - run: docker-compose build
+      - run: docker-compose up --abort-on-container-exit --exit-code-from cypress
       - run:
           name: Load docker image from .tar file
           command: |
             docker load -i rafflery.tar
             docker container ls
             docker ps
-      - run: 
-          name: Run rafflery backend
-          command: |
-            docker run -d	-it -p 8080:8080 -e JWT_CLIENTID -e JWT_ISSUER -e PORT --name rafflery registry.heroku.com/rafflery/web:latest
+      #- run: 
+      #    name: Run rafflery backend
+      #    command: |
+      #      docker run -d	-it -p 8080:8080 -e JWT_CLIENTID -e JWT_ISSUER -e PORT --name rafflery registry.heroku.com/rafflery/web:latest
       - run: 
           name: Check running container
           command: |
