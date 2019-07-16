@@ -17,6 +17,6 @@ services:
      dockerfile: Dockerfile.cypress
    depends_on:
       - "backend"
-    environment:
+   environment:
       - CYPRESS_baseUrl=http://backend
-    command: npm run cypress:run
+   command: npm run cypress:run
