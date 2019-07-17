@@ -7,10 +7,10 @@ import java.io.File
 
 class IndexController : Controller() {
 
-  override val method = "GET"
-  override val path = "/"
+    override val method = "GET"
+    override val path = "/"
 
-  override suspend fun invoke(call: ApplicationCall) {
-    call.respondFile(File("$STATIC_ROUTE/index.html"))
-  }
+    override suspend fun invoke(call: ApplicationCall) {
+        call.respondFile(File("$STATIC_ROUTE/index.html"))
+    }
 }

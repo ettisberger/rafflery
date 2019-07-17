@@ -12,17 +12,17 @@ import dagger.multibindings.ElementsIntoSet
 @Module
 object CommandHandlerModule {
 
-  @JvmStatic
-  @Provides
-  fun provideCommandBus(commandHandlers: Set<@JvmSuppressWildcards CommandHandler<*>>): CommandBus =
-    DefaultCommandBus(commandHandlers)
+    @JvmStatic
+    @Provides
+    fun provideCommandBus(commandHandlers: Set<@JvmSuppressWildcards CommandHandler<*>>): CommandBus =
+        DefaultCommandBus(commandHandlers)
 
-  @JvmStatic
-  @JvmSuppressWildcards
-  @ElementsIntoSet
-  @Provides
-  fun provideCommandHandlers(raffleRepository: RaffleRepository) : Set<@JvmSuppressWildcards CommandHandler<*>> =
-    setOf(
-      CreateRaffleCommandHandler(raffleRepository)
-    )
+    @JvmStatic
+    @JvmSuppressWildcards
+    @ElementsIntoSet
+    @Provides
+    fun provideCommandHandlers(raffleRepository: RaffleRepository): Set<@JvmSuppressWildcards CommandHandler<*>> =
+        setOf(
+            CreateRaffleCommandHandler(raffleRepository)
+        )
 }

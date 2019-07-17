@@ -9,22 +9,22 @@ import dagger.Component
 import javax.inject.Singleton
 
 fun main() {
-  DaggerRaffleryApp
-    .builder()
-    .build()
-    .app()
-    .start()
+    DaggerRaffleryApp
+        .builder()
+        .build()
+        .app()
+        .start()
 }
 
 @Singleton
 @Component(
-  modules = [
-    RepositoryModule::class,
-    CommandHandlerModule::class,
-    ControllerModule::class,
-    JwtModule::class
-  ]
+    modules = [
+        RepositoryModule::class,
+        CommandHandlerModule::class,
+        ControllerModule::class,
+        JwtModule::class
+    ]
 )
 interface RaffleryApp {
-  fun app(): App
+    fun app(): App
 }

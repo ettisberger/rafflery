@@ -9,11 +9,9 @@ import javax.inject.Singleton
 @Module
 object JwtModule {
 
-  @JvmStatic
-  @Provides
-  @Singleton
-  fun provideJwtConfigurator() : JwtConfigurator =
-    JwtRs256()
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideJwtConfigurator(): JwtConfigurator =
+        JwtRs256()
 }
-
-

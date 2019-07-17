@@ -9,20 +9,20 @@ import io.ktor.routing.route
 
 abstract class Controller {
 
-  protected abstract val method: String
-  protected abstract val path: String
+    protected abstract val method: String
+    protected abstract val path: String
 
-  protected abstract suspend fun invoke(call: ApplicationCall)
+    protected abstract suspend fun invoke(call: ApplicationCall)
 
-  open fun asRoute(parent: Route): Route =
-    parent.route(path) {
-        when (method) {
-          "GET" -> get {
-            invoke(call)
-          }
-          "POST" -> post {
-            invoke(call)
-          }
+    open fun asRoute(parent: Route): Route =
+        parent.route(path) {
+            when (method) {
+                "GET" -> get {
+                    invoke(call)
+                }
+                "POST" -> post {
+                    invoke(call)
+                }
+            }
         }
-    }
 }

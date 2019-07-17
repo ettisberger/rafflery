@@ -1,6 +1,6 @@
 package ch.rafflery.infrastructure
 
-import com.natpryce.konfig.*
+import com.natpryce.konfig.* // ktlint-disable no-wildcard-imports
 import com.natpryce.konfig.ConfigurationProperties.Companion.systemProperties
 
 object Config {
@@ -17,20 +17,20 @@ object Config {
     private val raffler_apiKey = "raffler.apiKey" to stringType
 
     private val config = systemProperties() overriding
-        EnvironmentVariables().also {
-            println("ENVIRONMENT PORT: ${it.getOrNull(Key("port", intType))}")
-            println(
-                "ENVIRONMENT JWT CLIENT ID: ${it.getOrNull(
-                    Key(
-                        "JWT_CLIENTID",
-                        stringType
-                    )
-                )}"
-            )
-            println("ENVIRONMENT JWT ISSUER: ${it.getOrNull(Key("JWT_ISSUER", stringType))}")
-        } overriding
-        ConfigurationProperties.fromOptionalResource("local.properties") overriding
-        ConfigurationProperties.fromResource("default.properties")
+            EnvironmentVariables().also {
+                println("ENVIRONMENT PORT: ${it.getOrNull(Key("port", intType))}")
+                println(
+                    "ENVIRONMENT JWT CLIENT ID: ${it.getOrNull(
+                        Key(
+                            "JWT_CLIENTID",
+                            stringType
+                        )
+                    )}"
+                )
+                println("ENVIRONMENT JWT ISSUER: ${it.getOrNull(Key("JWT_ISSUER", stringType))}")
+            } overriding
+            ConfigurationProperties.fromOptionalResource("local.properties") overriding
+            ConfigurationProperties.fromResource("default.properties")
 
     val jwtConfig
         get() = JwtConfig(

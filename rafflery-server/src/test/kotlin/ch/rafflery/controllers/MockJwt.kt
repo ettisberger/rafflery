@@ -12,35 +12,35 @@ import io.ktor.auth.jwt.JWTPrincipal
 
 object MockJwt {
 
-  private val algorithm = Algorithm.HMAC512("secret")
-  const val clientId = "clientId"
-  private const val issuer = "issuer"
+    private val algorithm = Algorithm.HMAC512("secret")
+    const val clientId = "clientId"
+    private const val issuer = "issuer"
 
-  val verifier: JWTVerifier = JWT
-    .require(algorithm)
-    .withIssuer(issuer)
-    .build()
+    val verifier: JWTVerifier = JWT
+        .require(algorithm)
+        .withIssuer(issuer)
+        .build()
 
-  fun makeToken(user: User): String = JWT.create()
-    .withSubject("Authentication")
-    .withAudience(clientId)
-    .withIssuer(issuer)
-    .withClaim("name", user.name)
-    .sign(algorithm)
+    fun makeToken(user: User): String = JWT.create()
+        .withSubject("Authentication")
+        .withAudience(clientId)
+        .withIssuer(issuer)
+        .withClaim("name", user.name)
+        .sign(algorithm)
 }
 
 object JwtHmac256 : JwtConfigurator {
 
-  override fun configure(configuration: JWTAuthenticationProvider.Configuration) {
-    with(configuration) {
-      verifier(MockJwt.verifier)
-      validate {
-        validate(it)
-      }
+    override fun configure(configuration: JWTAuthenticationProvider.Configuration) {
+        with(configuration) {
+            verifier(MockJwt.verifier)
+            validate {
+                validate(it)
+            }
+        }
     }
-  }
 
-  private fun validate(credential: JWTCredential): Principal? =
-    credential.payload.audience.contains(MockJwt.clientId)
-      .let { JWTPrincipal(credential.payload) }
+    private fun validate(credential: JWTCredential): Principal? =
+        credential.payload.audience.contains(MockJwt.clientId)
+            .let { JWTPrincipal(credential.payload) }
 }

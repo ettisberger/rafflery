@@ -21,39 +21,38 @@ import javax.inject.Inject
 const val STATIC_ROUTE = "./rafflery-ui/build/"
 
 class App @Inject constructor(
-  private val controllers: Set<@JvmSuppressWildcards Controller>,
-  private val jwtConfigurator: JwtConfigurator
+    private val controllers: Set<@JvmSuppressWildcards Controller>,
+    private val jwtConfigurator: JwtConfigurator
 ) {
-  fun start() {
-    val server = embeddedServer(Netty, Config.appConfig.port) {
-      init(controllers, jwtConfigurator)
-    }
+    fun start() {
+        val server = embeddedServer(Netty, Config.appConfig.port) {
+            init(controllers, jwtConfigurator)
+        }
 
-    server.start(wait = true)
-  }
+        server.start(wait = true)
+    }
 }
 
 fun Application.init(
-  controllers: Set<Controller>,
-  jwtConfigurator: JwtConfigurator
+    controllers: Set<Controller>,
+    jwtConfigurator: JwtConfigurator
 ) {
-  install(DefaultHeaders)
-  install(CallLogging)
-  install(Authentication) {
-    jwt {
-      jwtConfigurator.configure(this)
+    install(DefaultHeaders)
+    install(CallLogging)
+    install(Authentication) {
+        jwt {
+            jwtConfigurator.configure(this)
+        }
     }
-  }
-  install(ContentNegotiation) {
-    gson {}
-  }
-
-  routing {
-    controllers.forEach { it.asRoute(this) }
-
-    static {
-      files(STATIC_ROUTE)
+    install(ContentNegotiation) {
+        gson {}
     }
-  }
+
+    routing {
+        controllers.forEach { it.asRoute(this) }
+
+        static {
+            files(STATIC_ROUTE)
+        }
+    }
 }
-

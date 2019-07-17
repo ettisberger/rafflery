@@ -4,8 +4,7 @@ interface Command
 
 interface CommandHandler<in T : Command> {
 
-  fun canHandle(command: Command): Boolean
+    fun canHandle(command: Command): Boolean
 
-  fun handle(command: T)
-
+    fun handle(command: T)
 }

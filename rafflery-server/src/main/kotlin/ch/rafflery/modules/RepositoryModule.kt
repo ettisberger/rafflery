@@ -9,12 +9,9 @@ import javax.inject.Singleton
 @Module
 object RepositoryModule {
 
-  @JvmStatic
-  @Provides
-  @Singleton
-  fun provideRaffleRepository() : RaffleRepository =
-    StubbedRaffleRepository()
-
+    @JvmStatic
+    @Provides
+    @Singleton
+    fun provideRaffleRepository(): RaffleRepository =
+        StubbedRaffleRepository()
 }
-
-

@@ -8,29 +8,28 @@ import org.junit.Test
 
 class GetRafflesControllerTest : ControllerTest() {
 
-  val raffle = Raffle(
-    name = "name",
-    item = PrizeItem("name", 10),
-    slotSize = 10,
-    purchasedTickets = listOf(),
-    createdBy = "nick",
-    id = "1"
-  )
+    val raffle = Raffle(
+        name = "name",
+        item = PrizeItem("name", 10),
+        slotSize = 10,
+        purchasedTickets = listOf(),
+        createdBy = "nick",
+        id = "1"
+    )
 
-  private val raffleRepository = object : RaffleRepository {
-    override fun save(raffle: Raffle) = Unit
-    override fun get(id: String): Raffle? = raffle
-    override fun getAll(): List<Raffle> = listOf(raffle)
-  }
+    private val raffleRepository = object : RaffleRepository {
+        override fun save(raffle: Raffle) = Unit
+        override fun get(id: String): Raffle? = raffle
+        override fun getAll(): List<Raffle> = listOf(raffle)
+    }
 
-  private val controller = GetRafflesController(raffleRepository)
+    private val controller = GetRafflesController(raffleRepository)
 
-  @Test
-  fun `can get raffles`() = testApp(controller) {
-    val response = get("api/raffles")
+    @Test
+    fun `can get raffles`() = testApp(controller) {
+        val response = get("api/raffles")
 
-    response shouldHaveStatus OK
-    response shouldHaveBody listOf(raffle)
-  }
-
+        response shouldHaveStatus OK
+        response shouldHaveBody listOf(raffle)
+    }
 }
