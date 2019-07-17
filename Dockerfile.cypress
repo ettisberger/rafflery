@@ -1,9 +1,10 @@
 FROM cypress/base:10
 #FROM cypress/browsers:chrome69
 
-WORKDIR /app
+RUN pwd
+RUN ls -la
 
-RUN cd /app/cypress && ls
+WORKDIR /app
 
 COPY ./rafflery-ui .
 #COPY ./rafflery-ui/node_modules ./node_modules
