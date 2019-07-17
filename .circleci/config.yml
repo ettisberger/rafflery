@@ -90,27 +90,27 @@ jobs:
           name: Print working dir
           command: |
             pwd
-            ls
+            ls -la
       - run: docker-compose build
       - run: docker-compose up --abort-on-container-exit --exit-code-from cypress
-      - run:
-          name: Load docker image from .tar file
-          command: |
-            docker load -i rafflery.tar
-            docker container ls
-            docker ps
+      #- run:
+      #    name: Load docker image from .tar file
+      #    command: |
+      #      docker load -i rafflery.tar
+      #      docker container ls
+      #      docker ps
       #- run: 
       #    name: Run rafflery backend
       #    command: |
       #      docker run -d	-it -p 8080:8080 -e JWT_CLIENTID -e JWT_ISSUER -e PORT --name rafflery registry.heroku.com/rafflery/web:latest
-      - run: 
-          name: Check running container
-          command: |
-            docker ps
-      - run:
-          name: install-npm
-          command: |
-            cd rafflery-ui && npm install
+      #- run: 
+      #    name: Check running container
+      #    command: |
+      #      docker ps
+      #- run:
+      #    name: install-npm
+      #    command: |
+      #      cd rafflery-ui && npm install
       - run:
           name: Run cypress
           command: |
@@ -152,13 +152,13 @@ workflows:
       - build_test_backend:
           requires:
             - checkout_rafflery
-      - build_docker:
-          requires:
-            - build_test_frontend
-            - build_test_backend
+      #- build_docker:
+      #    requires:
+      #      - build_test_frontend
+      #      - build_test_backend
       - build_test_end2end:
-          requires:
-            - build_docker
+      #    requires:
+      #      - build_docker
       #- deploy:
       #    requires:
       #      - build_docker
