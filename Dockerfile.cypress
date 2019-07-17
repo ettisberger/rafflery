@@ -7,8 +7,11 @@ RUN pwd
 WORKDIR /app
 
 # dependencies will be installed only if the package files change
-COPY ./rafflery-ui .
-COPY ../.cache .
+COPY ./rafflery-ui/cypress.json .
+COPY ./rafflery-ui/cypress .
+COPY ./rafflery-ui/node_modules .
+COPY ./rafflery-ui/package.json .
+COPY ./rafflery-ui/package-lock.json .
 
 #RUN npm ci
 RUN npm install
