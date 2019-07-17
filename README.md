@@ -20,4 +20,4 @@ Cypress + Docker + CircleCI
 - install git hook to automatically check files for style violations on commit
 - run "ktlint installGitPrePushHook" if you wish to run ktlint on push instead
 
-ktlint installGitPreCommitHook
+`ktlint installGitPreCommitHook`
