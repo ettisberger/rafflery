@@ -22,9 +22,9 @@ services:
    depends_on:
       - "backend"
    volumes:
-      - /home/circleci/.cache:/root/.cache
-      - /home/circleci/project/rafflery-ui:/app
+      #- /home/circleci/.cache:/root/.cache
+      #- /home/circleci/project/rafflery-ui:/app
       - ./rafflery-ui/cypress:/app/cypress
-      #- ./rafflery-ui/cypress.json:/app/cypress.json
+      - ./rafflery-ui/cypress.json:/app/cypress.json
    network_mode: 'host'
    command: npm run cypress:run
