@@ -11,4 +11,6 @@ RUN ls -la
 RUN npm ci
 #RUN npm install
 
+RUN npm install xvfb
+
 RUN npm run cypress:verify
