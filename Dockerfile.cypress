@@ -8,7 +8,7 @@ WORKDIR /app
 
 # dependencies will be installed only if the package files change
 COPY ./rafflery-ui .
-COPY /home/circleci/project/.cache .
+COPY ../.cache .
 
 #RUN npm ci
 RUN npm install
