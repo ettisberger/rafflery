@@ -9,8 +9,6 @@ WORKDIR /app
 RUN pwd
 RUN ls -la
 
-RUN .. && pwd && ls -la
-
 # npm install doesnt work because he cant find /root/.cache
 # can we fix this or do we just run npm ci always?
 #RUN npm ci
