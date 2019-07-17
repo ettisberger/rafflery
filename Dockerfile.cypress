@@ -1,9 +1,6 @@
 #FROM cypress/base:10
 FROM cypress/browsers:chrome69
 
-RUN ls -la
-RUN pwd
-
 WORKDIR /app
 
 COPY ./rafflery-ui .
@@ -11,13 +8,7 @@ COPY ./rafflery-ui/node_modules ./node_modules
 
 RUN ls -la
 
-#COPY ./rafflery-ui/cypress.json .
-#COPY ./rafflery-ui/cypress ./cypress
-#COPY ./rafflery-ui/node_modules ./node_modules
-#COPY ./rafflery-ui/package.json .
-#COPY ./rafflery-ui/package-lock.json .
-
-#RUN npm ci
-RUN npm install
+RUN npm ci
+#RUN npm install
 
 RUN npm run cypress:verify
