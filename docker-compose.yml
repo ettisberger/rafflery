@@ -21,5 +21,9 @@ services:
      dockerfile: Dockerfile.cypress
    depends_on:
       - "backend"
+   volumes:
+      - ./rafflery-ui:/app/
+      - ./rafflery-ui/cypress:/app/cypress
+      - ./rafflery-ui/cypress.json:/app/cypress.json
    network_mode: 'host'
    command: npm run cypress:run
