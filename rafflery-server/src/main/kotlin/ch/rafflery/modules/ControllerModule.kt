@@ -1,9 +1,6 @@
 package ch.rafflery.modules
 
-import ch.rafflery.controllers.Controller
-import ch.rafflery.controllers.GetRafflesController
-import ch.rafflery.controllers.IndexController
-import ch.rafflery.controllers.RefreshController
+import ch.rafflery.controllers.*
 import ch.rafflery.domain.ports.RaffleRepository
 import dagger.Module
 import dagger.Provides
@@ -17,6 +14,7 @@ object ControllerModule {
     setOf(
       GetRafflesController(repository),
       IndexController(),
-      RefreshController()
+      RefreshController(),
+      GetUiConfigController()
     )
 }

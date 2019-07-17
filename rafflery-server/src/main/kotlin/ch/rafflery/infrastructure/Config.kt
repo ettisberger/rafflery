@@ -6,6 +6,7 @@ import com.natpryce.konfig.ConfigurationProperties.Companion.systemProperties
 object Config {
     // app config
     private val app_port = "port" to intType
+    private val environment = "environment" to stringType
 
     // jwt config
     private val jwt_clientId = "jwt.clientId" to stringType
@@ -16,19 +17,20 @@ object Config {
     private val raffler_apiKey = "raffler.apiKey" to stringType
 
     private val config = systemProperties() overriding
-            EnvironmentVariables().also {
-                println("ENVIRONMENT PORT: ${it.getOrNull(Key("port", intType))}")
-                println(
-                    "ENVIRONMENT JWT CLIENT ID: ${it.getOrNull(
-                        Key(
-                            "JWT_CLIENTID",
-                            stringType
-                        )
-                    )}"
-                )
-                println("ENVIRONMENT JWT ISSUER: ${it.getOrNull(Key("JWT_ISSUER", stringType))}")
-            } overriding
-            ConfigurationProperties.fromOptionalResource("local.properties")
+        EnvironmentVariables().also {
+            println("ENVIRONMENT PORT: ${it.getOrNull(Key("port", intType))}")
+            println(
+                "ENVIRONMENT JWT CLIENT ID: ${it.getOrNull(
+                    Key(
+                        "JWT_CLIENTID",
+                        stringType
+                    )
+                )}"
+            )
+            println("ENVIRONMENT JWT ISSUER: ${it.getOrNull(Key("JWT_ISSUER", stringType))}")
+        } overriding
+        ConfigurationProperties.fromResource("default.properties") overriding
+        ConfigurationProperties.fromOptionalResource("local.properties")
 
     val jwtConfig
         get() = JwtConfig(
@@ -38,7 +40,8 @@ object Config {
 
     val appConfig
         get() = AppConfig(
-            config[app_port]
+            port = config[app_port],
+            environment = config[environment]
         )
 
     val rafflerConfig
@@ -49,7 +52,8 @@ object Config {
 }
 
 data class AppConfig(
-    val port: Int
+    val port: Int,
+    val environment: String
 )
 
 data class RafflerConfig(
