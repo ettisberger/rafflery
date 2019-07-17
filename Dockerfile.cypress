@@ -6,4 +6,6 @@ COPY ./rafflery-ui .
 
 RUN npm ci
 
+RUN npm run cypress:verify
+
 RUN cd /app && printf '%s\n' *
