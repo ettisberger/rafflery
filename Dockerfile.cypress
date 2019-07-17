@@ -3,7 +3,9 @@ FROM cypress/base:10
 
 WORKDIR /app
 
-#COPY ./rafflery-ui .
+RUN cd /app/cypress && ls
+
+COPY ./rafflery-ui .
 #COPY ./rafflery-ui/node_modules ./node_modules
 
 RUN pwd
