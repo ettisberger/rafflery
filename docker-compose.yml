@@ -21,5 +21,5 @@ services:
      dockerfile: Dockerfile.cypress
    depends_on:
       - "backend"
-   #network_mode: 'host'
+   network_mode: 'host'
    command: npm run cypress:run
