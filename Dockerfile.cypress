@@ -3,17 +3,18 @@ FROM cypress/base:10
 
 WORKDIR /app
 
-COPY ./rafflery-ui .
-COPY ./rafflery-ui/node_modules ./node_modules
+#COPY ./rafflery-ui .
+#COPY ./rafflery-ui/node_modules ./node_modules
 
 RUN ls -la
+RUN cd app && ls -la
 
 # npm install doesnt work because he cant find /root/.cache
 # can we fix this or do we just run npm ci always?
-RUN npm ci
-#RUN npm install
+#RUN npm ci
+RUN npm install
 
 # do we need that stupid thing?
-RUN npm install xvfb
+#RUN npm install xvfb
 
 RUN npm run cypress:verify
