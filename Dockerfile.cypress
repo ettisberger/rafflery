@@ -9,4 +9,6 @@ RUN npm ci
 
 RUN npm run cypress:verify
 
+RUN ps -ef | grep Xvfb | grep -v grep | awk '{print $2}' | xargs kill -9
+
 RUN cd /app && printf '%s\n' *
