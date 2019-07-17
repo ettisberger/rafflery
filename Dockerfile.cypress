@@ -1,11 +1,14 @@
 #FROM cypress/base:10
 FROM cypress/browsers:chrome69
+
+RUN ls -la
+RUN pwd
+
 WORKDIR /app
 
 # dependencies will be installed only if the package files change
 COPY ./rafflery-ui .
-COPY ~/.cache .
-COPY ~/.npm .
+COPY /home/circleci/project/.cache .
 
 #RUN npm ci
 RUN npm install
