@@ -14,8 +14,8 @@ RUN ls -la
 
 # npm install doesnt work because he cant find /root/.cache
 # can we fix this or do we just run npm ci always?
-#RUN npm ci
-RUN npm install
+RUN npm ci
+#RUN npm install
 
 # do we need that stupid thing?
 #RUN npm install xvfb
