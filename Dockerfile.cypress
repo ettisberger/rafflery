@@ -1,4 +1,5 @@
-FROM cypress/base:10
+#FROM cypress/base:10
+FROM cypress/browsers:chrome69
 WORKDIR /app
 
 # dependencies will be installed only if the package files change
