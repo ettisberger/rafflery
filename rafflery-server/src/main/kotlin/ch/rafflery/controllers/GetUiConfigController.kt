@@ -4,7 +4,7 @@ import ch.rafflery.infrastructure.Config
 import io.ktor.application.ApplicationCall
 import io.ktor.response.respond
 
-class GetUiConfigController: Controller() {
+class GetUiConfigController : Controller() {
 
   override val method = "GET"
   override val path = "/api/ui-config"

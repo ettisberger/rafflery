@@ -8,12 +8,12 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export interface AuthState {
     isAuthenticating: boolean;
     isLoggedIn: boolean;
-    email: string;
+    name: string;
 }
 
 interface LoggedInAction {
     type: typeof LOGGED_IN;
-    email: string;
+    name: string;
 }
 
 export type LoginActionTypes = LoggedInAction;

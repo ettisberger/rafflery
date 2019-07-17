@@ -1,0 +1,25 @@
+.impersonation {
+  width: 75%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mock-users {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px
+}
+
+.mock-users div {
+  text-align: center;
+  padding: 30px 50px;
+  border: 1px solid var(--primaryColor);
+  border-radius: 3px;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.mock-users div:hover, .mock-users div.selected {
+  background-color: var(--primaryColor);
+  color: white;
+}

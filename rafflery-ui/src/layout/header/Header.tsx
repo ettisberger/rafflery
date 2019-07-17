@@ -2,10 +2,11 @@ import React from 'react';
 import './Header.css';
 import Navigation from './Navigation';
 
-const Header: React.FC = () => {
+
+const Header: React.FC<{ environment: string }> = ({ environment } ) => {
     return (
         <div className="header">
-            <Navigation/>
+            <Navigation environment={ environment }/>
             <div className="header__content">
                 <div className="header__title">
                     <h1>RAFFLERY</h1>

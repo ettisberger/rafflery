@@ -1,23 +1,23 @@
-import {AuthState, LoginActionTypes} from '../actions/types';
+import { AuthState, LoginActionTypes } from '../actions/types';
 
 const initialState: AuthState = {
-    email: '',
-    isAuthenticating: false,
-    isLoggedIn: false,
+  name: '',
+  isAuthenticating: false,
+  isLoggedIn: false,
 };
 
 export function authReducer(
-    state = initialState,
-    action: LoginActionTypes,
+  state = initialState,
+  action: LoginActionTypes,
 ): AuthState {
-    switch (action.type) {
-        case 'LOGGED_IN':
-            return {
-                ...state,
-                email: action.email,
-                isLoggedIn: true,
-            };
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case 'LOGGED_IN':
+      return {
+        ...state,
+        name: action.name,
+        isLoggedIn: true,
+      };
+    default:
+      return state;
+  }
 }

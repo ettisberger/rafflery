@@ -1,43 +1,33 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './Home.css';
 import RaffleList from '../../components/raffles/RaffleList';
 import SearchBar from '../../components/Searchbar';
-import axios from 'axios';
+import { http } from "../../http/http";
 
-interface HomeState  {
-    raffles: any;
+interface HomeState {
+  raffles: any;
 }
 
 class Home extends Component<{}, HomeState> {
-    constructor(props: any) {
-        super(props);
+  constructor(props: any) {
+    super(props);
 
-        this.state = {raffles: []};
-    }
+    this.state = { raffles: [] };
+  }
 
-    public componentDidMount(): void {
-        const jwt = localStorage.getItem('id_token');
-        console.log('using jwt', jwt);
+  async componentDidMount() {
+    const raffles = await http.get('/api/raffles');
+    this.setState({ raffles });
+  }
 
-        axios.get('/api/raffles', {
-            headers: {
-                Authorization: 'Bearer ' + jwt,
-            },
-        })
-            .then(res => {
-                console.log(res.data);
-                this.setState({raffles: res.data});
-            });
-    }
-
-    public render() {
-        return (
-            <div className="home">
-                <SearchBar/>
-                <RaffleList raffles={this.state.raffles}/>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div className="home">
+        <SearchBar/>
+        <RaffleList raffles={this.state.raffles}/>
+      </div>
+    );
+  }
 
 }
 

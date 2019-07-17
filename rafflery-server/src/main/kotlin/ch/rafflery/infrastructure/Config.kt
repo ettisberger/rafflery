@@ -29,8 +29,8 @@ object Config {
             )
             println("ENVIRONMENT JWT ISSUER: ${it.getOrNull(Key("JWT_ISSUER", stringType))}")
         } overriding
-        ConfigurationProperties.fromResource("default.properties") overriding
-        ConfigurationProperties.fromOptionalResource("local.properties")
+        ConfigurationProperties.fromOptionalResource("local.properties") overriding
+        ConfigurationProperties.fromResource("default.properties")
 
     val jwtConfig
         get() = JwtConfig(
