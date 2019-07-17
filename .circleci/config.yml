@@ -157,7 +157,9 @@ workflows:
       #      - build_test_frontend
       #      - build_test_backend
       - build_test_end2end
-      #    requires:
+          requires:
+            - build_test_frontend
+            - build_test_backend
       #      - build_docker
       #- deploy:
       #    requires:
