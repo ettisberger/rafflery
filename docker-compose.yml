@@ -11,6 +11,10 @@ services:
     dockerfile: Dockerfile
   ports:
     - "8080:8080"
+  environment:
+    - JWT_CLIENT
+    - JWT_ISSUER
+    - PORT
  cypress:
    build:
      context: .
