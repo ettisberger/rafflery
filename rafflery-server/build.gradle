@@ -1,5 +1,5 @@
 plugins {
-//    id 'com.github.johnrengelman.shadow' version '5.0.0'
+    id 'com.github.johnrengelman.shadow' version '5.0.0'
     id 'org.jlleitschuh.gradle.ktlint' version '8.1.0'
     id "org.jlleitschuh.gradle.ktlint-idea" version '8.1.0'
     id 'application'
@@ -34,8 +34,9 @@ dependencies {
 }
 
 // used for creating shadow jars to run the docker container (FAT JAR)
-//shadowJar {
-//    baseName = 'rafflery'
-//    classifier = null
-//    version = null
-//}
+// do we actually really need this??
+shadowJar {
+    baseName = 'rafflery'
+    classifier = null
+    version = null
+}
