@@ -16,7 +16,8 @@ https://circleci.com/gh/ettisberger/rafflery
 ## end2end tests
 Cypress + Docker + CircleCI
 
-## ktlint code styles
+## ktlint code styles (pre commit hook)
 - install git hook to automatically check files for style violations on commit
 - run "ktlint installGitPrePushHook" if you wish to run ktlint on push instead
+
 ktlint installGitPreCommitHook
