@@ -19,10 +19,12 @@ services:
      dockerfile: Dockerfile.cypress
    depends_on:
       - "backend"
-   volumes:
+   #volumes:
       #- /home/circleci/.cache:/root/.cache
       #- /home/circleci/project/rafflery-ui:/app
-      - ./rafflery-ui/cypress:/app/cypress
-      - ./rafflery-ui/cypress.json:/app/cypress.json
+      #- ./rafflery-ui/cypress:/app/cypress
+      #- ./rafflery-ui/cypress.json:/app/cypress.json
    #network_mode: 'host'
+   environment:
+      - CYPRESS_baseUrl=http://backend:8080
    command: npm run cypress:run
