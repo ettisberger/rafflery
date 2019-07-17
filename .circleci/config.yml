@@ -59,7 +59,23 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths: project/rafflery-server/build
-  build_docker:
+  build_test_end2end:
+    machine:
+      docker_layer_caching: false
+    steps:
+      - *fast-checkout
+      # why does it install cypress again here? shouldnt this be cached because of the
+      # frontend build where we saved the cache?
+      - restore_cache: # special step to restore the dependency cache
+          key: dependency-cache-{{ checksum "rafflery-ui/package.json" }}
+      - run:
+          name: Print working dir
+          command: |
+            pwd
+            ls -la
+      - run: docker-compose build
+      - run: docker-compose up --abort-on-container-exit --exit-code-from cypress
+   build_docker:
     machine: 
       services:
         - docker
@@ -77,44 +93,6 @@ jobs:
           root: /home/circleci
           paths:
             - project/rafflery.tar
-  build_test_end2end:
-    machine:
-      docker_layer_caching: false
-    steps:
-      - *fast-checkout
-      # why does it install cypress again here? shouldnt this be cached because of the
-      # frontend build where we saved the cache?
-      - restore_cache: # special step to restore the dependency cache
-          key: dependency-cache-{{ checksum "rafflery-ui/package.json" }}
-      - run:
-          name: Print working dir
-          command: |
-            pwd
-            ls -la
-      - run: docker-compose build
-      - run: docker-compose up --abort-on-container-exit --exit-code-from cypress
-      #- run:
-      #    name: Load docker image from .tar file
-      #    command: |
-      #      docker load -i rafflery.tar
-      #      docker container ls
-      #      docker ps
-      #- run: 
-      #    name: Run rafflery backend
-      #    command: |
-      #      docker run -d	-it -p 8080:8080 -e JWT_CLIENTID -e JWT_ISSUER -e PORT --name rafflery registry.heroku.com/rafflery/web:latest
-      #- run: 
-      #    name: Check running container
-      #    command: |
-      #      docker ps
-      #- run:
-      #    name: install-npm
-      #    command: |
-      #      cd rafflery-ui && npm install
-      - run:
-          name: Run cypress
-          command: |
-            cd rafflery-ui && npm run cypress:run
   deploy:
     machine: 
       services:
@@ -152,14 +130,14 @@ workflows:
       - build_test_backend:
           requires:
             - checkout_rafflery
-      #- build_docker:
-      #    requires:
-      #      - build_test_frontend
-      #      - build_test_backend
       - build_test_end2end:
           requires:
             - build_test_frontend
             - build_test_backend
+      #- build_docker:
+      #    requires:
+      #      - build_test_frontend
+      #      - build_test_backend
       #      - build_docker
       #- deploy:
       #    requires:
