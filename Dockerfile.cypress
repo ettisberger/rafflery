@@ -4,8 +4,8 @@ WORKDIR /app
 
 # dependencies will be installed only if the package files change
 COPY ./rafflery-ui .
-COPY .cache .
-COPY .npm .
+COPY ~/.cache .
+COPY ~/.npm .
 
 #RUN npm ci
 RUN npm install
