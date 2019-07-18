@@ -56,7 +56,6 @@ object JwtHmac256 : JwtConfigurator {
         .withClaim("name", user.name)
         .sign(algorithm)
 
-
     override fun configure(configuration: JWTAuthenticationProvider.Configuration) {
         with(configuration) {
             verifier(verifier)
@@ -69,6 +68,4 @@ object JwtHmac256 : JwtConfigurator {
     private fun validate(credential: JWTCredential): Principal? =
         credential.payload.audience.contains(clientId)
             .let { JWTPrincipal(credential.payload) }
-
-
 }

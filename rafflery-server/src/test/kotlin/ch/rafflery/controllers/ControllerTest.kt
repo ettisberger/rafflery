@@ -34,7 +34,6 @@ abstract class ControllerTest {
         withTestApplication({
             init(setOf(controller), JwtHmac256)
         }) { callback() }
-
     }
 
     protected inline fun <reified T> TestApplicationResponse.getBody(): T {
