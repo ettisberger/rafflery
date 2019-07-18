@@ -4,13 +4,14 @@ import ch.rafflery.app.init
 import ch.rafflery.domain.commands.Command
 import ch.rafflery.domain.user.User
 import ch.rafflery.infrastructure.CommandBus
+import ch.rafflery.infrastructure.JwtHmac256
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
-import io.ktor.server.testing.* // ktlint-disable no-wildcard-imports
+import io.ktor.server.testing.*
 import kotlin.test.assertEquals
 
 abstract class ControllerTest {
@@ -33,6 +34,7 @@ abstract class ControllerTest {
         withTestApplication({
             init(setOf(controller), JwtHmac256)
         }) { callback() }
+
     }
 
     protected inline fun <reified T> TestApplicationResponse.getBody(): T {
@@ -79,5 +81,5 @@ abstract class ControllerTest {
         }
     }
 
-    private fun getToken() = MockJwt.makeToken(User("testUser"))
+    private fun getToken() = JwtHmac256.makeToken(User("testUser"))
 }

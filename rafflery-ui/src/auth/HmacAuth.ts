@@ -12,7 +12,9 @@ export const hmacAuth = {
 
   setToken(username: string): string {
     const token = jwt.sign({
-      name: username
+      name: username,
+      iss: 'issuer',
+      aud: 'clientId'
     }, 'secret');
 
     localStorage.setItem('id_token', token);

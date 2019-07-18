@@ -12,23 +12,8 @@ object Config {
     private val jwt_clientId = "jwt.clientId" to stringType
     private val jwt_issuer = "jwt.issuer" to stringType
 
-    // raffler config
-    private val raffler_apiUrl = "raffler.apiUrl" to stringType
-    private val raffler_apiKey = "raffler.apiKey" to stringType
-
     private val config = systemProperties() overriding
-            EnvironmentVariables().also {
-                println("ENVIRONMENT PORT: ${it.getOrNull(Key("port", intType))}")
-                println(
-                    "ENVIRONMENT JWT CLIENT ID: ${it.getOrNull(
-                        Key(
-                            "JWT_CLIENTID",
-                            stringType
-                        )
-                    )}"
-                )
-                println("ENVIRONMENT JWT ISSUER: ${it.getOrNull(Key("JWT_ISSUER", stringType))}")
-            } overriding
+            EnvironmentVariables() overriding
             ConfigurationProperties.fromOptionalResource("local.properties") overriding
             ConfigurationProperties.fromResource("default.properties")
 
@@ -42,12 +27,6 @@ object Config {
         get() = AppConfig(
             port = config[app_port],
             environment = config[environment]
-        )
-
-    val rafflerConfig
-        get() = RafflerConfig(
-            config[raffler_apiKey],
-            config[raffler_apiUrl]
         )
 }
 
