@@ -76,7 +76,7 @@ jobs:
       - run: docker-compose build
       - run: docker-compose up --abort-on-container-exit --exit-code-from cypress
       - run: pwd && ls
-      - run: cd rafflery-ui && ls
+      - run: cd rafflery-ui && cd cypress && ls
       - store_test_results:
           path: rafflery-ui/out
   build_docker:
