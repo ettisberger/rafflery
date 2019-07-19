@@ -75,7 +75,7 @@ jobs:
             ls -la
       - run: docker-compose build
       - run: docker-compose up --abort-on-container-exit --exit-code-from cypress
-      - run: docker cp project_cypress_1:/app/out /rafflery-ui/out
+      - run: docker cp project_cypress_1:/app/out /home/circleci/project/rafflery-ui/out
       - store_test_results:
           path: rafflery-ui/out
   build_docker:
