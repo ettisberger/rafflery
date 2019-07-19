@@ -37,7 +37,7 @@
     "eject": "react-scripts eject",
     "pretty": "prettier --single-quote --trailing-comma es5 --write 'src/**/*.{ts,tsx}'",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run --reporter junit --reporter-options",
+    "cypress:run": "cypress run",
     "cypress:verify": "cypress verify"
   },
   "jest-junit": {
