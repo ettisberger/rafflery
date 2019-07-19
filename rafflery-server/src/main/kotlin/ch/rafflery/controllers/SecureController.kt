@@ -18,18 +18,18 @@ abstract class SecureController : Controller() {
             authenticate {
                 when (method) {
                     "GET" -> get {
-                        protecc(call)
+                        verify(call)
                         invoke(call)
                     }
                     "POST" -> post {
-                        protecc(call)
+                        verify(call)
                         invoke(call)
                     }
                 }
             }
         }
 
-    private fun protecc(call: ApplicationCall) {
+    private fun verify(call: ApplicationCall) {
         val user = call.user
         println("User $user is authenticated")
     }

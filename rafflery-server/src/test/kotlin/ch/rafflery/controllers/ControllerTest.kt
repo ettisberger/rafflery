@@ -19,9 +19,7 @@ abstract class ControllerTest {
     val mapper = jacksonObjectMapper()
 
     object FakeCommandBus : CommandBus {
-
         val commands = mutableListOf<Command>()
-
         override fun <T : Command> submit(command: T) {
             commands.add(command)
         }

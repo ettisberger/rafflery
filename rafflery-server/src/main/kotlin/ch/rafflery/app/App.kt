@@ -44,6 +44,7 @@ fun Application.init(
             jwtConfigurator.configure(this)
         }
     }
+
     install(ContentNegotiation) {
         gson {}
     }

@@ -4,7 +4,6 @@ import ch.rafflery.domain.commands.Command
 import ch.rafflery.domain.commands.CommandHandler
 
 interface CommandBus {
-
     fun <T : Command> submit(command: T)
 }
 
