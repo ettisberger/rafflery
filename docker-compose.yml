@@ -23,3 +23,6 @@ services:
    environment:
       - CYPRESS_baseUrl=http://backend:8080
    command: npm run cypress:run --reporter junit --reporter-options
+   volumes:
+     - ./cypress:/app/cypress
+     - ./gugus:/app/out/
