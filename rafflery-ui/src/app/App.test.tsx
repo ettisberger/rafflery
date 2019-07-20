@@ -1,8 +1,8 @@
 import React from 'react';
-import App, { AppProps } from "./App";
-import { hmacAuth } from "../auth/HmacAuth";
-import { render } from "@testing-library/react";
-import { http } from "../http/http";
+import App, { AppProps } from './App';
+import { hmacAuth } from '../auth/HmacAuth';
+import { render } from '@testing-library/react';
+import { http } from '../http/http';
 import '@testing-library/react/cleanup-after-each'
 
 jest.mock('../http/http');
@@ -16,7 +16,9 @@ const {
 describe('App', () => {
 
   const props: AppProps = {
-    loggedIn: jest.fn()
+    environment: '',
+    loggedIn: jest.fn(),
+    fetchEnvironment: jest.fn()
   };
 
   get.mockResolvedValue({ environment: 'test' });
@@ -26,9 +28,13 @@ describe('App', () => {
 
     render(<App {...props} />);
 
-    // we need to get rid of async componentDidMount or this will not work
-    setTimeout(() => {
-      expect(props.loggedIn).toHaveBeenCalledWith('hanspeter');
-    });
+    expect(props.loggedIn).toHaveBeenCalledWith('hanspeter');
   });
+
+  it('on mount, should call fetchEnvironment', async () => {
+    render(<App {...props} />);
+
+    expect(props.fetchEnvironment).toHaveBeenCalled();
+  });
+
 });

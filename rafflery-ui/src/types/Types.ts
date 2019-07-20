@@ -15,3 +15,7 @@ export interface Item {
 export interface Ticket {
   owner: string;
 }
+
+export interface UiConfig {
+  environment: string;
+}

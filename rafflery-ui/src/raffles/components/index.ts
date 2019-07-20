@@ -1,5 +1,5 @@
 import { ApplicationState } from '../../root.reducer';
-import * as actions from '../raffles.actions';
+import * as actions from '../redux/raffles.actions';
 import { connect } from 'react-redux';
 import { Raffles } from './Raffles';
 

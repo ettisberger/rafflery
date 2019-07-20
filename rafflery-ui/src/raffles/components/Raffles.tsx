@@ -1,6 +1,6 @@
 import React from 'react';
-import { Raffle } from '../types/Raffle';
 import RaffleList from './list/RaffleList';
+import { Raffle } from '../../types/Types';
 
 export interface RafflesProps {
   raffles: Raffle[];
@@ -15,7 +15,7 @@ export class Raffles extends React.Component<RafflesProps> {
 
   render() {
     return (
-      <RaffleList raffles={this.props.raffles || []}/>
+      <RaffleList raffles={this.props.raffles}/>
     )
   }
 }

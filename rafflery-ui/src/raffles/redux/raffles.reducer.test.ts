@@ -1,7 +1,7 @@
 import { rafflesReducer } from './raffles.reducer';
 import { fetchRafflesSucceeded } from './raffles.actions';
-import { initialState } from '../root.reducer';
-import { someRaffles } from './raffles.testData';
+import { initialState } from '../../root.reducer';
+import { someRaffles } from '../raffles.testData';
 
 describe('Raffles reducer', () => {
 

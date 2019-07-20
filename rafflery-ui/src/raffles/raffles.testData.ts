@@ -1,4 +1,4 @@
-import { Raffle } from './types/Raffle';
+import { Raffle } from '../types/Types';
 
 export const someRaffles: Raffle[] = [{
   id: '1',

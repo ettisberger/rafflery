@@ -1,5 +1,5 @@
-import { IAction } from "../actions/types";
-import { Raffle } from "./types/Raffle";
+import { IAction } from "../../actions/types";
+import { Raffle } from '../../types/Types';
 
 export const FETCH_RAFFLES_REQUESTED = 'FETCH_RAFFLES_REQUESTED';
 export const FETCH_RAFFLES_SUCCEEDED = 'FETCH_RAFFLES_SUCCEEDED';

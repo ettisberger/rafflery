@@ -1,7 +1,7 @@
-import { IAction } from '../actions/types';
-import { ApplicationState, initialState } from '../root.reducer';
+import { IAction } from '../../actions/types';
+import { ApplicationState, initialState } from '../../root.reducer';
 import * as actions from './raffles.actions';
-import { Raffle } from './types/Raffle';
+import { Raffle } from '../../types/Types';
 
 function onFetchRafflesSucceeded(state: ApplicationState, action: IAction<Raffle[]>): ApplicationState {
   return {

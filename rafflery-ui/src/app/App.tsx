@@ -7,31 +7,19 @@ import Home from '../pages/home/Home';
 import Footer from '../layout/footer/Footer';
 import Login from '../pages/login/Login';
 import Callback from '../pages/login/Callback';
-import { http } from '../http/http';
 import Impersonation from '../pages/impersonation';
-import { hmacAuth } from "../auth/HmacAuth";
-
-interface AppState {
-  environment: string;
-}
+import { hmacAuth } from '../auth/HmacAuth';
 
 export interface AppProps {
-  loggedIn: (args: any) => any
+  environment: string;
+  fetchEnvironment: () => any;
+  loggedIn: (args: any) => any;
 }
 
-class App extends React.Component<AppProps, AppState> {
+class App extends React.Component<AppProps> {
 
-  constructor(props: any) {
-    super(props);
-
-    this.state = {
-      environment: ''
-    }
-  }
-
-  async componentDidMount() {
-    const { environment } = await http.get('/api/ui-config');
-    this.setState({ environment });
+  componentDidMount() {
+    this.props.fetchEnvironment();
 
     const user = hmacAuth.getLoggedInUser();
 
@@ -44,7 +32,7 @@ class App extends React.Component<AppProps, AppState> {
     return (
       <Router history={history}>
         <div className="App">
-          <Header environment={this.state.environment}/>
+          <Header environment={this.props.environment}/>
           <main className="main">
             <Route name="home" exact={true} path="/" component={Home}/>
             <Route name="login" exact={true} path="/login" component={Login}/>

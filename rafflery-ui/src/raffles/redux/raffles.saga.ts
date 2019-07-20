@@ -1,4 +1,4 @@
-import { fetchRaffles } from './raffles.api';
+import { fetchRaffles } from '../raffles.api';
 import { call, put, takeEvery, all } from 'redux-saga/effects';
 import { fetchRafflesSucceeded } from './raffles.actions';
 import * as actions from './raffles.actions';
