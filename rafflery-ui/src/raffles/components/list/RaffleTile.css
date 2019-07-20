@@ -14,6 +14,7 @@
   flex-direction: column;
   justify-content: center;
   cursor: pointer;
+  border-radius: 20px;
   transition: transform 0.1s ease-out;
 }
 
@@ -23,6 +24,11 @@
 
 .raffleTile .content .title {
   color: white;
-  font-size: 20px;
+  font-size: 1.5em;
   padding: 15px 0;
+}
+
+.raffleTile .raffle-info {
+  padding: 5px 0;
+  font-size: 1.2em;
 }
