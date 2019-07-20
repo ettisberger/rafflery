@@ -2,8 +2,12 @@ import React from 'react';
 import './Navigation.css';
 import { Link } from 'react-router-dom';
 
+interface NavigationProps {
+  environment: string;
+  user: string;
+}
 
-const Navigation: React.FC<{ environment: string }> = ({ environment }) => {
+const Navigation: React.FC<NavigationProps> = ({ environment, user }) => {
   return (
     <nav className="navigation">
       <ul>
@@ -17,6 +21,11 @@ const Navigation: React.FC<{ environment: string }> = ({ environment }) => {
           <li><Link to="impersonation">Impersonation</Link></li>
         }
         <li>Raffles</li>
+        {
+          user && user !== 'Guest' &&
+          <li>Logged in as {user}</li>
+        }
+
       </ul>
     </nav>
   );

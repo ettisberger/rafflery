@@ -12,6 +12,7 @@ import { hmacAuth } from '../auth/HmacAuth';
 
 export interface AppProps {
   environment: string;
+  user: string;
   fetchEnvironment: () => any;
   loggedIn: (args: any) => any;
 }
@@ -32,7 +33,10 @@ class App extends React.Component<AppProps> {
     return (
       <Router history={history}>
         <div className="App">
-          <Header environment={this.props.environment}/>
+          <Header
+            environment={this.props.environment}
+            user={this.props.user}
+          />
           <main className="main">
             <Route name="home" exact={true} path="/" component={Home}/>
             <Route name="login" exact={true} path="/login" component={Login}/>

@@ -1,17 +1,9 @@
 import React from 'react';
 import './RaffleTile.css';
+import { Raffle } from '../../../types/Types';
 
 interface RaffleTileProps {
-    raffle: {
-        // I guess we need to make an interface for raffle items too...
-        name: string,
-        item: { name: string, value: number},
-        slotSize: number,
-        purchasedTickets: [ { owner: string }],
-        createdBy: string,
-        closesAt: Date,
-        id: number,
-    };
+    raffle: Raffle;
     color: string;
 }
 

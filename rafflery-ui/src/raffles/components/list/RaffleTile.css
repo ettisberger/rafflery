@@ -13,6 +13,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  cursor: pointer;
+  transition: transform 0.1s ease-out;
+}
+
+.raffleTile .content:hover {
+  transform: scale(1.1);
 }
 
 .raffleTile .content .title {

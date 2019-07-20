@@ -5,7 +5,8 @@ import App from "./App";
 import { ApplicationState } from '../root.reducer';
 
 const mapStateToProps = (state: ApplicationState) => ({
-  environment: state.uiConfig.environment
+  environment: state.uiConfig.environment,
+  user: state.authState.name
 });
 
 const mapDispatchToProps = {
