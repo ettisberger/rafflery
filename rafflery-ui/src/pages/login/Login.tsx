@@ -2,7 +2,7 @@ import React, { Component, Dispatch } from 'react';
 import './Login.css';
 import { connect } from 'react-redux';
 import { loggedIn } from '../../actions/actions';
-import { ApplicationState } from '../../reducers/root.reducer';
+import { ApplicationState } from '../../root.reducer';
 import auth0Service from '../../auth/AuthService';
 import LoginForm from './LoginForm';
 

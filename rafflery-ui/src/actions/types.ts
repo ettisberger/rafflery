@@ -16,4 +16,9 @@ interface LoggedInAction {
     name: string;
 }
 
+export interface IAction<P> {
+    type: string;
+    payload: P;
+}
+
 export type LoginActionTypes = LoggedInAction;

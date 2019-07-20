@@ -1,4 +1,4 @@
-import { ApplicationState } from "../../reducers/root.reducer";
+import { ApplicationState } from "../../root.reducer";
 import Impersonation from "./Impersonation";
 import { connect } from "react-redux";
 import * as actions from '../../actions/actions';
