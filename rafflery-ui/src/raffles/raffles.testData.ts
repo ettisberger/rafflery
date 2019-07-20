@@ -9,4 +9,14 @@ export const aRaffle: Raffle = {
   slotSize: 100
 };
 
-export const someRaffles: Raffle[] = [aRaffle];
+export const anotherRaffle: Raffle = {
+  id: '2',
+  name: 'my second raffle',
+  createdBy: 'andreas',
+  item: { name: 'tv', value: 5000 },
+  purchasedTickets: [],
+  slotSize: 30
+};
+
+
+export const someRaffles: Raffle[] = [aRaffle, anotherRaffle];

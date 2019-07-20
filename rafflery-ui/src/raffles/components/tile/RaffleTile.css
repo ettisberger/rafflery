@@ -1,7 +1,10 @@
 .raffleTile {
   display: flex;
-  flex: 25%;
+  margin: 25px;
   justify-content: center;
+  transition: width .5s ease-out, opacity .5s;
+  width: 20%;
+  white-space: nowrap;
 }
 
 .raffleTile .content {
@@ -31,4 +34,12 @@
 .raffleTile .raffle-info {
   padding: 5px 0;
   font-size: 1.2em;
+}
+
+.raffleTile.hidden {
+  width: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  overflow: hidden;
 }

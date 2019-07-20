@@ -9,7 +9,9 @@ describe('Raffle Tile', () => {
 
   const defaultProps: RaffleTileProps = {
     color: 'blue',
-    raffle
+    raffle,
+    hidden: false,
+    onSelect: jest.fn()
   };
 
   afterEach(cleanup);

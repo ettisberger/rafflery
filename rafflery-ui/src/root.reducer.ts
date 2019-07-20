@@ -7,8 +7,9 @@ import { appReducer } from './app/redux/app.reducer';
 
 export interface ApplicationState {
     authState: AuthState;
-    raffles: Raffle[]
-    uiConfig: UiConfig
+    raffles: Raffle[];
+    uiConfig: UiConfig;
+    selectedRaffle?: Raffle;
 }
 
 export const initialState: ApplicationState = {
@@ -18,6 +19,7 @@ export const initialState: ApplicationState = {
         isLoggedIn: false,
     },
     raffles: [],
+    selectedRaffle: undefined,
     uiConfig: {
         environment: ''
     },
