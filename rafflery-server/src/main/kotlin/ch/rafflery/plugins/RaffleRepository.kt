@@ -21,7 +21,7 @@ class StubbedRaffleRepository : RaffleRepository {
         "Sofa Vitra",
         PrizeItem("Sofa Vitra", 5000),
         100,
-        listOf(Ticket("Daniel",5), Ticket("Nicholas", 10)),
+        listOf(Ticket("Daniel", 5), Ticket("Nicholas", 10)),
         "ninula2",
         "2"
     )
@@ -39,7 +39,7 @@ class StubbedRaffleRepository : RaffleRepository {
         "Pandabär",
         PrizeItem("Pandabär", 2000),
         40,
-        listOf(Ticket("Andy", 30), Ticket("Nicole",40)),
+        listOf(Ticket("Andy", 30), Ticket("Nicole", 40)),
         "ninula4",
         "4"
     )

@@ -12,6 +12,10 @@ object Config {
     private val jwt_clientId = "jwt.clientId" to stringType
     private val jwt_issuer = "jwt.issuer" to stringType
 
+    // raffler config
+    private val raffler_api = "raffler.api" to stringType
+    private val raffler_api_key = "raffler.api.key" to stringType
+
     private val config = systemProperties() overriding
             EnvironmentVariables() overriding
             ConfigurationProperties.fromOptionalResource("local.properties") overriding
@@ -28,6 +32,12 @@ object Config {
             port = config[app_port],
             environment = config[environment]
         )
+
+    val rafflerConfig
+        get() = RafflerConfig(
+            rafflerApi = config[raffler_api],
+            rafflerApiKey = config[raffler_api_key]
+        )
 }
 
 data class AppConfig(
@@ -38,6 +48,11 @@ data class AppConfig(
 data class JwtConfig(
     val clientId: String,
     val issuer: String
+)
+
+data class RafflerConfig(
+    val rafflerApi: String,
+    val rafflerApiKey: String
 )
 
 private infix fun <T> String.to(type: PropertyType<T>): Key<T> = Key(this, type)

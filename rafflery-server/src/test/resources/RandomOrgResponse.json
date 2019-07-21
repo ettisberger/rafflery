@@ -1,0 +1,31 @@
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "random": {
+            "method": "generateSignedIntegers",
+            "hashedApiKey": "i++0F9AxirCiJN22GA49CeJAnRaiL2/YoQXogTmOGDiUYa+/R8HXEpnDmvcwmFQ4hfdVnJCZJOK4nBID9BEgbw==",
+            "n": 1,
+            "min": 1,
+            "max": 50,
+            "replacement": false,
+            "base": 10,
+            "data": [
+                8
+            ],
+            "license": {
+                "type": "developer",
+                "text": "Random values licensed strictly for development and testing only",
+                "infoUrl": null
+            },
+            "userData": null,
+            "completionTime": "2019-07-21 11:48:37Z",
+            "serialNumber": 6
+        "signature": "j14S8o0kOBOYLYHhg+ukZOkBofxSzPy0ryHkQFuoc46fLpobdgibG2OEYMvG8A8Ua6YxF1JpdRZP/SACz3TRsevbiRbtpYnXVxI7Y8e47/DWulL8FTqlQUFVQSCFuHqcLDZc66uxeWmi6c7dU0lrpFwKW6XWWwQBvqzVon/hf0k/mwl25Di+OoB00sgaFvmG3Lq9VQ4FD7Tm0y0FMv8eL2lUH/tCp5UVZ7S38UJkTRmPqKP/wH/LR3P99dq+3UQaNiFiHcjLSmjeoTr8AxlGj3eZtLtTvzvkrxweEoI9NF8NGV9YSq+QvVLjqdTm/8N/DM8Lup3fgLLbFEIQ1VQYOmkb8Wzm6cZDCD+8hY3Di7IF/pnyVlfdZ0rSqX+FKU94/zzhYXCX8pvh2PPbGWJY48t392OhuecpcnVtDV5Nf9Yvl/4BMFqwJ8RbXbnEFVNviBaU0IhID4CVyShdmpS3oXIQlkma/lLOr1lAWpa8Y5gSark4KfHb/Avi9xdT0GuLHQNSucM6DNM9KnwVM0wLeavl39h93TnJJKaO2Tv9SHIAXZSMWVq1Pgnhw0qGFe1ZGH5bFwnhkW25FO3wYLR8i5hW0IOIpSwdh5QjBfO15WV56wsWbxw78Txw9ZrL7tjayI0kQUW403hecY463B4m8OBXkzvgojuzpeYYveNCxVY=",
+        "bitsUsed": 6,
+        },
+        "bitsLeft": 249994,
+        "requestsLeft": 999,
+        "advisoryDelay": 2170
+    },
+    "id": 1337
+}
