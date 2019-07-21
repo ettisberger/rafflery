@@ -9,7 +9,6 @@ import kotlinx.coroutines.runBlocking
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import org.junit.Test
-import kotlin.test.assertEquals
 
 internal class RafflerTest {
     private val raffler: Raffler = StubbedRafflerTest()
