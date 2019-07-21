@@ -12,7 +12,7 @@ class StubbedRaffleRepository : RaffleRepository {
         "Rolex GMT Master II",
         PrizeItem("Rolex GMT Master II", 10000),
         100,
-        listOf(Ticket("Andy"), Ticket("Nicholas")),
+        listOf(Ticket("Andy", 1), Ticket("Nicholas", 2)),
         "ninula",
         "1"
     )
@@ -21,7 +21,7 @@ class StubbedRaffleRepository : RaffleRepository {
         "Sofa Vitra",
         PrizeItem("Sofa Vitra", 5000),
         100,
-        listOf(Ticket("Daniel"), Ticket("Nicholas")),
+        listOf(Ticket("Daniel",5), Ticket("Nicholas", 10)),
         "ninula2",
         "2"
     )
@@ -30,7 +30,7 @@ class StubbedRaffleRepository : RaffleRepository {
         "ASUS Mainboard GTX403",
         PrizeItem("ASUS Mainboard GTX403", 400),
         20,
-        listOf(Ticket("Susi"), Ticket("Nicholas")),
+        listOf(Ticket("Susi", 20), Ticket("Nicholas", 7)),
         "ninula3",
         "3"
     )
@@ -39,7 +39,7 @@ class StubbedRaffleRepository : RaffleRepository {
         "Pandabär",
         PrizeItem("Pandabär", 2000),
         40,
-        listOf(Ticket("Andy"), Ticket("Nicole")),
+        listOf(Ticket("Andy", 30), Ticket("Nicole",40)),
         "ninula4",
         "4"
     )

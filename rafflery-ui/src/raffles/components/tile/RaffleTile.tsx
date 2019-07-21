@@ -29,6 +29,7 @@ const RaffleTile: React.FC<RaffleTileProps> = ({ raffle, color, hidden, onSelect
                 <div className="raffle-info">SLOT SIZE {raffle.slotSize.toLocaleString()}</div>
                 <div className="raffle-info">VALUE CHF {raffle.item.value.toLocaleString()}</div>
                 <div className="raffle-info">{raffle.purchasedTickets.length} / {numberOfSlots} sold</div>
+                {raffle.purchasedTickets.map(ticket => <div>{ticket.owner} / {ticket.slot}</div>)}
                 <div className="raffle-info">created by {raffle.createdBy}</div>
             </div>
         </div>

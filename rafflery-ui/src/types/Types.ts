@@ -14,6 +14,7 @@ export interface Item {
 
 export interface Ticket {
   owner: string;
+  slot: number;
 }
 
 export interface UiConfig {

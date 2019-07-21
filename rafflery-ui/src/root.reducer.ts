@@ -21,7 +21,7 @@ export const initialState: ApplicationState = {
     raffles: [],
     selectedRaffle: undefined,
     uiConfig: {
-        environment: ''
+        environment: '',
     },
 };
 
