@@ -10,12 +10,11 @@
   }
 }
 
-.slot-purchase {
+.raffle-detail {
   background-color: var(--primaryColor);
   color: white;
   animation: grow .5s ease-out;
-  width: 30%;
-  height: 300px;
+  width: 50%;
   margin: 0 auto;
   padding: 20px;
   display: flex;
@@ -24,18 +23,26 @@
   align-items: center;
 }
 
-.slot-purchase h2 {
+.raffle-detail h2 {
   font-size: 2em;
 }
 
-.slot-purchase button.purchase-button {
-  padding: 30px;
-  font-size: 2em;
-  cursor: pointer;
-  border-radius: 15px;
+.raffle-detail__slots {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-.slot-purchase button.cancel-button {
+.raffle-detail__actions {
+    display: flex;
+    flex-direction: row;
+}
+
+.raffle-detail button {
+  margin: 10px;
   padding: 15px;
   font-size: 1em;
   cursor: pointer;

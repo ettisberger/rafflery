@@ -20,7 +20,7 @@ describe('Raffles Component', () => {
 
     const raffleTiles = component.getAllByTestId('raffle-item');
     expect(raffleTiles.length).toBe(someRaffles.length);
-    expect(component.queryByTestId('slot-purchase')).toBeFalsy();
+    expect(component.queryByTestId('raffle-detail')).toBeFalsy();
     raffleTiles.forEach(tile => expect(tile).not.toHaveClass('hidden'));
   });
 
@@ -39,9 +39,18 @@ describe('Raffles Component', () => {
     const props = { ...defaultProps, selectedRaffle: someRaffles[0] };
     const component = render(<Raffles {...props} />);
 
-    const slotPurchase = component.queryByTestId('slot-purchase');
+    const slotPurchase = component.queryByTestId('raffle-detail');
     expect(slotPurchase).toBeTruthy();
     expect(component.queryByText(`Purchase a slot for ${someRaffles[0].name}`));
+  });
+
+  it('should display slot items when raffle details are shown', () => {
+    const props = { ...defaultProps, selectedRaffle: someRaffles[0] };
+    const component = render(<Raffles {...props} />);
+
+    const raffleSlotContainer = component.queryByTestId('raffle-detail-slots');
+
+    expect(raffleSlotContainer!!.children.length).toBe(someRaffles[0].slotSize);
   });
 
   it('should hide other raffles when one is selected', () => {

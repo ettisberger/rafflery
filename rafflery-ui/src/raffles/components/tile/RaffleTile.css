@@ -1,4 +1,4 @@
-.raffleTile {
+.raffle-tile {
   display: flex;
   margin: 25px;
   justify-content: center;
@@ -7,7 +7,7 @@
   white-space: nowrap;
 }
 
-.raffleTile .content {
+.raffle-tile .content {
   height: 300px;
   width: 300px;
   background-color: rgba(51, 102, 198, 0.2);
@@ -21,22 +21,22 @@
   transition: transform 0.1s ease-out;
 }
 
-.raffleTile .content:hover {
+.raffle-tile .content:hover {
   transform: scale(1.1);
 }
 
-.raffleTile .content .title {
+.raffle-tile .content .title {
   color: white;
   font-size: 1.5em;
   padding: 15px 0;
 }
 
-.raffleTile .raffle-info {
+.raffle-tile .raffle-info {
   padding: 5px 0;
   font-size: 1.2em;
 }
 
-.raffleTile.hidden {
+.raffle-tile.hidden {
   width: 0;
   padding: 0;
   margin: 0;

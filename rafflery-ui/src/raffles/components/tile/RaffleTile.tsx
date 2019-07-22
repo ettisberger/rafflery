@@ -19,7 +19,7 @@ const RaffleTile: React.FC<RaffleTileProps> = ({
 
   return (
     <div
-      className={`raffleTile ${hidden ? 'hidden' : ''}`}
+      className={`raffle-tile ${hidden ? 'hidden' : ''}`}
       data-testid="raffle-tile"
     >
       <div
@@ -39,7 +39,7 @@ const RaffleTile: React.FC<RaffleTileProps> = ({
           {raffle.purchasedTickets.length} / {numberOfSlots} sold
         </div>
         {raffle.purchasedTickets.map(ticket => (
-          <div>
+          <div key={ticket.slot}>
             {ticket.owner} / {ticket.slot}
           </div>
         ))}

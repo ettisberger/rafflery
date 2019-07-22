@@ -2,7 +2,7 @@ import React from 'react';
 import { Raffle } from '../../types/Types';
 import RaffleTile from './tile/RaffleTile';
 import './Raffles.css';
-import { SlotPurchase } from './slotPurchase/SlotPurchase';
+import { RaffleDetail } from './detail/RaffleDetail';
 
 export interface RafflesProps {
   raffles: Raffle[];
@@ -38,7 +38,7 @@ export class Raffles extends React.Component<RafflesProps> {
           ))}
         </div>
         {selectedRaffle && (
-          <SlotPurchase
+          <RaffleDetail
             onCancel={() => this.props.unselectRaffle()}
             raffle={selectedRaffle}
           />
