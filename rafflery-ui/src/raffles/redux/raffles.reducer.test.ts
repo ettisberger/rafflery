@@ -1,10 +1,13 @@
 import { rafflesReducer } from './raffles.reducer';
-import { fetchRafflesSucceeded, selectRaffle, unselectRaffle } from './raffles.actions';
+import {
+  fetchRafflesSucceeded,
+  selectRaffle,
+  unselectRaffle,
+} from './raffles.actions';
 import { initialState } from '../../root.reducer';
 import { aRaffle, someRaffles } from '../raffles.testData';
 
 describe('Raffles reducer', () => {
-
   it('should initially return empty raffles', () => {
     const newState = rafflesReducer(undefined, fetchRafflesSucceeded([]));
     expect(newState.raffles).toEqual([]);
@@ -37,5 +40,4 @@ describe('Raffles reducer', () => {
 
     expect(newState.selectedRaffle).toBeUndefined();
   });
-
 });

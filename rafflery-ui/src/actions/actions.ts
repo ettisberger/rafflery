@@ -1,6 +1,6 @@
 import { IAction, LOGGED_IN } from './types';
 
-export function loggedIn(name: string): IAction<{name: string}> {
+export function loggedIn(name: string): IAction<{ name: string }> {
   return {
     type: LOGGED_IN,
     payload: { name },

@@ -6,7 +6,7 @@ export const aRaffle: Raffle = {
   createdBy: 'nicholas',
   item: { name: 'powerball', value: 2000 },
   purchasedTickets: [],
-  slotSize: 100
+  slotSize: 100,
 };
 
 export const anotherRaffle: Raffle = {
@@ -15,8 +15,7 @@ export const anotherRaffle: Raffle = {
   createdBy: 'andreas',
   item: { name: 'tv', value: 5000 },
   purchasedTickets: [],
-  slotSize: 30
+  slotSize: 30,
 };
-
 
 export const someRaffles: Raffle[] = [aRaffle, anotherRaffle];

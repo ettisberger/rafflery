@@ -9,7 +9,5 @@ export function* fetchUiConfigSaga() {
 }
 
 export default function* appSaga() {
-  yield all([
-    takeEvery(actions.FETCH_UI_CONFIG_REQUESTED, fetchUiConfigSaga)
-  ]);
+  yield all([takeEvery(actions.FETCH_UI_CONFIG_REQUESTED, fetchUiConfigSaga)]);
 }

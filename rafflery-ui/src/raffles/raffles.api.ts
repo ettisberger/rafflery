@@ -1,4 +1,4 @@
-import { http } from "../http/http";
+import { http } from '../http/http';
 import { Raffle } from '../types/Types';
 
 export async function fetchRaffles(): Promise<Raffle[]> {

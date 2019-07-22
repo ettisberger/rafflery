@@ -8,16 +8,14 @@ interface HomeState {
 }
 
 class Home extends Component<{}, HomeState> {
-
   render() {
     return (
       <div className="home">
-        <SearchBar/>
+        <SearchBar />
         <Raffles />
       </div>
     );
   }
-
 }
 
 export default Home;

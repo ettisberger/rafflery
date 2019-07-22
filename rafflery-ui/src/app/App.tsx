@@ -18,7 +18,6 @@ export interface AppProps {
 }
 
 class App extends React.Component<AppProps> {
-
   componentDidMount() {
     this.props.fetchEnvironment();
 
@@ -33,16 +32,23 @@ class App extends React.Component<AppProps> {
     return (
       <Router history={history}>
         <div className="App">
-          <Header
-            environment={this.props.environment}
-            user={this.props.user}
-          />
+          <Header environment={this.props.environment} user={this.props.user} />
           <main className="main">
-            <Route name="home" exact={true} path="/" component={Home}/>
-            <Route name="login" exact={true} path="/login" component={Login}/>
-            <Route name="callback" exact={true} path="/callback" component={Callback}/>
-            <Route name="impersonation" exact={true} path="/impersonation" component={Impersonation}/>
-            <Footer/>
+            <Route name="home" exact={true} path="/" component={Home} />
+            <Route name="login" exact={true} path="/login" component={Login} />
+            <Route
+              name="callback"
+              exact={true}
+              path="/callback"
+              component={Callback}
+            />
+            <Route
+              name="impersonation"
+              exact={true}
+              path="/impersonation"
+              component={Impersonation}
+            />
+            <Footer />
           </main>
         </div>
       </Router>

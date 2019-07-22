@@ -3,28 +3,37 @@ import { ApplicationState, initialState } from '../../root.reducer';
 import * as actions from './raffles.actions';
 import { Raffle } from '../../types/Types';
 
-function onFetchRafflesSucceeded(state: ApplicationState, action: IAction<Raffle[]>): ApplicationState {
+function onFetchRafflesSucceeded(
+  state: ApplicationState,
+  action: IAction<Raffle[]>
+): ApplicationState {
   return {
     ...state,
-    raffles: action.payload
-  }
+    raffles: action.payload,
+  };
 }
 
-function onSelectRaffle(state: ApplicationState, action: IAction<string>): ApplicationState {
+function onSelectRaffle(
+  state: ApplicationState,
+  action: IAction<string>
+): ApplicationState {
   return {
     ...state,
-    selectedRaffle: state.raffles.find(raffle => raffle.id === action.payload)
+    selectedRaffle: state.raffles.find(raffle => raffle.id === action.payload),
   };
 }
 
 function onUnSelectRaffle(state: ApplicationState): ApplicationState {
   return {
     ...state,
-    selectedRaffle: undefined
+    selectedRaffle: undefined,
   };
 }
 
-export function rafflesReducer(state = initialState, action: IAction<any>): ApplicationState {
+export function rafflesReducer(
+  state = initialState,
+  action: IAction<any>
+): ApplicationState {
   switch (action.type) {
     case actions.FETCH_RAFFLES_SUCCEEDED:
       return onFetchRafflesSucceeded(state, action);

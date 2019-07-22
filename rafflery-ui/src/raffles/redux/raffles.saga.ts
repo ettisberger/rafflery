@@ -9,7 +9,5 @@ export function* fetchRafflesSaga() {
 }
 
 export default function* rafflesSaga() {
-  yield all([
-    takeEvery(actions.FETCH_RAFFLES_REQUESTED, fetchRafflesSaga)
-  ]);
+  yield all([takeEvery(actions.FETCH_RAFFLES_REQUESTED, fetchRafflesSaga)]);
 }

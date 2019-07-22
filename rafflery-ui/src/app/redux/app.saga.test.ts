@@ -6,18 +6,14 @@ import { fetchUiConfigSucceeded } from './app.actions';
 import { call } from 'redux-saga/effects';
 
 describe('App saga', () => {
-
   const mockUiConfig: UiConfig = {
-    environment: 'dev'
+    environment: 'dev',
   };
 
   it('should fetch ui config', () => {
     return expectSaga(fetchUiConfigSaga)
-      .provide([
-        [call(fetchUiConfig), mockUiConfig]
-      ])
+      .provide([[call(fetchUiConfig), mockUiConfig]])
       .put(fetchUiConfigSucceeded(mockUiConfig))
       .run();
   });
-
 });

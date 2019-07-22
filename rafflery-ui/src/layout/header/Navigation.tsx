@@ -11,21 +11,21 @@ const Navigation: React.FC<NavigationProps> = ({ environment, user }) => {
   return (
     <nav className="navigation">
       <ul>
-        <li><Link to="">Home</Link></li>
-        {
-          environment === 'prod' &&
-          <li><Link to="login">Login</Link></li>
-        }
-        {
-          environment === 'dev' &&
-          <li><Link to="impersonation">Impersonation</Link></li>
-        }
+        <li>
+          <Link to="">Home</Link>
+        </li>
+        {environment === 'prod' && (
+          <li>
+            <Link to="login">Login</Link>
+          </li>
+        )}
+        {environment === 'dev' && (
+          <li>
+            <Link to="impersonation">Impersonation</Link>
+          </li>
+        )}
         <li>Raffles</li>
-        {
-          user && user !== 'Guest' &&
-          <li>Logged in as {user}</li>
-        }
-
+        {user && user !== 'Guest' && <li>Logged in as {user}</li>}
       </ul>
     </nav>
   );

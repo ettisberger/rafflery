@@ -1,11 +1,10 @@
-import { render, fireEvent, RenderResult } from "@testing-library/react";
-import Impersonation, { ImpersonationProps } from "./Impersonation";
-import * as React from "react";
-import { hmacAuth } from "../../auth/HmacAuth";
-import '@testing-library/react/cleanup-after-each'
+import { render, fireEvent, RenderResult } from '@testing-library/react';
+import Impersonation, { ImpersonationProps } from './Impersonation';
+import * as React from 'react';
+import { hmacAuth } from '../../auth/HmacAuth';
+import '@testing-library/react/cleanup-after-each';
 
 describe('Impersonation Component', () => {
-
   hmacAuth.setToken = jest.fn();
   hmacAuth.clearToken = jest.fn();
 
@@ -20,7 +19,7 @@ describe('Impersonation Component', () => {
     let component: RenderResult;
 
     beforeEach(() => {
-      component = render(<Impersonation {...defaultProps}/>);
+      component = render(<Impersonation {...defaultProps} />);
     });
 
     it('should impersonate "Andy" when clicked', () => {

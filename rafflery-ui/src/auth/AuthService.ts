@@ -5,7 +5,6 @@ import history from '../history/History';
  * Authentication service
  */
 class AuthService {
-
   private auth0: WebAuth;
 
   constructor() {
@@ -42,28 +41,37 @@ class AuthService {
    * https://auth0.com/docs/cross-origin-authentication#limitations-of-cross-origin-authentication
    */
   public login(username: string, password: string) {
-    return new Promise((resolve, reject) => this.auth0.login({
-      realm: 'Username-Password-Authentication',
-      username,
-      password,
-    }, (err: any, authResult) => {
-      this.handleAuthResult(authResult, err);
-    }));
+    return new Promise((resolve, reject) =>
+      this.auth0.login(
+        {
+          realm: 'Username-Password-Authentication',
+          username,
+          password,
+        },
+        (err: any, authResult) => {
+          this.handleAuthResult(authResult, err);
+        }
+      )
+    );
   }
 
   public signup(email: string, password: string) {
     return new Promise((resolve, reject) =>
-      this.auth0.signup({
-        connection: 'Username-Password-Authentication',
-        email,
-        password,
-      }, (err: any) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve();
+      this.auth0.signup(
+        {
+          connection: 'Username-Password-Authentication',
+          email,
+          password,
+        },
+        (err: any) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
         }
-      }));
+      )
+    );
   }
 
   public handleAuthentication(): void {

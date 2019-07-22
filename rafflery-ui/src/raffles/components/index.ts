@@ -14,4 +14,7 @@ const mapDispatchToProps = {
   unselectRaffle: actions.unselectRaffle,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Raffles);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Raffles);

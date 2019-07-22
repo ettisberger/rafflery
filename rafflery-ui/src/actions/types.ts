@@ -6,19 +6,19 @@ export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 
 export interface AuthState {
-    isAuthenticating: boolean;
-    isLoggedIn: boolean;
-    name: string;
+  isAuthenticating: boolean;
+  isLoggedIn: boolean;
+  name: string;
 }
 
 interface LoggedInAction {
-    type: typeof LOGGED_IN;
-    name: string;
+  type: typeof LOGGED_IN;
+  name: string;
 }
 
 export interface IAction<P> {
-    type: string;
-    payload: P;
+  type: string;
+  payload: P;
 }
 
 export type LoginActionTypes = LoggedInAction;

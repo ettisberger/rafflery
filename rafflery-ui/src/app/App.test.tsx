@@ -3,22 +3,19 @@ import App, { AppProps } from './App';
 import { hmacAuth } from '../auth/HmacAuth';
 import { render } from '@testing-library/react';
 import { http } from '../http/http';
-import '@testing-library/react/cleanup-after-each'
+import '@testing-library/react/cleanup-after-each';
 
 jest.mock('../http/http');
 jest.mock('../pages/home/Home');
 jest.mock('../pages/login/Login');
 
-const {
-  get
-} = http as jest.Mocked<typeof http>;
+const { get } = http as jest.Mocked<typeof http>;
 
 describe('App', () => {
-
   const props: AppProps = {
     environment: '',
     loggedIn: jest.fn(),
-    fetchEnvironment: jest.fn()
+    fetchEnvironment: jest.fn(),
   };
 
   get.mockResolvedValue({ environment: 'test' });
@@ -36,5 +33,4 @@ describe('App', () => {
 
     expect(props.fetchEnvironment).toHaveBeenCalled();
   });
-
 });

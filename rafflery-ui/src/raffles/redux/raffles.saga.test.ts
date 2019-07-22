@@ -6,14 +6,10 @@ import { fetchRafflesSucceeded } from './raffles.actions';
 import { someRaffles } from '../raffles.testData';
 
 describe('raffles saga', () => {
-
   it('should fetch raffles', () => {
     return expectSaga(fetchRafflesSaga)
-      .provide([
-        [call(fetchRaffles), someRaffles]
-      ])
+      .provide([[call(fetchRaffles), someRaffles]])
       .put(fetchRafflesSucceeded(someRaffles))
       .run();
   });
-
 });

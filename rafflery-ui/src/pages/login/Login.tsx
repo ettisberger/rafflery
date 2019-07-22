@@ -44,13 +44,12 @@ class Login extends Component<AuthProps, AuthState> {
   }
 
   public render() {
-
     const isAuthenticated = auth0Service.authenticated.toString();
 
     return (
       <div className="login">
         <h2>Login</h2>
-        <br/>
+        <br />
         <LoginForm
           handleLogin={(values: any) => {
             this.login(values.username, values.password);
@@ -60,9 +59,9 @@ class Login extends Component<AuthProps, AuthState> {
           }}
           handleLogout={() => auth0Service.logout()}
         />
-        <br/>
+        <br />
         <span>Authenticated: {isAuthenticated}</span>
-        <br/>
+        <br />
         <span>Email: {this.state.userProfile.email}</span>
       </div>
     );
@@ -81,4 +80,7 @@ class Login extends Component<AuthProps, AuthState> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);

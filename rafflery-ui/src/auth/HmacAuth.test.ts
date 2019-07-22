@@ -1,7 +1,6 @@
-import { hmacAuth } from "./HmacAuth";
+import { hmacAuth } from './HmacAuth';
 
 describe('Hmac Auth', () => {
-
   afterEach(() => localStorage.clear());
 
   describe('when user "Andy" is selected', () => {
