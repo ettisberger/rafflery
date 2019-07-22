@@ -1,6 +1,5 @@
 package ch.rafflery.plugins
 
-import ch.rafflery.domain.raffle.Raffle
 import ch.rafflery.domain.raffle.RaffleResult
 import ch.rafflery.infrastructure.Config
 import io.ktor.client.HttpClient
@@ -16,8 +15,8 @@ open class Raffler {
     private val RANDOM_ORG_API_URL = Config.rafflerConfig.rafflerApi
     private val RANDOM_ORG_API_KEY = Config.rafflerConfig.rafflerApiKey
 
-    open suspend fun draw(raffle: Raffle): RaffleResult? {
-        val requestJson = createRequestJson(raffle)
+    open suspend fun draw(id: Int, maxSlots: Int): RaffleResult? {
+        val requestJson = createRequestJson(id, maxSlots)
 
         val responseJson = request(requestJson)
 
@@ -26,7 +25,11 @@ open class Raffler {
         val randomResultData = (randomResult.get("random") as JSONObject).get("data") as JSONArray
         val signature = randomResult.get("signature")
 
-        return RaffleResult(raffleId.toString(), signature.toString(), (randomResultData[0] as Long).toInt())
+        return RaffleResult(
+            raffleId.toString(),
+            signature.toString(),
+            (randomResultData[0] as Long).toInt()
+        )
     }
 
     open suspend fun request(requestJson: JSONObject): JSONObject {
@@ -41,7 +44,7 @@ open class Raffler {
         return response
     }
 
-    private fun createRequestJson(raffle: Raffle): JSONObject {
+    private fun createRequestJson(id: Int, maxSlots: Int): JSONObject {
         val raffleJson = JSONObject()
         raffleJson.put("jsonrpc", "2.0")
         raffleJson.put("method", "generateSignedIntegers")
@@ -50,11 +53,11 @@ open class Raffler {
         params.put("apiKey", RANDOM_ORG_API_KEY)
         params.put("n", 1)
         params.put("min", 1)
-        params.put("max", raffle.slotSize)
+        params.put("max", maxSlots)
         params.put("replacement", false)
 
         raffleJson.put("params", params)
-        raffleJson.put("id", raffle.id)
+        raffleJson.put("id", id)
 
         return raffleJson
     }

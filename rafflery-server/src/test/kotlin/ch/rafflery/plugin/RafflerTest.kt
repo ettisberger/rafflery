@@ -1,8 +1,6 @@
 package ch.rafflery.plugin
 
 import ch.rafflery.assertions.shouldBe
-import ch.rafflery.domain.prize.PrizeItem
-import ch.rafflery.domain.raffle.Raffle
 import ch.rafflery.plugins.Raffler
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
@@ -15,12 +13,9 @@ internal class RafflerTest {
 
     @Test
     fun `can raffle a result`() {
-        val raffle =
-            Raffle("TestRaffle", PrizeItem("TestItem", 1000), 50, listOf(), "tester", "1337")
-
         runBlocking {
             val result = async {
-                raffler.draw(raffle)
+                raffler.draw(1337, 50)
             }
 
             var raffleResult = result.await()
