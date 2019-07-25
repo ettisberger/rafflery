@@ -48,7 +48,7 @@ describe('Raffles Component', () => {
     const props = { ...defaultProps, selectedRaffle: someRaffles[0] };
     const component = render(<Raffles {...props} />);
 
-    const raffleSlotContainer = component.queryByTestId('raffle-detail-slots');
+    const raffleSlotContainer = component.queryByTestId('raffle-slots');
 
     expect(raffleSlotContainer!!.children.length).toBe(someRaffles[0].slotSize);
   });

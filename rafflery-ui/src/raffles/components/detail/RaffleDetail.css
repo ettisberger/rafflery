@@ -11,10 +11,10 @@
 }
 
 .raffle-detail {
-  background-color: var(--primaryColor);
-  color: white;
+  background-color: var(--lightGreyColor);
+  color: var(--primaryColor);
   animation: grow .5s ease-out;
-  width: 50%;
+  width: 80%;
   margin: 0 auto;
   padding: 20px;
   display: flex;
@@ -25,15 +25,6 @@
 
 .raffle-detail h2 {
   font-size: 2em;
-}
-
-.raffle-detail__slots {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
 }
 
 .raffle-detail__actions {

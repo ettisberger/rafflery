@@ -25,7 +25,7 @@ const RaffleTile: React.FC<RaffleTileProps> = ({
       <div
         data-testid="raffle-item"
         className="content"
-        style={{ backgroundColor: color }}
+        style={{ borderColor: color }}
         onClick={onSelect}
       >
         <div className="title">{raffle.name}</div>

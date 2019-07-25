@@ -2,11 +2,18 @@ import React from 'react';
 import './RaffleSlot.css';
 
 export interface RaffleSlotProps {
-  raffleSlot: number;
+  slot: number;
+  sold: boolean;
 }
 
-export const RaffleSlot: React.FC<RaffleSlotProps> = ({ raffleSlot }) => (
-  <div className="slot" data-testid="slot">
-    <div className="slot__number">{raffleSlot}</div>
-  </div>
-);
+export const RaffleSlot: React.FC<RaffleSlotProps> = ({ slot, sold }) => {
+  return (
+    <div
+      className={`slot ${sold ? 'sold' : ''}`}
+      unselectable={sold ? 'on' : 'off'}
+      data-testid="slot"
+    >
+      <div className="slot__number">{slot}</div>
+    </div>
+  );
+};

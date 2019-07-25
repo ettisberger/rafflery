@@ -10,6 +10,23 @@
   flex-direction: row;
   justify-content: center;
   cursor: grab;
+  border-radius: 50%;
+}
+
+.slot.sold {
+  background-color: var(--purpleColor);
+  color: white;
+}
+
+.slot.sold:hover {
+  background-color: var(--purpleColor);
+  color: white;
+  cursor: default;
+}
+
+.slot:hover {
+  background-color: var(--primaryColor);
+  color: white;
 }
 
 .slot__number {

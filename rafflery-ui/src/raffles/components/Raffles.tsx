@@ -26,7 +26,7 @@ export class Raffles extends React.Component<RafflesProps> {
 
     return (
       <div>
-        <div className="raffleList">
+        <div className="raffle-list">
           {this.props.raffles.map((raffle, i) => (
             <RaffleTile
               hidden={isHidden(raffle)}
