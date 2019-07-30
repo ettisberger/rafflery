@@ -7,21 +7,88 @@ export interface RaffleSlotsProps {
   soldSlots: number[];
 }
 
-export const RaffleSlots: React.FC<RaffleSlotsProps> = ({
-  maxSlots,
-  soldSlots,
-}) => {
-  const slots = [];
+export interface RaffleSlotsState {
+  slots: RaffleSlotItem[];
+}
 
-  for (let i = 0; i < maxSlots; i++) {
-    slots.push(
-      <RaffleSlot sold={soldSlots.includes(i)} slot={i + 1} key={i + 1} />
-    );
+enum RaffleSlotState {
+  SELECTED,
+  SOLD,
+  FREE,
+}
+
+class RaffleSlotItem {
+  public slot: number;
+  public status: RaffleSlotState;
+
+  constructor(slot: number, status: RaffleSlotState) {
+    this.slot = slot;
+    this.status = status;
   }
 
-  return (
-    <div className="raffle-slots" data-testid="raffle-slots">
-      {slots}
-    </div>
-  );
-};
+  public isSelected = () => {
+    return this.status === RaffleSlotState.SELECTED;
+  };
+
+  public isSold = () => {
+    return this.status === RaffleSlotState.SOLD;
+  };
+
+  public isFree = () => {
+    return this.status === RaffleSlotState.FREE;
+  };
+}
+
+export class RaffleSlots extends React.Component<
+  RaffleSlotsProps,
+  RaffleSlotsState
+> {
+  constructor(props: any) {
+    super(props);
+
+    this.state = { slots: [] };
+  }
+
+  componentDidMount() {
+    const slots: RaffleSlotItem[] = [];
+
+    for (let i = 0; i < this.props.maxSlots; i++) {
+      if (this.props.soldSlots.includes(i)) {
+        slots[i] = new RaffleSlotItem(i + 1, RaffleSlotState.SOLD);
+      } else {
+        slots[i] = new RaffleSlotItem(i + 1, RaffleSlotState.FREE);
+      }
+    }
+    this.setState({ slots });
+  }
+
+  onSelect = (raffleSlot: RaffleSlotItem) => {
+    const slots = this.state.slots;
+
+    if (raffleSlot.isSelected()) {
+      raffleSlot.status = RaffleSlotState.FREE;
+    } else if (raffleSlot.isFree()) {
+      raffleSlot.status = RaffleSlotState.SELECTED;
+    }
+
+    slots[raffleSlot.slot - 1] = raffleSlot;
+
+    this.setState({ slots });
+  };
+
+  render() {
+    return (
+      <div className="raffle-slots" data-testid="raffle-slots">
+        {this.state.slots.map(raffleSlot => (
+          <RaffleSlot
+            sold={raffleSlot.isSold()}
+            selected={raffleSlot.isSelected()}
+            slot={raffleSlot.slot}
+            key={raffleSlot.slot}
+            onSelect={() => this.onSelect(raffleSlot)}
+          />
+        ))}
+      </div>
+    );
+  }
+}

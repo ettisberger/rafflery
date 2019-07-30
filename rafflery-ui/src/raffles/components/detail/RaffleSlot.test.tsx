@@ -6,7 +6,9 @@ import '@testing-library/jest-dom/extend-expect';
 describe('Raffle Slot', () => {
   const defaultProps: RaffleSlotProps = {
     slot: 1,
+    selected: false,
     sold: false,
+    onSelect: jest.fn(),
   };
 
   afterEach(cleanup);
@@ -23,5 +25,13 @@ describe('Raffle Slot', () => {
 
     expect(component.getByText('1')).toBeDefined();
     expect(component.getByTestId('slot')).toHaveClass('sold');
+  });
+
+  it('clicked slot should be marked', () => {
+    const props = { ...defaultProps, selected: true };
+    const component = render(<RaffleSlot {...props} />);
+
+    expect(component.getByText('1')).toBeDefined();
+    expect(component.getByTestId('slot')).toHaveClass('selected');
   });
 });

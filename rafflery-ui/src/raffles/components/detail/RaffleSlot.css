@@ -18,6 +18,11 @@
   color: white;
 }
 
+.slot.selected {
+  background-color: var(--pinkColor);
+  color: white;
+}
+
 .slot.sold:hover {
   background-color: var(--purpleColor);
   color: white;
