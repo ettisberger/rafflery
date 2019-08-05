@@ -27,7 +27,32 @@
   font-size: 2em;
 }
 
-.raffle-detail__actions {
+.raffle-detail-boxes {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.raffle-detail-box {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  padding: 2rem;
+  background-color: var(--primaryColor);
+  color: var(--lightGreyColor);
+  margin: 3rem 1rem;
+}
+
+.raffle-detail-box__title {
+  font-size: 2.5rem;
+  margin-bottom: 5px;
+}
+
+.raffle-detail-box__description {
+  font-size: 1rem;
+}
+
+.raffle-detail-actions {
     display: flex;
     flex-direction: row;
 }
