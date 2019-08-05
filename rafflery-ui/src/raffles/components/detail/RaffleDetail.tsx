@@ -34,27 +34,30 @@ export class RaffleDetail extends React.Component<
       <div className="raffle-detail" data-testid="raffle-detail">
         <h2>Purchase a slot for {raffle.name}</h2>
         <div className="raffle-detail-boxes">
-          <div className="raffle-detail-box">
+          <div className="raffle-detail-box" data-testid="raffle-detail-box">
             <div className="raffle-detail-box__title">{raffle.slotSize}</div>
             <div className="raffle-detail-box__description">SLOTS</div>
           </div>
-          <div className="raffle-detail-box">
+          <div className="raffle-detail-box" data-testid="raffle-detail-box">
             <div className="raffle-detail-box__title">{raffle.item.value}</div>
             <div className="raffle-detail-box__description">PRICE</div>
           </div>
-          <div className="raffle-detail-box">
+          <div className="raffle-detail-box" data-testid="raffle-detail-box">
             <div className="raffle-detail-box__title">
               {raffle.slotSize - raffle.purchasedTickets.length}
             </div>
             <div className="raffle-detail-box__description">SLOTS LEFT</div>
           </div>
-          <div className="raffle-detail-box">
+          <div className="raffle-detail-box" data-testid="raffle-detail-box">
             <div className="raffle-detail-box__title">
               {raffle.purchasedTickets.length}
             </div>
             <div className="raffle-detail-box__description">SLOTS SOLD</div>
           </div>
-          <div className="raffle-detail-box raffle-detail-box--buyer">
+          <div
+            className="raffle-detail-box raffle-detail-box--buyer"
+            data-testid="raffle-detail-box"
+          >
             <div className="raffle-detail-box__title">
               {this.state.currentSlots * price}
             </div>

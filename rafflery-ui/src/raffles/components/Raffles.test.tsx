@@ -1,7 +1,7 @@
 import React from 'react';
 import { Raffles, RafflesProps } from './Raffles';
 import { someRaffles } from '../raffles.testData';
-import { render, fireEvent, cleanup } from '@testing-library/react';
+import { cleanup, fireEvent, render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
 describe('Raffles Component', () => {
@@ -35,13 +35,19 @@ describe('Raffles Component', () => {
     expect(defaultProps.selectRaffle).toHaveBeenCalledWith(someRaffles[0].id);
   });
 
-  it('should display slot purchase option of raffle when selected', () => {
+  it('should display detail information for raffle when selected', () => {
     const props = { ...defaultProps, selectedRaffle: someRaffles[0] };
     const component = render(<Raffles {...props} />);
 
     const slotPurchase = component.queryByTestId('raffle-detail');
+    const detailBoxes = component.getAllByTestId('raffle-detail-box');
     expect(slotPurchase).toBeTruthy();
     expect(component.queryByText(`Purchase a slot for ${someRaffles[0].name}`));
+    expect(detailBoxes.length).toBe(5);
+    expect(detailBoxes[0]).toHaveTextContent(`${someRaffles[0].slotSize}SLOTS`);
+    expect(detailBoxes[1]).toHaveTextContent(
+      `${someRaffles[0].item.value}PRICE`
+    );
   });
 
   it('should display slot items when raffle details are shown', () => {
