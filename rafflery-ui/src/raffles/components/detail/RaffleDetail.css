@@ -30,7 +30,7 @@
 .raffle-detail-boxes {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .raffle-detail-box {
@@ -41,6 +41,10 @@
   background-color: var(--primaryColor);
   color: var(--lightGreyColor);
   margin: 3rem 1rem;
+}
+
+.raffle-detail-box--buyer {
+  background-color: var(--pinkColor);
 }
 
 .raffle-detail-box__title {
