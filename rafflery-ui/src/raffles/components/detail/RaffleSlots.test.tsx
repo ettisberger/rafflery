@@ -7,6 +7,7 @@ describe('Raffle Slot', () => {
   const defaultProps: RaffleSlotsProps = {
     maxSlots: 10,
     soldSlots: [5, 6],
+    onSlotChange: jest.fn(),
   };
 
   afterEach(cleanup);
