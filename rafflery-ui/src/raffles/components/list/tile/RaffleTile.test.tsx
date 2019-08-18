@@ -22,17 +22,17 @@ describe('Raffle Tile', () => {
     const numberOfSlots = raffle.item.value / raffle.slotSize;
 
     expect(component.getByText(aRaffle.name)).toBeDefined();
+
     expect(
-      component.getByText(`SLOT SIZE ${aRaffle.slotSize.toLocaleString()}`)
-    ).toBeDefined();
+      component.getByTestId('raffle-detail-slot-size').innerHTML
+    ).toBe(`CHF ${aRaffle.slotSize.toLocaleString()}.00`);
+
     expect(
-      component.getByText(`VALUE CHF ${aRaffle.item.value.toLocaleString()}`)
-    ).toBeDefined();
+      component.getByTestId('raffle-detail-total-value').innerHTML
+    ).toBe(`CHF ${aRaffle.item.value.toLocaleString()}.00`);
+
     expect(
-      component.getByText(`created by ${aRaffle.createdBy}`)
-    ).toBeDefined();
-    expect(
-      component.getByText(`${numberOfPurchasesSlots} / ${numberOfSlots} sold`)
-    );
+      component.getByTestId('raffle-detail-sold-slots').innerHTML
+    ).toBe(`${numberOfPurchasesSlots} / ${numberOfSlots}`);
   });
 });

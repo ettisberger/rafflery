@@ -21,7 +21,7 @@ describe('Raffles Component', () => {
   it('should only display list of raffles when no raffle is selected', () => {
     const component = render(<Raffles {...defaultProps} />);
 
-    const raffleTiles = component.getAllByTestId('raffle-item');
+    const raffleTiles = component.getAllByTestId('raffle-tile');
     expect(raffleTiles.length).toBe(someRaffles.length);
     expect(component.queryByTestId('raffle-detail')).toBeFalsy();
     raffleTiles.forEach(tile => expect(tile).not.toHaveClass('hidden'));
@@ -30,7 +30,7 @@ describe('Raffles Component', () => {
   it('should go to /raffles/:id when a raffle is selected', () => {
     const component = render(<Raffles {...defaultProps} />);
 
-    const raffles = component.getAllByTestId('raffle-item');
+    const raffles = component.getAllByTestId('raffle-tile');
     const raffleTileToSelect = raffles[0];
 
     fireEvent.click(raffleTileToSelect);

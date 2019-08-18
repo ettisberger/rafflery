@@ -10,40 +10,57 @@ export interface RaffleTileProps {
 }
 
 const RaffleTile: React.FC<RaffleTileProps> = ({
-  raffle,
-  color,
-  hidden,
-  onSelect,
-}) => {
+                                                 raffle,
+                                                 color,
+                                                 hidden,
+                                                 onSelect,
+                                               }) => {
   const numberOfSlots = raffle.item.value / raffle.slotSize;
+
+  const getImageSrc = (raffle: Raffle): string => {
+    switch (raffle.name) {
+      case 'Rolex GMT Master II':
+        return './images/rolex.jpeg';
+      case 'Sofa Vitra':
+        return './images/sofavitra.jpeg';
+      case 'ASUS Mainboard GTX403':
+        return './images/mainboard.jpeg';
+      default:
+        return './images/panda.jpeg';
+    }
+  };
 
   return (
     <div
       className={`raffle-tile ${hidden ? 'hidden' : ''}`}
       data-testid="raffle-tile"
+      onClick={onSelect}
     >
-      <div
-        data-testid="raffle-item"
-        className="content"
-        style={{ borderColor: color }}
-        onClick={onSelect}
-      >
-        <div className="title">{raffle.name}</div>
-        <div className="raffle-info">
-          SLOT SIZE {raffle.slotSize.toLocaleString()}
+      <div className="product-image">
+        <img alt="product" src={getImageSrc(raffle)}/>
+      </div>
+      <div className="title">{raffle.name}</div>
+      <div className="raffle-details">
+        <div>Total value</div>
+        <div
+          data-testid="raffle-detail-total-value"
+        >
+          CHF {raffle.item.value.toLocaleString()}.00
         </div>
-        <div className="raffle-info">
-          VALUE CHF {raffle.item.value.toLocaleString()}
+
+        <div>Slot size</div>
+        <div
+          data-testid="raffle-detail-slot-size"
+        >
+          CHF {raffle.slotSize.toLocaleString()}.00
         </div>
-        <div className="raffle-info">
-          {raffle.purchasedTickets.length} / {numberOfSlots} sold
+
+        <div>Sold</div>
+        <div
+          data-testid="raffle-detail-sold-slots"
+        >
+          {raffle.purchasedTickets.length} / {numberOfSlots}
         </div>
-        {raffle.purchasedTickets.map(ticket => (
-          <div key={ticket.slot}>
-            {ticket.owner} / {ticket.slot}
-          </div>
-        ))}
-        <div className="raffle-info">created by {raffle.createdBy}</div>
       </div>
     </div>
   );
