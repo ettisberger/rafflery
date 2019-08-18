@@ -10,10 +10,7 @@ describe('Raffles Component', () => {
     history: {
       push: jest.fn()
     },
-    selectedRaffle: undefined,
     fetchRaffles: jest.fn(),
-    selectRaffle: jest.fn(),
-    unselectRaffle: jest.fn(),
   };
 
   afterEach(cleanup);

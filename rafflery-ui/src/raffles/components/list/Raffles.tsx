@@ -5,10 +5,7 @@ import { Raffle } from '../../../types/Types';
 
 export interface RafflesProps {
   raffles: Raffle[];
-  selectedRaffle?: Raffle;
   fetchRaffles: (...args: any) => any;
-  selectRaffle: (...args: any) => any;
-  unselectRaffle: (...args: any) => any;
   history: any;
 }
 
@@ -19,22 +16,17 @@ export class Raffles extends React.Component<RafflesProps> {
     this.props.fetchRaffles();
   }
 
-  goToDetail(raffle: Raffle) {
+  selectRaffle(raffle: Raffle) {
     this.props.history.push(`/raffles/${raffle.id}`);
   }
 
   render() {
-    const selectedRaffle = this.props.selectedRaffle;
-    const isHidden = (raffle: Raffle) =>
-      !!(selectedRaffle && selectedRaffle.id !== raffle.id);
-
     return (
       <div>
         <div className="raffle-list">
           {this.props.raffles.map((raffle, i) => (
             <RaffleTile
-              hidden={isHidden(raffle)}
-              onSelect={() => this.goToDetail(raffle)}
+              onSelect={() => this.selectRaffle(raffle)}
               raffle={raffle}
               key={raffle.id}
               color={colors[i % colors.length]}

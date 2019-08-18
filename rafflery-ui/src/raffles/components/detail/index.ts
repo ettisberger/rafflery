@@ -11,7 +11,8 @@ const mapStateToProps = (
 });
 
 const mapDispatchToProps = {
-  fetchRaffles: actions.fetchRaffles
+  fetchRaffles: actions.fetchRaffles,
+  purchaseSlots: actions.purchaseSlots
 };
 
 export default connect(

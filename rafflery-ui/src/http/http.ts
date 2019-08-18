@@ -5,6 +5,12 @@ export const http = {
     const response = await axios.get(path, authConfig());
     return (response || {}).data;
   },
+
+  async put(path: string, data: any) {
+    const response = await axios.put(path, data, authConfig());
+    return (response || {}).data;
+  },
+
 };
 
 function authConfig() {

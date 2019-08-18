@@ -5,16 +5,10 @@ import { Raffle } from '../../../../types/Types';
 export interface RaffleTileProps {
   raffle: Raffle;
   color: string;
-  hidden: boolean;
   onSelect: () => void;
 }
 
-const RaffleTile: React.FC<RaffleTileProps> = ({
-                                                 raffle,
-                                                 color,
-                                                 hidden,
-                                                 onSelect,
-                                               }) => {
+const RaffleTile: React.FC<RaffleTileProps> = ({ raffle, color, onSelect, }) => {
   const numberOfSlots = raffle.item.value / raffle.slotSize;
 
   const getImageSrc = (raffle: Raffle): string => {
@@ -32,7 +26,7 @@ const RaffleTile: React.FC<RaffleTileProps> = ({
 
   return (
     <div
-      className={`raffle-tile ${hidden ? 'hidden' : ''}`}
+      className="raffle-tile"
       data-testid="raffle-tile"
       onClick={onSelect}
     >

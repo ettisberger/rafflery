@@ -9,14 +9,11 @@ const mapStateToProps = (
   ownProps: any
 ) => ({
   raffles: state.raffles,
-  selectedRaffle: state.selectedRaffle && state.selectedRaffle,
   history: ownProps.history
 });
 
 const mapDispatchToProps = {
   fetchRaffles: actions.fetchRaffles,
-  selectRaffle: actions.selectRaffle,
-  unselectRaffle: actions.unselectRaffle,
 };
 
 export default withRouter(connect(

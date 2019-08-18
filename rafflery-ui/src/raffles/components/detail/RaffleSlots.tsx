@@ -5,7 +5,7 @@ import './RaffleSlots.css';
 export interface RaffleSlotsProps {
   maxSlots: number;
   soldSlots: number[];
-  onSlotChange: any;
+  onSlotChange: (slots: number[]) => void;
 }
 
 export interface RaffleSlotsState {
@@ -18,7 +18,7 @@ enum RaffleSlotState {
   FREE,
 }
 
-class RaffleSlotItem {
+export class RaffleSlotItem {
   public slot: number;
   public status: RaffleSlotState;
 
@@ -40,10 +40,8 @@ class RaffleSlotItem {
   };
 }
 
-export class RaffleSlots extends React.Component<
-  RaffleSlotsProps,
-  RaffleSlotsState
-> {
+export class RaffleSlots extends React.Component<RaffleSlotsProps,
+  RaffleSlotsState> {
   constructor(props: any) {
     super(props);
 
@@ -76,7 +74,11 @@ export class RaffleSlots extends React.Component<
 
     this.setState({ slots });
 
-    this.props.onSlotChange(slots.filter(slot => slot.isSelected()).length);
+    this.props.onSlotChange(
+      slots
+        .filter(slot => slot.isSelected())
+        .map(slot => slot.slot)
+    );
   };
 
   render() {
