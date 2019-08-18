@@ -5,21 +5,22 @@ import { RaffleSlots } from './RaffleSlots';
 
 export interface RaffleDetailProps {
   raffle: Raffle;
-  onCancel: () => void;
+  fetchRaffles: (...args: any) => any;
 }
 
 export interface RaffleDetailState {
   currentSlots: number;
 }
 
-export class RaffleDetail extends React.Component<
-  RaffleDetailProps,
-  RaffleDetailState
-> {
+export class RaffleDetail extends React.Component<RaffleDetailProps, RaffleDetailState> {
   constructor(props: any) {
     super(props);
 
     this.state = { currentSlots: 0 };
+  }
+
+  componentDidMount() {
+    this.props.fetchRaffles();
   }
 
   public onSlotChange = (currentSlots: number) => {
@@ -28,6 +29,11 @@ export class RaffleDetail extends React.Component<
 
   render() {
     const { raffle } = this.props;
+
+    if (!raffle) {
+      return <div />
+    }
+
     const price = raffle.item.value / raffle.slotSize;
 
     return (
@@ -71,7 +77,6 @@ export class RaffleDetail extends React.Component<
         />
         <div className="raffle-detail-actions">
           <button>Purchase</button>
-          <button onClick={this.props.onCancel}>Cancel</button>
         </div>
       </div>
     );

@@ -1,6 +1,6 @@
 import { cleanup, render } from '@testing-library/react';
 import RaffleTile, { RaffleTileProps } from './RaffleTile';
-import { aRaffle } from '../../raffles.testData';
+import { aRaffle } from '../../../raffles.testData';
 import * as React from 'react';
 
 describe('Raffle Tile', () => {

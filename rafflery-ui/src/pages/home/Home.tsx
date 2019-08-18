@@ -1,21 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Home.css';
 import SearchBar from '../../components/Searchbar';
-import Raffles from '../../raffles/components';
+import Raffles from '../../raffles/components/list';
 
-interface HomeState {
-  raffles: any;
-}
-
-class Home extends Component<{}, HomeState> {
-  render() {
-    return (
-      <div className="home">
-        <SearchBar />
-        <Raffles />
-      </div>
-    );
-  }
-}
+const Home: React.FC = () => (
+  <div className="home">
+    <SearchBar />
+    <Raffles />
+  </div>
+);
 
 export default Home;

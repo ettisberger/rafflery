@@ -3,12 +3,13 @@ import { Route, Router } from 'react-router-dom';
 import history from '../history/History';
 import './App.css';
 import Header from '../layout/header/Header';
-import Home from '../pages/home/Home';
 import Footer from '../layout/footer/Footer';
 import Login from '../pages/login/Login';
 import Callback from '../pages/login/Callback';
 import Impersonation from '../pages/impersonation';
 import { hmacAuth } from '../auth/HmacAuth';
+import RaffleDetail from '../raffles/components/detail';
+import Home from '../pages/home/Home';
 
 export interface AppProps {
   environment: string;
@@ -47,6 +48,12 @@ class App extends React.Component<AppProps> {
               exact={true}
               path="/impersonation"
               component={Impersonation}
+            />
+            <Route
+              name="raffleDetail"
+              exact={true}
+              path="/raffles/:id"
+              component={RaffleDetail}
             />
             <Footer />
           </main>

@@ -1,6 +1,6 @@
 import React from 'react';
 import './RaffleTile.css';
-import { Raffle } from '../../../types/Types';
+import { Raffle } from '../../../../types/Types';
 
 export interface RaffleTileProps {
   raffle: Raffle;
