@@ -6,7 +6,7 @@ import { http } from '../http/http';
 import '@testing-library/react/cleanup-after-each';
 
 jest.mock('../http/http');
-jest.mock('../pages/home/Home');
+jest.mock('../pages/home/Home', () => { 'div' });
 jest.mock('../pages/login/Login');
 
 const { get } = http as jest.Mocked<typeof http>;
@@ -16,6 +16,7 @@ describe('App', () => {
     environment: '',
     loggedIn: jest.fn(),
     fetchEnvironment: jest.fn(),
+    user: 'andy'
   };
 
   get.mockResolvedValue({ environment: 'test' });

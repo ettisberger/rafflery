@@ -1,0 +1,56 @@
+.raffle-tile {
+  display: flex;
+  margin: 25px;
+  justify-content: center;
+  white-space: nowrap;
+  cursor: pointer;
+  padding: 15px;
+  width: 265px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  background-color: var(--lightGreyColor);
+  transition: transform 0.1s ease-out;
+  border: 1px solid var(--greyColor);
+  border-radius: 5px;
+}
+
+.raffle-tile:hover {
+  transform: scale(1.1);
+}
+
+.raffle-tile .product-image {
+  text-align: center;
+}
+
+.raffle-tile .product-image img {
+  max-height: 150px;
+}
+
+.raffle-tile {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.raffle-tile .title {
+  color: black;
+  margin: 0.5em 0;
+  font-size: 1.2em;
+  letter-spacing: 0.05em;
+}
+
+.raffle-tile .raffle-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 15px;
+  grid-row-gap: 2px;
+  margin: 0 20px;
+}
+
+.raffle-tile .raffle-details div:nth-child(even) {
+  text-align: right;
+}
+
+.raffle-tile .raffle-details div:nth-child(odd) {
+  text-align: left;
+}

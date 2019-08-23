@@ -5,29 +5,40 @@ import { RaffleSlots } from './RaffleSlots';
 
 export interface RaffleDetailProps {
   raffle: Raffle;
-  onCancel: () => void;
+  fetchRaffles: () => void;
+  purchaseSlots: (raffle: Raffle, slots: number[]) => void;
 }
 
 export interface RaffleDetailState {
-  currentSlots: number;
+  currentSlots: number[];
 }
 
-export class RaffleDetail extends React.Component<
-  RaffleDetailProps,
-  RaffleDetailState
-> {
+export class RaffleDetail extends React.Component<RaffleDetailProps, RaffleDetailState> {
   constructor(props: any) {
     super(props);
-
-    this.state = { currentSlots: 0 };
+    console.log(this.props);
+    this.state = { currentSlots: [] };
   }
 
-  public onSlotChange = (currentSlots: number) => {
-    this.setState({ currentSlots });
+  componentDidMount() {
+    this.props.fetchRaffles();
+  }
+
+  onSlotChange = (slots: number[]) => {
+    this.setState({ currentSlots: slots });
+  };
+
+  purchaseSlots = () => {
+    this.props.purchaseSlots(this.props.raffle, this.state.currentSlots);
   };
 
   render() {
     const { raffle } = this.props;
+
+    if (!raffle) {
+      return <div />
+    }
+
     const price = raffle.item.value / raffle.slotSize;
 
     return (
@@ -39,8 +50,8 @@ export class RaffleDetail extends React.Component<
             <div className="raffle-detail-box__description">SLOTS</div>
           </div>
           <div className="raffle-detail-box" data-testid="raffle-detail-box">
-            <div className="raffle-detail-box__title">{raffle.item.value}</div>
-            <div className="raffle-detail-box__description">PRICE</div>
+            <div className="raffle-detail-box__title">{price}</div>
+            <div className="raffle-detail-box__description">PRICE CHF / SLOT</div>
           </div>
           <div className="raffle-detail-box" data-testid="raffle-detail-box">
             <div className="raffle-detail-box__title">
@@ -59,9 +70,9 @@ export class RaffleDetail extends React.Component<
             data-testid="raffle-detail-box"
           >
             <div className="raffle-detail-box__title">
-              {this.state.currentSlots * price}
+              {this.state.currentSlots.length * price}
             </div>
-            <div className="raffle-detail-box__description">CURRENT TOTAL</div>
+            <div className="raffle-detail-box__description">CURRENT TOTAL CHF</div>
           </div>
         </div>
         <RaffleSlots
@@ -70,8 +81,13 @@ export class RaffleDetail extends React.Component<
           onSlotChange={this.onSlotChange}
         />
         <div className="raffle-detail-actions">
-          <button>Purchase</button>
-          <button onClick={this.props.onCancel}>Cancel</button>
+          <button
+            data-testid="purchase-button"
+            disabled={this.state.currentSlots.length === 0}
+            onClick={this.purchaseSlots}
+          >
+            Purchase
+          </button>
         </div>
       </div>
     );

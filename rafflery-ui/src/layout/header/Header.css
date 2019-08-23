@@ -3,7 +3,8 @@
   justify-content: flex-start;
   align-items: flex-start;
   position: relative;
-  height: 700px;
+  /*height: 700px;*/
+  height: 200px;
   background-image: linear-gradient(var(--primaryColor), var(--primaryColor));
   margin-bottom: 2rem;
 }
