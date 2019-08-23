@@ -2,6 +2,7 @@ import React from 'react';
 import { Raffle } from '../../../types/Types';
 import './RaffleDetail.css';
 import { RaffleSlots } from './RaffleSlots';
+import { Box, Button, Carousel, Image } from 'grommet';
 
 export interface RaffleDetailProps {
   raffle: Raffle;
@@ -47,6 +48,16 @@ export class RaffleDetail extends React.Component<
     return (
       <div className="raffle-detail" data-testid="raffle-detail">
         <h2>Purchase a slot for {raffle.name}</h2>
+        <Box height="small" width="medium" overflow="hidden">
+          <Carousel fill>
+            <Image
+              fit="cover"
+              src="//v2.grommet.io/assets/Wilderpeople_Ricky.jpg"
+            />
+            <Image fit="cover" src="//v2.grommet.io/assets/IMG_4245.jpg" />
+            <Image fit="cover" src="//v2.grommet.io/assets/IMG_4210.jpg" />
+          </Carousel>
+        </Box>
         <div className="raffle-detail-boxes">
           <div className="raffle-detail-box" data-testid="raffle-detail-box">
             <div className="raffle-detail-box__title">{raffle.slotSize}</div>
@@ -88,13 +99,12 @@ export class RaffleDetail extends React.Component<
           onSlotChange={this.onSlotChange}
         />
         <div className="raffle-detail-actions">
-          <button
+          <Button
             data-testid="purchase-button"
+            label="Purchase"
             disabled={this.state.currentSlots.length === 0}
             onClick={this.purchaseSlots}
-          >
-            Purchase
-          </button>
+          />
         </div>
       </div>
     );

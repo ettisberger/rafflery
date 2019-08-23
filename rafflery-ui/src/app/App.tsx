@@ -10,6 +10,8 @@ import Impersonation from '../pages/impersonation';
 import { hmacAuth } from '../auth/HmacAuth';
 import RaffleDetail from '../raffles/components/detail';
 import Home from '../pages/home/Home';
+import { Grommet } from 'grommet';
+import { raffleryTheme } from '../layout/theme';
 
 export interface AppProps {
   environment: string;
@@ -32,7 +34,7 @@ class App extends React.Component<AppProps> {
   render() {
     return (
       <Router history={history}>
-        <div className="App">
+        <Grommet className="App" theme={raffleryTheme}>
           <Header environment={this.props.environment} user={this.props.user} />
           <main className="main">
             <Route name="home" exact={true} path="/" component={Home} />
@@ -57,7 +59,7 @@ class App extends React.Component<AppProps> {
             />
             <Footer />
           </main>
-        </div>
+        </Grommet>
       </Router>
     );
   }
