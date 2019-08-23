@@ -10,7 +10,7 @@ export const raffleryTheme = {
     },
     button: {
         border: {
-            radius: 0,
+            // radius: 0,
         },
     },
 }

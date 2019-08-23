@@ -48,14 +48,11 @@ export class RaffleDetail extends React.Component<
     return (
       <div className="raffle-detail" data-testid="raffle-detail">
         <h2>Purchase a slot for {raffle.name}</h2>
-        <Box height="small" width="medium" overflow="hidden">
-          <Carousel fill>
-            <Image
-              fit="cover"
-              src="//v2.grommet.io/assets/Wilderpeople_Ricky.jpg"
-            />
-            <Image fit="cover" src="//v2.grommet.io/assets/IMG_4245.jpg" />
-            <Image fit="cover" src="//v2.grommet.io/assets/IMG_4210.jpg" />
+        <Box height="medium" width="big" overflow="hidden">
+          <Carousel fill={true}>
+            <Image fit="cover" src="//placehold.jp/500x300.png" />
+            <Image fit="cover" src="//placehold.jp/500x300.png" />
+            <Image fit="cover" src="//placehold.jp/500x300.png" />
           </Carousel>
         </Box>
         <div className="raffle-detail-boxes">
