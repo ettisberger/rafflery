@@ -8,7 +8,7 @@ describe('Raffles Component', () => {
   const defaultProps: RafflesProps = {
     raffles: someRaffles,
     history: {
-      push: jest.fn()
+      push: jest.fn(),
     },
     fetchRaffles: jest.fn(),
   };
@@ -32,6 +32,8 @@ describe('Raffles Component', () => {
 
     fireEvent.click(raffleTileToSelect);
 
-    expect(defaultProps.history.push).toHaveBeenCalledWith(`/raffles/${someRaffles[0].id}`);
+    expect(defaultProps.history.push).toHaveBeenCalledWith(
+      `/raffles/${someRaffles[0].id}`
+    );
   });
 });

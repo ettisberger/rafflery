@@ -23,16 +23,16 @@ describe('Raffle Tile', () => {
 
     expect(component.getByText(aRaffle.name)).toBeDefined();
 
-    expect(
-      component.getByTestId('raffle-detail-slot-size').innerHTML
-    ).toBe(`CHF ${aRaffle.slotSize.toLocaleString()}.00`);
+    expect(component.getByTestId('raffle-detail-slot-size').innerHTML).toBe(
+      `CHF ${aRaffle.slotSize.toLocaleString()}.00`
+    );
 
-    expect(
-      component.getByTestId('raffle-detail-total-value').innerHTML
-    ).toBe(`CHF ${aRaffle.item.value.toLocaleString()}.00`);
+    expect(component.getByTestId('raffle-detail-total-value').innerHTML).toBe(
+      `CHF ${aRaffle.item.value.toLocaleString()}.00`
+    );
 
-    expect(
-      component.getByTestId('raffle-detail-sold-slots').innerHTML
-    ).toBe(`${numberOfPurchasesSlots} / ${numberOfSlots}`);
+    expect(component.getByTestId('raffle-detail-sold-slots').innerHTML).toBe(
+      `${numberOfPurchasesSlots} / ${numberOfSlots}`
+    );
   });
 });

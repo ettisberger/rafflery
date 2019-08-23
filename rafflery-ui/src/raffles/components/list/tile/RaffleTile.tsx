@@ -8,7 +8,7 @@ export interface RaffleTileProps {
   onSelect: () => void;
 }
 
-const RaffleTile: React.FC<RaffleTileProps> = ({ raffle, color, onSelect, }) => {
+const RaffleTile: React.FC<RaffleTileProps> = ({ raffle, color, onSelect }) => {
   const numberOfSlots = raffle.item.value / raffle.slotSize;
 
   const getImageSrc = (raffle: Raffle): string => {
@@ -25,34 +25,24 @@ const RaffleTile: React.FC<RaffleTileProps> = ({ raffle, color, onSelect, }) => 
   };
 
   return (
-    <div
-      className="raffle-tile"
-      data-testid="raffle-tile"
-      onClick={onSelect}
-    >
+    <div className="raffle-tile" data-testid="raffle-tile" onClick={onSelect}>
       <div className="product-image">
-        <img alt="product" src={getImageSrc(raffle)}/>
+        <img alt="product" src={getImageSrc(raffle)} />
       </div>
       <div className="title">{raffle.name}</div>
       <div className="raffle-details">
         <div>Total value</div>
-        <div
-          data-testid="raffle-detail-total-value"
-        >
+        <div data-testid="raffle-detail-total-value">
           CHF {raffle.item.value.toLocaleString()}.00
         </div>
 
         <div>Slot size</div>
-        <div
-          data-testid="raffle-detail-slot-size"
-        >
+        <div data-testid="raffle-detail-slot-size">
           CHF {raffle.slotSize.toLocaleString()}.00
         </div>
 
         <div>Sold</div>
-        <div
-          data-testid="raffle-detail-sold-slots"
-        >
+        <div data-testid="raffle-detail-sold-slots">
           {raffle.purchasedTickets.length} / {numberOfSlots}
         </div>
       </div>

@@ -13,7 +13,10 @@ export interface RaffleDetailState {
   currentSlots: number[];
 }
 
-export class RaffleDetail extends React.Component<RaffleDetailProps, RaffleDetailState> {
+export class RaffleDetail extends React.Component<
+  RaffleDetailProps,
+  RaffleDetailState
+> {
   constructor(props: any) {
     super(props);
     console.log(this.props);
@@ -36,7 +39,7 @@ export class RaffleDetail extends React.Component<RaffleDetailProps, RaffleDetai
     const { raffle } = this.props;
 
     if (!raffle) {
-      return <div />
+      return <div />;
     }
 
     const price = raffle.item.value / raffle.slotSize;
@@ -51,7 +54,9 @@ export class RaffleDetail extends React.Component<RaffleDetailProps, RaffleDetai
           </div>
           <div className="raffle-detail-box" data-testid="raffle-detail-box">
             <div className="raffle-detail-box__title">{price}</div>
-            <div className="raffle-detail-box__description">PRICE CHF / SLOT</div>
+            <div className="raffle-detail-box__description">
+              PRICE CHF / SLOT
+            </div>
           </div>
           <div className="raffle-detail-box" data-testid="raffle-detail-box">
             <div className="raffle-detail-box__title">
@@ -72,7 +77,9 @@ export class RaffleDetail extends React.Component<RaffleDetailProps, RaffleDetai
             <div className="raffle-detail-box__title">
               {this.state.currentSlots.length * price}
             </div>
-            <div className="raffle-detail-box__description">CURRENT TOTAL CHF</div>
+            <div className="raffle-detail-box__description">
+              CURRENT TOTAL CHF
+            </div>
           </div>
         </div>
         <RaffleSlots
