@@ -6,10 +6,7 @@ import io.ktor.application.call
 import io.ktor.auth.authenticate
 import io.ktor.auth.authentication
 import io.ktor.auth.jwt.JWTPrincipal
-import io.ktor.routing.Route
-import io.ktor.routing.get
-import io.ktor.routing.post
-import io.ktor.routing.route
+import io.ktor.routing.*
 
 abstract class SecureController : Controller() {
 
@@ -22,6 +19,10 @@ abstract class SecureController : Controller() {
                         invoke(call)
                     }
                     "POST" -> post {
+                        verify(call)
+                        invoke(call)
+                    }
+                    "PUT" -> put {
                         verify(call)
                         invoke(call)
                     }

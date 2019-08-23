@@ -20,7 +20,6 @@ export class RaffleDetail extends React.Component<
 > {
   constructor(props: any) {
     super(props);
-    console.log(this.props);
     this.state = { currentSlots: [] };
   }
 

@@ -78,5 +78,16 @@ abstract class ControllerTest {
         }
     }
 
+    protected fun TestApplicationEngine.putSecure(
+        path: String,
+        request: Any
+    ): TestApplicationCall {
+        return handleRequest(HttpMethod.Put, path) {
+            addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
+            setBody(mapper.writeValueAsString(request))
+            addHeader("Authorization", "Bearer ${getToken()}")
+        }
+    }
+
     private fun getToken() = JwtHmac256.makeToken(User("testUser"))
 }
