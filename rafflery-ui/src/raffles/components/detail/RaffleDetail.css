@@ -24,10 +24,12 @@
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
+  align-items: center;
   padding: 2rem;
   background-color: var(--primaryColor);
   color: var(--lightGreyColor);
   margin: 3rem 1rem;
+  line-height: 1;
 }
 
 .raffle-detail-box--buyer {

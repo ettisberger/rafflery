@@ -47,8 +47,8 @@ export class RaffleDetail extends React.Component<
 
     return (
       <div className="raffle-detail" data-testid="raffle-detail">
-        <h2>Purchase a slot for {raffle.name}</h2>
-        <Box height="medium" width="big" overflow="hidden">
+        <h2>{raffle.name}</h2>
+        <Box height="medium" width="big" overflow="hidden" margin="small">
           <Carousel fill={true}>
             <Image fit="cover" src="//placehold.jp/500x300.png" />
             <Image fit="cover" src="//placehold.jp/500x300.png" />
