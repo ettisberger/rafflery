@@ -53,13 +53,14 @@ export class RaffleSlots extends React.Component<
   componentDidMount() {
     const slots: RaffleSlotItem[] = [];
 
-    for (let i = 0; i < this.props.maxSlots; i++) {
+    for (let i = 1; i <= this.props.maxSlots; i++) {
       if (this.props.soldSlots.includes(i)) {
-        slots[i] = new RaffleSlotItem(i + 1, RaffleSlotState.SOLD);
+        slots[i - 1] = new RaffleSlotItem(i, RaffleSlotState.SOLD);
       } else {
-        slots[i] = new RaffleSlotItem(i + 1, RaffleSlotState.FREE);
+        slots[i - 1] = new RaffleSlotItem(i, RaffleSlotState.FREE);
       }
     }
+
     this.setState({ slots });
   }
 

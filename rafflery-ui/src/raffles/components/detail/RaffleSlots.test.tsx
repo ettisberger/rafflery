@@ -21,7 +21,7 @@ describe('Raffle Slot', () => {
 
     slotElements.forEach((slot, i) => {
       expect(slot).toHaveAttribute('unselectable');
-      if (defaultProps.soldSlots.includes(i)) {
+      if (defaultProps.soldSlots.includes(i + 1)) {
         expect(slot).toHaveClass('sold');
       } else {
         expect(slot).not.toHaveClass('sold');
