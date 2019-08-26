@@ -18,7 +18,7 @@ class BuySlotsController(
         val slots = call.receive<Array<Int>>()
         val user = call.user
 
-        if(call.parameters["id"] == null){
+        if (call.parameters["id"] == null) {
             call.response.status(HttpStatusCode.BadRequest)
         }
 
@@ -31,4 +31,3 @@ class BuySlotsController(
         call.response.status(HttpStatusCode.OK)
     }
 }
-

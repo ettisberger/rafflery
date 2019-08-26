@@ -12,7 +12,6 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.testing.* // ktlint-disable no-wildcard-imports
-import org.junit.AfterClass
 import kotlin.test.AfterTest
 import kotlin.test.assertEquals
 
@@ -21,7 +20,7 @@ abstract class ControllerTest {
     val mapper = jacksonObjectMapper()
 
     @AfterTest
-    fun tearDown(){
+    fun tearDown() {
         FakeCommandBus.commands.clear()
     }
 

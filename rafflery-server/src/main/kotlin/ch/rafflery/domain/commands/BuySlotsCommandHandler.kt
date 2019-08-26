@@ -7,7 +7,7 @@ import ch.rafflery.domain.user.User
 
 data class BuySlotsCommand(
     val raffleId: String,
-    val user : User,
+    val user: User,
     val slots: Array<Int>
 ) : Command
 
@@ -23,10 +23,9 @@ class BuySlotsCommandHandler(private val raffleRepository: RaffleRepository) :
 
         val raffle: Raffle? = getRaffle(raffleId)
 
-        if(raffle != null && slots != null){
-            command.slots.forEach { println(it) }
+        if (raffle != null && slots != null) {
             buySlots(raffle, user, slots)
-        }  else {
+        } else {
             // error handling
         }
     }
@@ -40,12 +39,12 @@ class BuySlotsCommandHandler(private val raffleRepository: RaffleRepository) :
         user: User,
         slots: Array<Int>
     ) {
-        val purchasedTickets : MutableList<Ticket> = raffle.purchasedTickets
+        val purchasedTickets: MutableList<Ticket> = raffle.purchasedTickets
 
         slots.forEach { slot ->
-            val ticket : Ticket? = purchasedTickets.find{it.slot == slot }
+            val ticket: Ticket? = purchasedTickets.find { it.slot == slot }
 
-            if(ticket == null) {
+            if (ticket == null) {
                 purchasedTickets.add(Ticket(user.name, slot))
                 println("Slot $slot purchased and added. Purchased slots: ${purchasedTickets.size}")
             } else {
