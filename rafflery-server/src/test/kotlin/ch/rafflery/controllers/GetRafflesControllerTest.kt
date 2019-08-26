@@ -12,7 +12,7 @@ class GetRafflesControllerTest : ControllerTest() {
         name = "name",
         item = PrizeItem("name", 10),
         slotSize = 10,
-        purchasedTickets = listOf(),
+        purchasedTickets = mutableListOf(),
         createdBy = "nick",
         id = "1"
     )

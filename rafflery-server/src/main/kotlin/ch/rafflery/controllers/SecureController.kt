@@ -6,7 +6,11 @@ import io.ktor.application.call
 import io.ktor.auth.authenticate
 import io.ktor.auth.authentication
 import io.ktor.auth.jwt.JWTPrincipal
-import io.ktor.routing.*
+import io.ktor.routing.Route
+import io.ktor.routing.get
+import io.ktor.routing.post
+import io.ktor.routing.put
+import io.ktor.routing.route
 
 abstract class SecureController : Controller() {
 

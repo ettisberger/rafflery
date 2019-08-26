@@ -2,6 +2,7 @@ package ch.rafflery.controllers
 
 import ch.rafflery.assertions.shouldBe
 import ch.rafflery.domain.commands.BuySlotsCommand
+import ch.rafflery.domain.user.User
 import io.ktor.http.HttpStatusCode.Companion.OK
 import org.junit.Test
 
@@ -15,7 +16,7 @@ class BuySlotsControllerTest : ControllerTest() {
 
         val response = putSecure("/api/raffles/1/slots", request)
 
-        val expectedCommand = BuySlotsCommand(request)
+        val expectedCommand = BuySlotsCommand("1", User("Nichilino Paynolino"), request)
 
         response shouldHaveStatus OK
         FakeCommandBus.commands.size shouldBe 1

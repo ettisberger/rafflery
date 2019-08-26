@@ -22,7 +22,7 @@ class CreateRaffleCommandHandler(private val raffleRepository: RaffleRepository)
             name = command.name,
             item = PrizeItem(command.itemName, command.itemValue),
             slotSize = command.slotSize,
-            purchasedTickets = emptyList(),
+            purchasedTickets = mutableListOf(),
             createdBy = command.createdBy
         )
 

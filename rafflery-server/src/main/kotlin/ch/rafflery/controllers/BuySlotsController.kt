@@ -15,11 +15,20 @@ class BuySlotsController(
 
     override suspend fun invoke(call: ApplicationCall) {
         // TODO map to BuySlotsRequest
-        val request = call.receive<Array<Int>>()
-        val command = BuySlotsCommand(request)
+        val slots = call.receive<Array<Int>>()
+        val user = call.user
+
+        if(call.parameters["id"] == null){
+            call.response.status(HttpStatusCode.BadRequest)
+        }
+
+        val raffleId = call.parameters["id"]!!
+
+        val command = BuySlotsCommand(raffleId, user, slots)
 
         commandBus.submit(command)
 
         call.response.status(HttpStatusCode.OK)
     }
 }
+

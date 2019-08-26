@@ -32,7 +32,7 @@ internal class CreateRaffleCommandHandlerTest : TestFixture {
             name = command.name,
             item = PrizeItem(command.itemName, command.itemValue),
             slotSize = command.slotSize,
-            purchasedTickets = emptyList(),
+            purchasedTickets = mutableListOf(),
             createdBy = command.createdBy
         )
 
