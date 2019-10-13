@@ -20,7 +20,7 @@ class CreateRaffleControllerTest : ControllerTest() {
             createdBy = "andy"
         )
 
-        val response = postSecure("/api/raffles", request)
+        val response = postSecure("/api/savedRaffles", request)
 
         val expectedCommand = CreateRaffleCommand(
             name = "name",
@@ -45,7 +45,7 @@ class CreateRaffleControllerTest : ControllerTest() {
             createdBy = "andy"
         )
 
-        val response = post("/api/raffles", request)
+        val response = post("/api/savedRaffles", request)
         response shouldHaveStatus Unauthorized
     }
 }

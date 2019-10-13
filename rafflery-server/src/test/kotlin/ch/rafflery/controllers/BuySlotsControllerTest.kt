@@ -12,9 +12,9 @@ class BuySlotsControllerTest : ControllerTest() {
 
     @Test
     fun `submits BuySlotsCommand`() = testApp(controller) {
-        val request = arrayOf(10, 11, 12)
+        val request = listOf(10, 11, 12)
 
-        val response = putSecure("/api/raffles/1/slots", request)
+        val response = putSecure("/api/savedRaffles/1/slots", request)
 
         val expectedCommand = BuySlotsCommand("1", User("Nichilino Paynolino"), request)
 

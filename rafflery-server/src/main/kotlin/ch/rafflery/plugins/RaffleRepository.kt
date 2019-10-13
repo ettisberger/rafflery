@@ -54,6 +54,7 @@ class StubbedRaffleRepository : RaffleRepository {
         raffles.add(raffle.copy(id = "stubbed_id"))
     }
 
-    override fun get(id: String): Raffle? =
+    override fun get(id: String): Raffle =
         raffles.find { it.id == id }?.let { it.copy() }
+            ?: throw IllegalArgumentException("No raffle with id $id found.")
 }

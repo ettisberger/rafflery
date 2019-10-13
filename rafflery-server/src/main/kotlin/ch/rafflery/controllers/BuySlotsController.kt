@@ -15,7 +15,7 @@ class BuySlotsController(
 
     override suspend fun invoke(call: ApplicationCall) {
         // TODO map to BuySlotsRequest
-        val slots = call.receive<Array<Int>>()
+        val slots = call.receive<List<Int>>()
         val user = call.user
 
         if (call.parameters["id"] == null) {

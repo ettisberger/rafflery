@@ -3,6 +3,7 @@ package ch.rafflery.domain.commands
 /* ktlint-disable import-ordering */
 import ch.rafflery.TestFixture
 import ch.rafflery.TestFixture.FakeRaffleRepository
+import ch.rafflery.aRandomCreateRaffleCommand
 import ch.rafflery.domain.prize.PrizeItem
 import ch.rafflery.domain.raffle.Raffle
 import org.junit.Test
@@ -15,7 +16,7 @@ internal class CreateRaffleCommandHandlerTest : TestFixture {
     fun `can handle a CreateRaffleCommand`() {
         val raffleRepository = FakeRaffleRepository()
         val commandHandler = CreateRaffleCommandHandler(raffleRepository)
-        val command = aRandomCreateRaffleCommand()
+        val command = aRandomCreateRaffleCommand
 
         assertTrue { commandHandler.canHandle(command) }
     }
@@ -24,7 +25,7 @@ internal class CreateRaffleCommandHandlerTest : TestFixture {
     fun `creates new raffle`() {
         val raffleRepository = FakeRaffleRepository()
         val commandHandler = CreateRaffleCommandHandler(raffleRepository)
-        val command = aRandomCreateRaffleCommand()
+        val command = aRandomCreateRaffleCommand
 
         commandHandler.handle(command)
 

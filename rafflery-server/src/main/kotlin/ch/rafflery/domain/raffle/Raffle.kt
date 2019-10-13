@@ -6,7 +6,7 @@ data class Raffle(
     val name: String,
     val item: PrizeItem,
     val slotSize: Int,
-    val purchasedTickets: MutableList<Ticket>,
+    val purchasedTickets: List<Ticket>,
     val createdBy: String,
-    val id: String? = null
+    val id: String? = null // todo this should not be nullable
 )

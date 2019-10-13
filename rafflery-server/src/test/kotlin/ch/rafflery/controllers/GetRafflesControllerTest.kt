@@ -19,7 +19,7 @@ class GetRafflesControllerTest : ControllerTest() {
 
     private val raffleRepository = object : RaffleRepository {
         override fun save(raffle: Raffle) = Unit
-        override fun get(id: String): Raffle? = raffle
+        override fun get(id: String): Raffle = raffle
         override fun getAll(): List<Raffle> = listOf(raffle)
     }
 
@@ -27,7 +27,7 @@ class GetRafflesControllerTest : ControllerTest() {
 
     @Test
     fun `can get raffles`() = testApp(controller) {
-        val response = get("api/raffles")
+        val response = get("api/savedRaffles")
 
         response shouldHaveStatus OK
         response shouldHaveBody listOf(raffle)

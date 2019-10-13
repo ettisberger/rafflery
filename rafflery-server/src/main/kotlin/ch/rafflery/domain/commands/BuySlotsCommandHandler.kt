@@ -8,11 +8,12 @@ import ch.rafflery.domain.user.User
 data class BuySlotsCommand(
     val raffleId: String,
     val user: User,
-    val slots: Array<Int>
+    val slots: List<Int>
 ) : Command
 
-class BuySlotsCommandHandler(private val raffleRepository: RaffleRepository) :
-    CommandHandler<BuySlotsCommand> {
+class BuySlotsCommandHandler(
+    private val raffleRepository: RaffleRepository
+) : CommandHandler<BuySlotsCommand> {
 
     override fun canHandle(command: Command) = command is BuySlotsCommand
 
@@ -21,37 +22,27 @@ class BuySlotsCommandHandler(private val raffleRepository: RaffleRepository) :
         val user = command.user
         val slots = command.slots
 
-        val raffle: Raffle? = getRaffle(raffleId)
-
-        if (raffle != null && slots != null) {
-            buySlots(raffle, user, slots)
-        } else {
-            // error handling
-        }
-    }
-
-    private fun getRaffle(raffleId: String): Raffle? {
-        return raffleRepository.get(raffleId)
+        val raffle: Raffle = raffleRepository.get(raffleId)
+        val updatedRaffle = buySlots(raffle, user, slots)
+        raffleRepository.save(updatedRaffle)
     }
 
     private fun buySlots(
         raffle: Raffle,
         user: User,
-        slots: Array<Int>
-    ) {
-        val purchasedTickets: MutableList<Ticket> = raffle.purchasedTickets
+        slotsToPurchase: List<Int>
+    ): Raffle {
+        val purchasedSlots: List<Int> = raffle.purchasedTickets.map { it.slotNumber }
+        val conflicts: Set<Int> = slotsToPurchase.intersect(purchasedSlots)
 
-        slots.forEach { slot ->
-            val ticket: Ticket? = purchasedTickets.find { it.slot == slot }
-
-            if (ticket == null) {
-                purchasedTickets.add(Ticket(user.name, slot))
-                println("Slot $slot purchased and added. Purchased slots: ${purchasedTickets.size}")
-            } else {
-                // cant buy already purchased ticket
-                // error handling
-                println("Cant buy slot. Already purchased")
-            }
+        require(conflicts.isEmpty()) {
+            "Slots ${conflicts.joinToString()} for raffle ${raffle.id} have already been purchased."
         }
+
+        val newTickets = slotsToPurchase.map { Ticket(user.name, it) }
+
+        return raffle.copy(
+            purchasedTickets = raffle.purchasedTickets + newTickets
+        )
     }
 }
