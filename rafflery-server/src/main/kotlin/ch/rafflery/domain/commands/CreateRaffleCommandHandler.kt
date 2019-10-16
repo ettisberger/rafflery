@@ -3,9 +3,9 @@ package ch.rafflery.domain.commands
 import ch.rafflery.domain.ports.RaffleRepository
 import ch.rafflery.domain.prize.PrizeItem
 import ch.rafflery.domain.raffle.Raffle
-import java.util.*
 
 data class CreateRaffleCommand(
+    val id: String,
     val name: String,
     val itemName: String,
     val itemValue: Int,
@@ -20,12 +20,12 @@ class CreateRaffleCommandHandler(private val raffleRepository: RaffleRepository)
 
     override fun handle(command: CreateRaffleCommand) {
         val raffle = Raffle(
+            id = command.id,
             name = command.name,
             item = PrizeItem(command.itemName, command.itemValue),
             slotSize = command.slotSize,
             purchasedTickets = mutableListOf(),
-            createdBy = command.createdBy,
-            id = Date().toString()
+            createdBy = command.createdBy
         )
 
         raffleRepository.save(raffle)

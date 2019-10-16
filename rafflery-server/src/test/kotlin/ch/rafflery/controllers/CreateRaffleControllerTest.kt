@@ -1,14 +1,19 @@
 package ch.rafflery.controllers
 
+import ch.rafflery.TestFixture
+import ch.rafflery.TestFixture.FakeIdGenerator
 import ch.rafflery.assertions.shouldBe
 import ch.rafflery.domain.commands.CreateRaffleCommand
 import io.ktor.http.HttpStatusCode.Companion.OK
 import io.ktor.http.HttpStatusCode.Companion.Unauthorized
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
-class CreateRaffleControllerTest : ControllerTest() {
+class CreateRaffleControllerTest : ControllerTest(), TestFixture {
 
-    private val controller = CreateRaffleController(FakeCommandBus)
+    private val mockId = "1"
+    private val idGenerator = FakeIdGenerator(id = mockId)
+
+    private val controller = CreateRaffleController(commandBus, idGenerator)
 
     @Test
     fun `submits CreateRaffleCommand`() = testApp(controller) {
@@ -20,9 +25,10 @@ class CreateRaffleControllerTest : ControllerTest() {
             createdBy = "andy"
         )
 
-        val response = postSecure("/api/savedRaffles", request)
+        val response = postSecure("/api/raffles", request)
 
         val expectedCommand = CreateRaffleCommand(
+            id = mockId,
             name = "name",
             itemName = "itemName",
             itemValue = 10,
@@ -31,8 +37,8 @@ class CreateRaffleControllerTest : ControllerTest() {
         )
 
         response shouldHaveStatus OK
-        FakeCommandBus.commands.size shouldBe 1
-        FakeCommandBus.commands[0] shouldBe expectedCommand
+        commandBus.commands.size shouldBe 1
+        commandBus.commands[0] shouldBe expectedCommand
     }
 
     @Test
@@ -45,7 +51,7 @@ class CreateRaffleControllerTest : ControllerTest() {
             createdBy = "andy"
         )
 
-        val response = post("/api/savedRaffles", request)
+        val response = post("/api/raffles", request)
         response shouldHaveStatus Unauthorized
     }
 }

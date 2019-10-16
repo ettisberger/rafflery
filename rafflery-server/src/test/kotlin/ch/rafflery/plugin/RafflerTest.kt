@@ -6,7 +6,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 internal class RafflerTest {
     private val raffler: Raffler = StubbedRafflerTest()

@@ -1,13 +1,15 @@
 package ch.rafflery.controllers
 
 import ch.rafflery.domain.commands.CreateRaffleCommand
+import ch.rafflery.domain.ports.IdGenerator
 import ch.rafflery.infrastructure.CommandBus
 import io.ktor.application.ApplicationCall
 import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 
 class CreateRaffleController(
-    private val commandBus: CommandBus
+    private val commandBus: CommandBus,
+    private val idGenerator: IdGenerator
 ) : SecureController() {
 
     override val method = "POST"
@@ -15,12 +17,14 @@ class CreateRaffleController(
 
     override suspend fun invoke(call: ApplicationCall) {
         val request = call.receive<CreateRaffleRequest>()
+
         val command = CreateRaffleCommand(
-            request.name,
-            request.itemName,
-            request.itemValue,
-            request.slotSize,
-            request.createdBy
+            id = idGenerator.getId(),
+            name = request.name,
+            itemName = request.itemName,
+            itemValue = request.itemValue,
+            slotSize = request.slotSize,
+            createdBy = request.createdBy
         )
 
         commandBus.submit(command)

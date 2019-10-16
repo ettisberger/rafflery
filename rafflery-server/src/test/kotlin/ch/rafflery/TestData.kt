@@ -5,7 +5,7 @@ import ch.rafflery.domain.prize.PrizeItem
 import ch.rafflery.domain.raffle.Raffle
 import ch.rafflery.domain.raffle.Ticket
 
-val aRandomRaffle = Raffle(
+fun aRandomRaffle() = Raffle(
   name = "Rolex GMT Master II",
   item = PrizeItem("Rolex GMT Master II", 10000),
   slotSize = 100,
@@ -17,7 +17,8 @@ val aRandomRaffle = Raffle(
   id = "1"
 )
 
-val aRandomCreateRaffleCommand = CreateRaffleCommand(
+fun aRandomCreateRaffleCommand() = CreateRaffleCommand(
+  id = "1",
   name = "name",
   itemName = "itemName",
   itemValue = 10,

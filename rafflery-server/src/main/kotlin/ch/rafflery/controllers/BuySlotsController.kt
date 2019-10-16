@@ -14,8 +14,7 @@ class BuySlotsController(
     override val path = "/api/raffles/{id}/slots"
 
     override suspend fun invoke(call: ApplicationCall) {
-        // TODO map to BuySlotsRequest
-        val slots = call.receive<List<Int>>()
+        val slots = call.receive<BuySlotsRequest>().slots
         val user = call.user
 
         if (call.parameters["id"] == null) {
@@ -31,3 +30,7 @@ class BuySlotsController(
         call.response.status(HttpStatusCode.OK)
     }
 }
+
+data class BuySlotsRequest(
+    val slots: List<Int>
+)

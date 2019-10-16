@@ -4,7 +4,7 @@ import ch.rafflery.domain.ports.RaffleRepository
 import ch.rafflery.domain.prize.PrizeItem
 import ch.rafflery.domain.raffle.Raffle
 import io.ktor.http.HttpStatusCode.Companion.OK
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class GetRafflesControllerTest : ControllerTest() {
 
@@ -27,7 +27,7 @@ class GetRafflesControllerTest : ControllerTest() {
 
     @Test
     fun `can get raffles`() = testApp(controller) {
-        val response = get("api/savedRaffles")
+        val response = get("api/raffles")
 
         response shouldHaveStatus OK
         response shouldHaveBody listOf(raffle)
