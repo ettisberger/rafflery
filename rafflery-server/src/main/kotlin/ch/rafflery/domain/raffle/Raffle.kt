@@ -2,10 +2,8 @@ package ch.rafflery.domain.raffle
 
 import ch.rafflery.domain.commands.BuySlotsCommand
 import ch.rafflery.domain.commands.Command
+import ch.rafflery.domain.commands.validate
 import ch.rafflery.domain.prize.PrizeItem
-import java.time.Instant
-
-val EMPTY_ID = Instant.now().toString()
 
 data class Raffle(
   val name: String,
@@ -13,7 +11,7 @@ data class Raffle(
   val slotSize: Int,
   val purchasedTickets: List<Ticket>,
   val createdBy: String,
-  val id: String = EMPTY_ID
+  val id: String
 ) {
 
   fun handle(command: Command): Raffle =
@@ -22,8 +20,12 @@ data class Raffle(
       else -> this
     }
 
-  fun handle(buySlotsCommand: BuySlotsCommand): Raffle {
-    return this
+  private fun handle(command: BuySlotsCommand): Raffle {
+    validate(command, this)
+    return this.copy(
+      purchasedTickets = purchasedTickets + command.slots.map {
+        Ticket(owner = command.user.name, slotNumber = it)
+      }
+    )
   }
-
 }
