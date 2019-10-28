@@ -4,10 +4,7 @@ package ch.rafflery.domain.commands
 import ch.rafflery.TestFixture
 import ch.rafflery.TestFixture.FakeRaffleRepository
 import ch.rafflery.aRandomCreateRaffleCommand
-import ch.rafflery.domain.prize.PrizeItem
-import ch.rafflery.domain.raffle.Raffle
 import org.junit.jupiter.api.Test
-import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 internal class CreateRaffleCommandHandlerTest : TestFixture {
@@ -19,26 +16,5 @@ internal class CreateRaffleCommandHandlerTest : TestFixture {
         val command = aRandomCreateRaffleCommand()
 
         assertTrue { commandHandler.canHandle(command) }
-    }
-
-    @Test
-    fun `creates new raffle`() {
-        val raffleRepository = FakeRaffleRepository()
-        val commandHandler = CreateRaffleCommandHandler(raffleRepository)
-        val command = aRandomCreateRaffleCommand()
-
-        commandHandler.handle(command)
-
-        val expectedRaffle = Raffle(
-            id = command.id,
-            name = command.name,
-            item = PrizeItem(command.itemName, command.itemValue),
-            slotSize = command.slotSize,
-            purchasedTickets = mutableListOf(),
-            createdBy = command.createdBy
-        )
-
-        assertEquals(1, raffleRepository.savedRaffles.size)
-        assertEquals(expectedRaffle, raffleRepository.savedRaffles[0])
     }
 }

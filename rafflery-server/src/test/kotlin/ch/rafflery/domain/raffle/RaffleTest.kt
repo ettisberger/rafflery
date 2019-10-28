@@ -2,6 +2,8 @@ package ch.rafflery.domain.raffle
 
 import ch.rafflery.aRandomRaffle
 import ch.rafflery.domain.commands.BuySlotsCommand
+import ch.rafflery.domain.commands.CreateRaffleCommand
+import ch.rafflery.domain.prize.PrizeItem
 import ch.rafflery.domain.user.User
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
@@ -9,6 +11,31 @@ import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 
 internal class RaffleTest {
+
+  @Test
+  fun `can create a raffle`() {
+    val command = CreateRaffleCommand(
+      id = "1",
+      slotSize = 5,
+      itemName = "supergeil",
+      itemValue = 100,
+      name = "suuuuper",
+      createdBy = "nick"
+    )
+
+    val raffle = Raffle(command)
+
+    val expectedRaffle = Raffle(
+      name = command.name,
+      item = PrizeItem(name = command.itemName, value = command.itemValue),
+      slotSize = command.itemValue,
+      purchasedTickets = emptyList(),
+      id = command.id,
+      createdBy = command.createdBy
+    )
+
+    assertThat(raffle, equalTo(expectedRaffle))
+  }
 
   @Test
   fun `can buy slots`() {
