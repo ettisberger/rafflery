@@ -3,6 +3,7 @@ package ch.rafflery.modules
 import ch.rafflery.domain.commands.BuySlotsCommandHandler
 import ch.rafflery.domain.commands.CommandHandler
 import ch.rafflery.domain.commands.CreateRaffleCommandHandler
+import ch.rafflery.domain.commands.DrawWinnerCommandHandler
 import ch.rafflery.domain.ports.RaffleRepository
 import ch.rafflery.infrastructure.CommandBus
 import ch.rafflery.infrastructure.DefaultCommandBus
@@ -25,6 +26,7 @@ object CommandHandlerModule {
     fun provideCommandHandlers(raffleRepository: RaffleRepository): Set<@JvmSuppressWildcards CommandHandler<*>> =
         setOf(
             CreateRaffleCommandHandler(raffleRepository),
-            BuySlotsCommandHandler(raffleRepository)
+            BuySlotsCommandHandler(raffleRepository),
+            DrawWinnerCommandHandler(raffleRepository)
         )
 }

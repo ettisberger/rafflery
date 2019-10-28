@@ -1,9 +1,6 @@
 package ch.rafflery.domain.raffle
 
-import ch.rafflery.domain.commands.BuySlotsCommand
-import ch.rafflery.domain.commands.Command
-import ch.rafflery.domain.commands.CreateRaffleCommand
-import ch.rafflery.domain.commands.validate
+import ch.rafflery.domain.commands.*
 import ch.rafflery.domain.prize.PrizeItem
 
 data class Raffle(
@@ -12,16 +9,20 @@ data class Raffle(
   val slotSize: Int,
   val purchasedTickets: List<Ticket>,
   val createdBy: String,
-  val id: String
+  val id: String,
+  val winningSlot: Int?,
+  val winner: String?
 ) {
 
   private constructor() :
     this(
+      id = "",
       name = "",
       item = PrizeItem(name = "", value = 0),
       slotSize = 0,
       purchasedTickets = emptyList(),
-      id = "",
+      winningSlot = null,
+      winner = null,
       createdBy = ""
     )
 
@@ -29,16 +30,19 @@ data class Raffle(
     when (command) {
       is CreateRaffleCommand -> handle(command)
       is BuySlotsCommand -> handle(command)
+      is DrawWinnerCommand -> handle(command)
       else -> this
     }
 
   private fun handle(command: CreateRaffleCommand): Raffle =
     Raffle(
+      id = command.id,
       name = command.name,
       item = PrizeItem(name = command.itemName, value = command.itemValue),
       slotSize = command.itemValue,
       purchasedTickets = emptyList(),
-      id = command.id,
+      winningSlot = null,
+      winner = null,
       createdBy = command.createdBy
     )
 
@@ -48,6 +52,16 @@ data class Raffle(
       purchasedTickets = purchasedTickets + command.slots.map {
         Ticket(owner = command.user.name, slotNumber = it)
       }
+    )
+  }
+
+  private fun handle(command: DrawWinnerCommand): Raffle {
+    val winner = purchasedTickets.find { it.slotNumber == command.winningSlot }?.owner
+      ?: throw IllegalArgumentException("Nobody has purchased slot number ${command.winningSlot}")
+
+    return this.copy(
+      winningSlot = command.winningSlot,
+      winner = winner
     )
   }
 

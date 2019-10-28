@@ -14,7 +14,9 @@ class GetRafflesControllerTest : ControllerTest() {
         slotSize = 10,
         purchasedTickets = mutableListOf(),
         createdBy = "nick",
-        id = "1"
+        id = "1",
+        winner = null,
+        winningSlot = null
     )
 
     private val raffleRepository = object : RaffleRepository {

@@ -3,6 +3,7 @@ package ch.rafflery.domain.raffle
 import ch.rafflery.aRandomRaffle
 import ch.rafflery.domain.commands.BuySlotsCommand
 import ch.rafflery.domain.commands.CreateRaffleCommand
+import ch.rafflery.domain.commands.DrawWinnerCommand
 import ch.rafflery.domain.prize.PrizeItem
 import ch.rafflery.domain.user.User
 import com.natpryce.hamkrest.assertion.assertThat
@@ -26,11 +27,13 @@ internal class RaffleTest {
     val raffle = Raffle(command)
 
     val expectedRaffle = Raffle(
+      id = command.id,
       name = command.name,
       item = PrizeItem(name = command.itemName, value = command.itemValue),
       slotSize = command.itemValue,
       purchasedTickets = emptyList(),
-      id = command.id,
+      winner = null,
+      winningSlot = null,
       createdBy = command.createdBy
     )
 
@@ -76,5 +79,29 @@ internal class RaffleTest {
       raffle.handle(command)
     }
     assertThat(exception.message, equalTo("Slots ${command.slots.joinToString()} for raffle ${raffle.id} have already been purchased."))
+  }
+
+  @Test
+  fun `can draw the winner`() {
+    val raffle = aRandomRaffle().copy(
+      purchasedTickets = listOf(
+        Ticket(owner = "nick", slotNumber = 1),
+        Ticket(owner = "andy", slotNumber = 2)
+      )
+    )
+
+    val command = DrawWinnerCommand(
+      raffleId = raffle.id,
+      winningSlot = 1
+    )
+
+    val updatedRaffle = raffle.handle(command)
+
+    val expectedRaffle = raffle.copy(
+      winningSlot = command.winningSlot,
+      winner = "nick"
+    )
+
+    assertThat(updatedRaffle, equalTo(expectedRaffle))
   }
 }

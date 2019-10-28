@@ -14,7 +14,9 @@ fun aRandomRaffle() = Raffle(
   slotSize = aRandomInt(),
   purchasedTickets = emptyList(),
   createdBy = aRandomString(),
-  id = aRandomString()
+  id = aRandomString(),
+  winner = null,
+  winningSlot = null
 )
 
 fun aRandomCreateRaffleCommand() = CreateRaffleCommand(
