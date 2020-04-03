@@ -10,7 +10,7 @@ interface NavigationProps {
 const Navigation: React.FC<NavigationProps> = ({ environment, user }) => {
   return (
     <nav className="navigation">
-      <ul>
+      <ul className="menu">
         <li>
           <Link to="">Home</Link>
         </li>

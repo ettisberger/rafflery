@@ -14,5 +14,4 @@ object PersistenceModule {
     @Singleton
     fun provideIdGenerator(): IdGenerator =
         DummyIdGenerator()
-
 }
