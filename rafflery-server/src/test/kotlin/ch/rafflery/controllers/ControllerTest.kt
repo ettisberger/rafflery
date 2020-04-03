@@ -11,7 +11,7 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
-import io.ktor.server.testing.*
+import io.ktor.server.testing.* // ktlint-disable no-wildcard-imports
 import kotlin.test.assertEquals
 
 abstract class ControllerTest {

@@ -1,10 +1,10 @@
 package ch.rafflery.domain.raffle
 
 import ch.rafflery.domain.commands.BuySlotsCommand
-import ch.rafflery.domain.commands.validate
 import ch.rafflery.domain.commands.Command
 import ch.rafflery.domain.commands.CreateRaffleCommand
 import ch.rafflery.domain.commands.DrawWinnerCommand
+import ch.rafflery.domain.commands.validate
 import ch.rafflery.domain.prize.PrizeItem
 
 data class Raffle(
