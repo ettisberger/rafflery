@@ -62,7 +62,7 @@ class StubbedRaffleRepository : RaffleRepository {
         val existingRaffle = raffles.find { it.id == raffle.id }
 
         if (existingRaffle == null) {
-            raffles.add(raffle);
+            raffles.add(raffle)
         } else {
             raffles[raffles.indexOf(existingRaffle)] = raffle
         }

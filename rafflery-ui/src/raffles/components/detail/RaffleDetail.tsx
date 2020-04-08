@@ -20,6 +20,7 @@ export class RaffleDetail extends React.Component<
 > {
   constructor(props: any) {
     super(props);
+
     this.state = { currentSlots: [] };
   }
 
@@ -37,6 +38,8 @@ export class RaffleDetail extends React.Component<
 
   render() {
     const { raffle } = this.props;
+
+    debugger;
 
     if (!raffle) {
       return <div />;
@@ -91,7 +94,7 @@ export class RaffleDetail extends React.Component<
         </div>
         <RaffleSlots
           maxSlots={raffle.slotSize}
-          soldSlots={raffle.purchasedTickets.map(owner => owner.slot)}
+          soldSlots={raffle.purchasedTickets.map(owner => owner.slotNumber)}
           onSlotChange={this.onSlotChange}
         />
         <div className="raffle-detail-actions">
