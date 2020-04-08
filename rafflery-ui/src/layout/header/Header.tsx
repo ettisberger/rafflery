@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({environment, user}) => {
             <div className="header__content">
                 <div className="header__title">
                     <div className="header__title__logo">
-                        <img src="./images/logo_white.svg" alt="Home"/>
+                        <img src={process.env.PUBLIC_URL + '/images/logo_white.svg'} alt="Home"/>
                     </div>
                     {/*<div id="header__subtitle__first">*/}
                     {/*    <p>slots</p>*/}

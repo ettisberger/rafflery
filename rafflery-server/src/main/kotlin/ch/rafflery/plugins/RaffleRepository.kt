@@ -59,7 +59,13 @@ class StubbedRaffleRepository : RaffleRepository {
         raffles.map { it.copy() }
 
     override fun save(raffle: Raffle) {
-        raffles.add(raffle.copy(id = "stubbed_id"))
+        val existingRaffle = raffles.find { it.id == raffle.id }
+
+        if (existingRaffle == null) {
+            raffles.add(raffle);
+        } else {
+            raffles[raffles.indexOf(existingRaffle)] = raffle
+        }
     }
 
     override fun get(id: String): Raffle =
